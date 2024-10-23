@@ -17,18 +17,6 @@
         <a class="header__logo" href="/">
           <img src="{{ asset('images/logo.svg') }}">
         </a>
-        <nav>
-          <ul class="header-nav">
-            <li class="header-nav__item">
-              <a class="header-nav__link" href="/mypage">マイページ</a>
-            </li>
-            <li class="header-nav__item">
-              <form>
-                <button class="header-nav__button">ログアウト</button>
-              </form>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   </header>
