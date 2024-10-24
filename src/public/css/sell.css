@@ -16,13 +16,14 @@
     text-align: left;
     font-size: 20px;
     border-bottom: 1px solid;
-    margin-bottom: 5%;
+    margin: 5% auto;
     font-weight: bold;
-    color: #555;
+    color: gray;
 }
 
 .form__group-title {
     text-align: left;
+    font-weight: bold;
 }
 
 .form__error {
