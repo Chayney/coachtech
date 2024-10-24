@@ -15,3 +15,5 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', [ProductController::class, 'index']);
+
+Route::get('/sell', [ProductController::class, 'sell']);
