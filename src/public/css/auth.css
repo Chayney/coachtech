@@ -1,11 +1,16 @@
 .header {
+    top: 0;
+    left: 0;
+    height: 70px;
+    display: flex;
+    width: 100%;
+    position: fixed;
     background: #000;
 }
   
 .header__inner {
-    margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    padding-top: 17px;
+    width: 100%;
 }
 
 .header-utilities {
@@ -15,31 +20,5 @@
 }
 
 .header__logo {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.header-utilities nav {
-    width: 18%;
-}
-
-.header-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-nav__link {
-    color: #fff;
-    text-decoration: none;
-}
-
-.header-nav__button {
-    border: none;
-    background: transparent;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
+    margin-left: 2.2%;
 }
