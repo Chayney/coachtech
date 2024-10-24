@@ -41,7 +41,7 @@
           @endif
           @if (Auth::check())
             <li class="header-nav__white">
-              <a class="header-item__link" href="/">出品</a>
+              <a class="header-item__link" href="/sell">出品</a>
             </li>
           @else
             <li class="header-nav__white">
