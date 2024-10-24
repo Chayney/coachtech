@@ -19,3 +19,5 @@ Route::get('/', [ProductController::class, 'index']);
 Route::get('/sell', [ProductController::class, 'sell']);
 
 Route::get('/address', [ProductController::class, 'address']);
+
+Route::get('/profile', [ProductController::class, 'profile']);

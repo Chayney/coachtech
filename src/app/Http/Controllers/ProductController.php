@@ -20,4 +20,9 @@ class ProductController extends Controller
     {
         return view('address');
     }
+
+    public function profile()
+    {
+        return view('profile');
+    }
 }
