@@ -7,7 +7,7 @@
 }
 
 .form {
-    margin: 0 auto;
+    margin: 3% auto;
     width: 25%;
     text-align: center;
 }
@@ -44,6 +44,7 @@
     border: none;
     border-radius: 5px;
     background: rgb(255,85,85);
+    font-weight: bold;
     color: #fff;
     cursor: pointer;
 }
@@ -56,4 +57,5 @@
 .login__button-submit {
     text-decoration: none;
     color: lightskyblue;
+    font-weight: bold;
 }
