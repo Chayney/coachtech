@@ -9,7 +9,11 @@
     <button class="tab-button" data-target="tab1">おすすめ</button>
     <button class="tab-button" data-target="tab2">マイリスト</button>
 </div>
-<div class="container">
-    
+<div class="parent__container">
+    @foreach ($products as $product)
+    <div class="child__container">
+        <img class="" src="">
+    </div>
+    @endforeach
 </div>
 @endsection
