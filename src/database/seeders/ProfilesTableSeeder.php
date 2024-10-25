@@ -16,12 +16,12 @@ class ProfilesTableSeeder extends Seeder
     {
         $param = [
             'user_id' => '1',
-            'image' => '5',
-            'name' => '5',
-            'postcode' => '商品10',
-            'address' => '即購入大丈夫です。',
-            'building' => '300'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
+            'name' => 'ナルミ',
+            'postcode' => '123-4567',
+            'address' => '東京都',
+            'building' => 'タマホーム'
         ];
-        DB::table('products')->insert($param);
+        DB::table('profiles')->insert($param);
     }
 }

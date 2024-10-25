@@ -21,7 +21,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品1',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => ''
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -32,7 +32,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品2',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品3',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -54,7 +54,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品4',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -65,7 +65,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品5',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -76,7 +76,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品6',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -87,7 +87,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品7',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -98,7 +98,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品8',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -109,7 +109,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品9',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
         ];
         DB::table('products')->insert($param);
 
@@ -120,7 +120,7 @@ class ProductsTableSeeder extends Seeder
             'name' => '商品10',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'ファッション'
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg'
         ];
         DB::table('products')->insert($param);
     }

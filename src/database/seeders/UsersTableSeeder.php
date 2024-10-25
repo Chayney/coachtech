@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'name' => 'testuser',
             'email' => 'test@example.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password')
