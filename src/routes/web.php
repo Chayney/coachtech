@@ -21,3 +21,5 @@ Route::get('/sell', [ProductController::class, 'sell']);
 Route::get('/address', [ProductController::class, 'address']);
 
 Route::get('/profile', [ProductController::class, 'profile']);
+
+Route::get('/item', [ProductController::class, 'detail']);
