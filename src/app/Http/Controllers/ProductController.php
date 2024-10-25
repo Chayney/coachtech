@@ -7,12 +7,14 @@ use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Condition;
 use App\Models\Category;
+use App\Models\Item;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $products = Product::all();
+        return view('index', compact('products'));
     }
 
     public function sell()

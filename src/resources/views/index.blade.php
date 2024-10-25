@@ -12,7 +12,7 @@
 <div class="parent__container">
     @foreach ($products as $product)
     <div class="child__container">
-        <img class="" src="">
+        <img class="product_image" src="{{ $product['image'] }}">
     </div>
     @endforeach
 </div>
