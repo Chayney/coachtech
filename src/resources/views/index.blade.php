@@ -5,10 +5,11 @@
 @endsection
 
 @section('content')
-<div class="parent__container">
-    <!-- foreach -->
-    <div class="child__container">
-        <!-- foreachの中身 -->
-    </div>
+<div class="tabs">
+    <button class="tab-button" data-target="tab1">おすすめ</button>
+    <button class="tab-button" data-target="tab2">マイリスト</button>
+</div>
+<div class="container">
+    
 </div>
 @endsection
