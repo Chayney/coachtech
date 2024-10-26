@@ -7,7 +7,7 @@
 @section('content')
     <div class="profile">
         @foreach ($profiles as $profile)
-            <img class="profile_image" src="{{ $profile['image'] }}">
+            <img class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
             <span class="label--item">{{ $profile['name'] }}</span>
             <form class="form-label--item" action="/mypage/profile" method="get">
                 <input type="hidden" name="profile_id" value="{{ $profile['id'] }}">

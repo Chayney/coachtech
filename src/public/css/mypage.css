@@ -36,7 +36,8 @@
 }
 
 .profile_image {
-    width: 13%;
+    width: 12%;
+    border: 1px solid #000;
     border-radius: 100%;
 }
 
