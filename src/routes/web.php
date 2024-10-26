@@ -14,12 +14,14 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+Route::get('/', [ProductController::class, 'index']);
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/sell', [ProductController::class, 'sell']);
 });
 
 
-Route::get('/sell', [ProductController::class, 'sell']);
+
 
 Route::get('/address', [ProductController::class, 'address']);
 
