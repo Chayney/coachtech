@@ -41,8 +41,6 @@ class ProfileController extends Controller
         } else {
             $path = null;
         }
-        
-        
         $profile->update([
             'image' => $path[1],
             'name' => $request->name,
