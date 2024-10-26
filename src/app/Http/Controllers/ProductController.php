@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Condition;
@@ -13,6 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $products = Product::all();
         return view('index', compact('products'));
     }
