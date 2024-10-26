@@ -20,9 +20,10 @@
         <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="">
         <nav>
           <ul class="header-nav">
-          @if (Request::is('register'))
+          @if (Auth::check())
             <li class="header-nav__item">
               <form action="logout" method="post">
+                @csrf
                 <button class="header-nav__button">ログアウト</button>
               </form>
             </li>

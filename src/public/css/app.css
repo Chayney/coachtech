@@ -49,10 +49,17 @@
     text-decoration: none;
 }
 
+.header-nav__button {
+    color: #fff;
+    background-color: #000;
+    border: none;
+    font-size: 15px;
+}
+
 .header-nav__white {
     width: 15%;
     padding: 5px 3px;
-    background-color: white;
+    background-color: #fff;
     border-radius: 5px;
     text-align: center;
 }
