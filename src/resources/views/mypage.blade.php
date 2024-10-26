@@ -10,7 +10,8 @@
             <img class="profile_image" src="{{ $profile['image'] }}">
             <span class="label--item">{{ $profile['name'] }}</span>
             <form class="form-label--item" action="/mypage/profile" method="get">
-                <button class="edit" type="submit" name="id" value="">プロフィールを編集</button>
+                <input type="hidden" name="profile_id" value="{{ $profile['id'] }}">
+                <button class="edit" type="submit">プロフィールを編集</button>
             </form>
         @endforeach
     </div>

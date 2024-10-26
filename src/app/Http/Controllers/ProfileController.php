@@ -29,9 +29,10 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        dd($request);
         $user = Auth::user();
+        $account = Profile::where('user_id', $user->id)->first();
         $profile = $request->only(['name', 'postcode', 'address', 'building']);
-        return redirect()->back();
+        $profiles = Profile::find($account->id)->update($profile);
+        return redirect('/mypage/profile');
     }
 }
