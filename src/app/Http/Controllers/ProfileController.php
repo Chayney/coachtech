@@ -17,6 +17,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profiles = Profile::where('user_id', $user->id)->get();
         $products = Product::all();
+        
         return view('mypage', compact('profiles', 'products'));
     }
 
@@ -24,16 +25,24 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profiles = Profile::where('user_id', $user->id)->get();
+
         return view('profile', compact('profiles'));
     }
 
     public function update(Request $request)
     {
         $user = Auth::user();
-        $account = Profile::where('user_id', $user->id)->first();
+        $profile = Profile::where('user_id', $user->id)->first();
         $image = $request->file('image');
-        $profile = $request->only(['name', 'postcode', 'address', 'building']);
-        $profiles = Profile::find($account->id)->update($profile);
+        $imagePath = $image->store('public/images');
+        $profile->update([
+            'image' => $imagePath,
+            'name' => $request->name,
+            'postcode' => $request->postcode,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]);
+
         return redirect('/mypage/profile');
     }
 }
