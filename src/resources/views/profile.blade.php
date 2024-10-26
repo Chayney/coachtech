@@ -18,14 +18,14 @@
             <button class="edit" type="submit" name="id" value="">画像を選択する</button>
         </form>
     </div>
-    <form class="form" action="/" method="post">
+    <form class="form" action="/profile/update" method="post">
       <div class="form__group">
         <div class="form__group-title">
           <span class="form__label--item">ユーザー名</span>
         </div>
         <div class="form__group-content">
           <div class="form__input--text">
-            <input type="text" name="" value="" />
+            <input type="text" name="name" value="{{ $profile['name'] }}" />
           </div>
           <div class="form__error">
             @error('')
@@ -40,7 +40,7 @@
         </div>
         <div class="form__group-content">
           <div class="form__input--text">
-            <input type="text" name="" value="" />
+            <input type="text" name="postcode" value="{{ $profile['postcode'] }}" />
           </div>
           <div class="form__error">
             @error('email')
@@ -55,7 +55,7 @@
         </div>
         <div class="form__group-content">
           <div class="form__input--text">
-            <input type="text" name="" />
+            <input type="text" name="address" value="{{ $profile['address'] }}" />
           </div>
           <div class="form__error">
             @error('password')
@@ -70,7 +70,7 @@
         </div>
         <div class="form__group-content">
           <div class="form__input--text">
-            <input type="text" name="" />
+            <input type="text" name="building" value="{{ $profile['building'] }}" />
           </div>
           <div class="form__error">
             @error('')

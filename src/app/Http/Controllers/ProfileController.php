@@ -26,4 +26,12 @@ class ProfileController extends Controller
         $profiles = Profile::where('user_id', $user->id)->get();
         return view('profile', compact('profiles'));
     }
+
+    public function update(Request $request)
+    {
+        dd($request);
+        $user = Auth::user();
+        $profile = $request->only(['name', 'postcode', 'address', 'building']);
+        return redirect()->back();
+    }
 }
