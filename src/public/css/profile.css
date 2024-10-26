@@ -23,6 +23,10 @@
     margin: auto 0;
 }
 
+.file {
+   display: none;
+}
+
 .edit {
     padding: 8px 30px;
     width: 100%;
@@ -34,6 +38,7 @@
     border: 1px solid rgb(255,85,85);
     font-weight: bold;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .form {

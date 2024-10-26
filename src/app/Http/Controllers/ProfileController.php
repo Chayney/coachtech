@@ -31,6 +31,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $account = Profile::where('user_id', $user->id)->first();
+        $image = $request->file('image');
         $profile = $request->only(['name', 'postcode', 'address', 'building']);
         $profiles = Profile::find($account->id)->update($profile);
         return redirect('/mypage/profile');

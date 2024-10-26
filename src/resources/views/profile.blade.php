@@ -13,9 +13,9 @@
         @foreach ($profiles as $profile)
             <img class="profile_image" src="{{ $profile['image'] }}">
         @endforeach
-        <form class="form-label--item" action="" method="post">
+        <form class="form-label--item" action="/profile/update" method="post" enctype="multipart/form-data">
             @csrf
-            <button class="edit" type="submit" name="id" value="">画像を選択する</button>
+            <label class="edit">画像を選択する<input type="file" class="file" name="image"></label>
         </form>
     </div>
     <form class="form" action="/profile/update" method="post">
