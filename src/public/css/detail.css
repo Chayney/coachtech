@@ -49,3 +49,11 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.description-group {
+    margin-top: 5%;
+}
+
+.infomation-group {
+    margin-top: 10%;
+}

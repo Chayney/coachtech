@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function detail()
     {
-        $products = Product::all();
+        $products = Product::with(['category.item','condition'])->get();
         return view('detail', compact('products'));
     }
 
