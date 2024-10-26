@@ -15,8 +15,15 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $profiles = Profile::where('id', $user->id)->get();
+        $profiles = Profile::where('user_id', $user->id)->get();
         $products = Product::all();
         return view('mypage', compact('profiles', 'products'));
+    }
+
+    public function edit(Request $request)
+    {
+        $user = Auth::user();
+        $profiles = Profile::where('user_id', $user->id)->get();
+        return view('profile', compact('profiles'));
     }
 }

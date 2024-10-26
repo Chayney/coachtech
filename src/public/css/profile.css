@@ -6,6 +6,36 @@
     text-align: center;
 }
 
+.profile {
+    display: flex;
+    justify-content: space-around;
+    width: 35%;
+    margin: 0 auto;
+    height: 150px;
+}
+
+.profile_image {
+    width: 35%;
+    border-radius: 100%;
+}
+
+.form-label--item {
+    margin: auto 0;
+}
+
+.edit {
+    padding: 8px 30px;
+    width: 100%;
+    color: white;
+    height: 50px;
+    background-color: #fff;
+    color: rgb(255,85,85);
+    border-radius: 5px;
+    border: 1px solid rgb(255,85,85);
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .form {
     margin: 3% auto;
     width: 35%;
