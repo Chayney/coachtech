@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Condition;
 use App\Models\Category;
 use App\Models\Item;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -34,9 +35,16 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
         $image = $request->file('image');
-        $imagePath = $image->store('public/images');
+        if ($request->hasFile('image')) {
+            $path = \Storage::put('/public', $image);
+            $path = explode('/', $path);
+        } else {
+            $path = null;
+        }
+        
+        
         $profile->update([
-            'image' => $imagePath,
+            'image' => $path[1],
             'name' => $request->name,
             'postcode' => $request->postcode,
             'address' => $request->address,

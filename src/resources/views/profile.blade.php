@@ -13,7 +13,7 @@
         <form class="form" action="/profile/update" method="post" enctype="multipart/form-data">
             @csrf
             <div class="profile">
-              <img class="profile_image" src="{{ Storage::url($profile['image']) }}">
+              <img class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
               <label class="edit">画像を選択する<input type="file" class="file" name="image"></label>
             </div>
           <div class="form__group">
