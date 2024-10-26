@@ -39,10 +39,4 @@ class ProductController extends Controller
     {
         return view('profile');
     }
-
-    public function mypage()
-    {
-        $products = Product::all();
-        return view('mypage', compact('products'));
-    }
 }

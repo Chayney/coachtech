@@ -29,9 +29,38 @@
     font-size: 20px;
 }
 
+.profile {
+    display: flex;
+    height: 150px;
+    margin: 10% 0 0 15%;
+}
+
 .profile_image {
-    width: 20%;
-    border-radius: 50%;
+    width: 13%;
+    border-radius: 100%;
+}
+
+.label--item {
+    font-weight: bold;
+    font-size: 25px;
+    margin: auto 5%;
+}
+
+.form-label--item {
+    margin: auto 0 auto 30%;
+}
+
+.edit {
+    padding: 8px 30px;
+    width: 100%;
+    color: white;
+    height: 50px;
+    background-color: #fff;
+    color: rgb(255,85,85);
+    border-radius: 5px;
+    border: 1px solid rgb(255,85,85);
+    font-weight: bold;
+    font-size: 25px;
 }
 
 .parent__container {

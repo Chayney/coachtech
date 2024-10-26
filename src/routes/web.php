@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [ProductController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/sell', [ProductController::class, 'sell']);
+    Route::get('/mypage', [ProfileController::class, 'index']);
 });
 
 
@@ -29,4 +30,4 @@ Route::get('/profile', [ProductController::class, 'profile']);
 
 Route::get('/item', [ProductController::class, 'detail']);
 
-Route::get('/mypage', [ProductController::class, 'mypage']);
+Route::get('/sell', [ProductController::class, 'sell']);
