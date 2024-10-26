@@ -19,6 +19,7 @@
         </form>
     </div>
     <form class="form" action="/profile/update" method="post">
+      @csrf
       <div class="form__group">
         <div class="form__group-title">
           <span class="form__label--item">ユーザー名</span>

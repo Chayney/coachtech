@@ -20,7 +20,7 @@ Route::get('/', [ProductController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index']);
     Route::get('/mypage/profile', [ProfileController::class, 'edit']);
-    Route::get('/profile/update', [ProfileController::class, 'update']);
+    Route::post('/profile/update', [ProfileController::class, 'update']);
 });
 
 
