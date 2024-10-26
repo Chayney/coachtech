@@ -28,3 +28,5 @@ Route::get('/address', [ProductController::class, 'address']);
 Route::get('/profile', [ProductController::class, 'profile']);
 
 Route::get('/item', [ProductController::class, 'detail']);
+
+Route::get('/mypage', [ProductController::class, 'mypage']);
