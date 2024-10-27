@@ -33,3 +33,4 @@ Route::get('/profile', [ItemController::class, 'profile']);
 Route::get('/item', [ItemController::class, 'detail']);
 
 Route::get('/sell', [ItemController::class, 'sell']);
+Route::post('/sell/register', [ItemController::class, 'create']);

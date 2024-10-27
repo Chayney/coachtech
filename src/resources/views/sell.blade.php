@@ -9,7 +9,24 @@
   <div class="sell-form__heading">
     <h2>商品の出品</h2>
   </div>
-  <form class="form" action="/" method="post">
+  <form class="form" action="/sell/register" method="post" enctype="multipart/form-data">
+    @csrf
+    <div class="form__group">
+      <div class="form__group-title">
+        <span class="form__label--item">商品画像</span>
+      </div>
+      <div class="form__group-content">
+        <div class="form__input--image">
+          <img class="item_image">
+          <label class="edit">画像を選択する<input type="file" class="file" name="image"></label>
+        </div>
+        <div class="form__error">
+          @error('')
+          {{ $message }}
+          @enderror
+        </div>
+      </div>
+    </div>
     <div class="group-title">
         <span class="label--item">商品の詳細</span>
     </div>
