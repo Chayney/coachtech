@@ -32,6 +32,10 @@
     text-align: left;
 }
 
+.form__input--text {
+    position: relative;
+}
+
 .form__input--text input {
     width: 100%;
     height: 30px;
@@ -39,6 +43,7 @@
     border-radius: 5px;
     appearance: none;
     outline: none;
+    padding-left: 20px;
 }
 
 .form__input input {
@@ -60,6 +65,16 @@
     border-radius: 5px;
     appearance: none;
     outline: none;
+}
+
+.select__box {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    appearance: none;
+    outline: none;
+    padding-left: 18px;
 }
 
 .form__button {
@@ -95,4 +110,11 @@
 
 .file {
     display: none;
- }
+}
+
+.input__label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
