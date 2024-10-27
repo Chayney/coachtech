@@ -10,8 +10,14 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
+        'item_id',
         'element_id'
     ];
+
+    public function categoryItem()
+    {
+        return $this->belongsTo(Item::class);
+    }
 
     public function element()
     {
