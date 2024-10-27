@@ -10,6 +10,27 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'profile_id',
+        'category_id',
+        'condition_id',
+        'name',
+        'description',
+        'price',
+        'image'
     ];
+
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class);
+    }
 }
