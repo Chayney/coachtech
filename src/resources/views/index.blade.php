@@ -12,10 +12,10 @@
         @endif
     </div>
     <div class="parent__container">
-        @foreach ($products as $product)
+        @foreach ($items as $item)
             <div class="child__container">
                 <form action="/item/" method="get">
-                <img class="product_image" src="{{ $product['image'] }}">
+                <img class="product_image" src="{{ $item['image'] }}">
             </div>
         @endforeach
     </div>
