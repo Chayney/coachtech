@@ -55,7 +55,7 @@ class ItemController extends Controller
             'price' => $request->price
         ]);
             
-        return view('mypage');           
+        return redirect('/mypage');           
     }
 
     public function address()
