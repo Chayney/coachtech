@@ -15,27 +15,123 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'name' => 'ファッション'
+            'profile_id' => '1',
+            'category_id' => '1',
+            'condition_id' => '1',
+            'name' => '商品1',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
         ];
         DB::table('items')->insert($param);
 
         $param = [
-            'name' => 'ゲーム'
+            'profile_id' => '1',
+            'category_id' => '2',
+            'condition_id' => '3',
+            'name' => '商品2',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg'
         ];
         DB::table('items')->insert($param);
 
         $param = [
-            'name' => '本'
+            'profile_id' => '1',
+            'category_id' => '3',
+            'condition_id' => '3',
+            'name' => '商品3',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg'
         ];
         DB::table('items')->insert($param);
 
         $param = [
-            'name' => 'スマホ'
+            'profile_id' => '1',
+            'category_id' => '4',
+            'condition_id' => '4',
+            'name' => '商品4',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg'
         ];
         DB::table('items')->insert($param);
 
         $param = [
-            'name' => 'コスメ'
+            'profile_id' => '1',
+            'category_id' => '5',
+            'condition_id' => '5',
+            'name' => '商品5',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '1',
+            'condition_id' => '1',
+            'name' => '商品6',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '2',
+            'condition_id' => '2',
+            'name' => '商品7',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '3',
+            'condition_id' => '3',
+            'name' => '商品8',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '4',
+            'condition_id' => '4',
+            'name' => '商品9',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '5',
+            'condition_id' => '5',
+            'name' => '商品10',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg'
+        ];
+        DB::table('items')->insert($param);
+
+        $param = [
+            'profile_id' => '1',
+            'category_id' => '2',
+            'condition_id' => '3',
+            'name' => '商品11',
+            'description' => '即購入大丈夫です。',
+            'price' => '300',
+            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
         ];
         DB::table('items')->insert($param);
     }

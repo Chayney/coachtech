@@ -15,27 +15,27 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'item_id' => '1'
+            'element_id' => '1'
         ];
         DB::table('categories')->insert($param);
 
         $param = [
-            'item_id' => '2'
+            'element_id' => '2'
         ];
         DB::table('categories')->insert($param);
 
         $param = [
-            'item_id' => '3'
+            'element_id' => '3'
         ];
         DB::table('categories')->insert($param);
 
         $param = [
-            'item_id' => '4'
+            'element_id' => '4'
         ];
         DB::table('categories')->insert($param);
 
         $param = [
-            'item_id' => '5'
+            'element_id' => '5'
         ];
         DB::table('categories')->insert($param);
     }
