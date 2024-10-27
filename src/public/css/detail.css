@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    margin: 13% auto;
+    margin: 10% auto;
     justify-content: space-between;
 }
 
@@ -34,6 +34,15 @@
     font-size: 30px;
 }
 
+.form__label--item {
+    font-size: 20px;
+    padding-right: 50px;
+}
+
+.name-group {
+    line-height: 50px;
+}
+
 .product_image {
     width: 80%;
     height: 400px;
@@ -56,4 +65,24 @@
 
 .infomation-group {
     margin-top: 10%;
+}
+
+.category-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.condition-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.item {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 3px 10px;
+    background-color: #d3d3d3;
 }

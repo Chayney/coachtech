@@ -17,6 +17,7 @@ use App\Http\Controllers\SellController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index']);
@@ -33,5 +34,5 @@ Route::get('/address', [ItemController::class, 'address']);
 
 Route::get('/profile', [ItemController::class, 'profile']);
 
-Route::get('/item', [ItemController::class, 'detail']);
+
 

@@ -16,12 +16,13 @@ class ItemController extends Controller
     {
         $user = Auth::user();
         $items = Item::all();
+
         return view('index', compact('items'));
     }
 
-    public function detail()
+    public function detail(Request $request)
     {
-        $items = Item::with(['category.element','condition'])->get();
+        $items = Item::with(['category.element','condition'])->where('id', $request->id)->get();
         return view('detail', compact('items'));
     }
 

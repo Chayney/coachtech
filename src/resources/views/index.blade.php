@@ -14,8 +14,10 @@
     <div class="parent__container">
         @foreach ($items as $item)
             <div class="child__container">
-                <form action="/item/" method="get">
-                <img class="product_image" src="{{ $item['image'] }}">
+                <form action="/item/:item_id" method="get">
+                    <input type="hidden" name="id" value="{{ $item['id'] }}">
+                    <button><img class="product_image" src="{{ $item['image'] }}"></button>
+                </form>
             </div>
         @endforeach
     </div>
