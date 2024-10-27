@@ -17,7 +17,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profiles = Profile::where('user_id', $user->id)->get();
-        $items = Item::all();
+        $items = Item::where('profile_id', $user->id)->get();
         
         return view('mypage', compact('profiles', 'items'));
     }
