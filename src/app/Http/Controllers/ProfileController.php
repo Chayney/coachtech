@@ -41,14 +41,27 @@ class ProfileController extends Controller
         } else {
             $path = null;
         }
-        $profile->update([
-            'image' => $path[1],
-            'name' => $request->name,
-            'postcode' => $request->postcode,
-            'address' => $request->address,
-            'building' => $request->building,
-        ]);
+        if (empty($profile)) {
+            $profile = Profile::create([
+                'user_id' => $user->id,
+                'image' => $path[1],
+                'name' => $request->name,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building
+            ]);
 
-        return redirect('/mypage/profile');
+            return redirect('/mypage/profile');
+        } else {
+            $profile->update([
+                'image' => $path[1],
+                'name' => $request->name,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building
+            ]);
+    
+            return redirect('/mypage/profile');
+        }    
     }
 }
