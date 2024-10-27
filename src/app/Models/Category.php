@@ -10,10 +10,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'item_id'
+        'element_id'
     ];
 
-    public function item()
+    public function element()
     {
         return $this->belongsTo(Item::class);
     }
