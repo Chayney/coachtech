@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -15,7 +15,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', [ProductController::class, 'index']);
+Route::get('/', [ItemController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index']);
@@ -26,10 +26,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/address', [ProductController::class, 'address']);
+Route::get('/address', [ItemController::class, 'address']);
 
-Route::get('/profile', [ProductController::class, 'profile']);
+Route::get('/profile', [ItemController::class, 'profile']);
 
-Route::get('/item', [ProductController::class, 'detail']);
+Route::get('/item', [ItemController::class, 'detail']);
 
-Route::get('/sell', [ProductController::class, 'sell']);
+Route::get('/sell', [ItemController::class, 'sell']);
