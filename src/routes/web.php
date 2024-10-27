@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SellController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index']);
     Route::get('/mypage/profile', [ProfileController::class, 'edit']);
     Route::post('/profile/update', [ProfileController::class, 'update']);
+    Route::get('/sell', [SellController::class, 'index']);
+    Route::post('/sell/register', [SellController::class, 'create']);
 });
 
 
@@ -32,5 +35,3 @@ Route::get('/profile', [ItemController::class, 'profile']);
 
 Route::get('/item', [ItemController::class, 'detail']);
 
-Route::get('/sell', [ItemController::class, 'sell']);
-Route::post('/sell/register', [ItemController::class, 'create']);
