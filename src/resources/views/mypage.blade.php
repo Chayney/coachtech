@@ -23,7 +23,8 @@
         @foreach ($products as $product)
             <div class="child__container">
                 <form action="/item/" method="get">
-                <img class="product_image" src="{{ $product['image'] }}">
+                    <img class="product_image" src="{{ $product['image'] }}">
+                </form>
             </div>
         @endforeach
     </div>

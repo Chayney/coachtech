@@ -67,8 +67,22 @@
 .parent__container {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin: -5% auto;
+    width: 95%;
+    justify-content: space-between;
+    margin: -5% auto 0 auto;
+}
+
+.parent__container::before{
+    content:"";
+    display: block;
+    width:35%;
+    order:1;
+}
+
+.parent__container::after{
+    content:"";
+    display: block;
+    width:15%;
 }
 
 .child__container {
