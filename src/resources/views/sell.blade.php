@@ -36,7 +36,12 @@
       </div>
       <div class="form__group-content">
         <div class="form__input--text">
-          <input type="text" name="" value="" />
+          <select name="category_id">
+            <option disabled selected>必須</option>
+            @foreach ($categories as $category)
+              <option value="{{ $category['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['name'] }}</option>
+            @endforeach
+          </select>
         </div>
         <div class="form__error">
           @error('')
@@ -69,7 +74,7 @@
       </div>
       <div class="form__group-content">
         <div class="form__input--text">
-          <input type="text" name="" placeholder="必須 (40文字まで)" />
+          <input type="text" name="name" placeholder="必須 (40文字まで)">
         </div>
         <div class="form__error">
           @error('')
@@ -84,7 +89,7 @@
       </div>
       <div class="form__group-content">
         <div class="form__input">
-          <input type="text" name="" />
+          <input type="text" name="description">
         </div>
         <div class="form__error">
           @error('')
@@ -102,7 +107,7 @@
       </div>
       <div class="form__group-content">
         <div class="form__input--text">
-          <input type="text" name="" placeholder="¥"/>
+          <input type="text" name="price" placeholder="¥">
         </div>
         <div class="form__error">
           @error('')

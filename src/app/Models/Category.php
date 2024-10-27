@@ -15,6 +15,6 @@ class Category extends Model
 
     public function element()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Element::class);
     }
 }
