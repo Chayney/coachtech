@@ -19,7 +19,7 @@ use App\Http\Controllers\PurchaseController;
 
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
-Route::get('/purchase/{item_id}', [PurchaseController::class, 'purchase']);
+Route::get('/purchase/{item_id}', [PurchaseController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index']);
