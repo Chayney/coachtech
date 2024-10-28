@@ -16,7 +16,7 @@
             <div class="child__container">
                 <form action="/item/:item_id" method="get">
                     <input type="hidden" name="id" value="{{ $item['id'] }}">
-                    <button><img class="product_image" src="{{ $item['image'] }}"></button>
+                    <button><img class="product_image" src="{{ '/storage/' . $item['image'] }}"></button>
                 </form>
             </div>
         @endforeach
