@@ -22,11 +22,17 @@ Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 Route::get('/purchase/{item_id}', [PurchaseController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
+    // マイページ、プロフィールページ
     Route::get('/mypage', [ProfileController::class, 'index']);
     Route::get('/mypage/profile', [ProfileController::class, 'edit']);
     Route::post('/profile/update', [ProfileController::class, 'update']);
+
+    // 出品ページ
     Route::get('/sell', [SellController::class, 'index']);
     Route::post('/sell/register', [SellController::class, 'create']);
+
+    // 購入ページ
+    Route::post('/purchase', [PurchaseController::class, 'create']);
 });
 
 
