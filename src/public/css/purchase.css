@@ -100,3 +100,11 @@
     align-items: center;
     width: 100%;
 }
+
+.pay-link {
+    text-decoration: none;
+}
+
+.address-link {
+    text-decoration: none;
+}

@@ -17,11 +17,11 @@
             </div>
             <div class="pay-group">
                 <span class="form__label--item">支払い方法</span><br>
-                <a class="" href="">変更する</a>
+                <a class="pay-link" href="">変更する</a>
             </div>
             <div class="address-group">
                 <span class="form__label--item">配送先</span><br>
-                <a class="" href="/purchase/address/:item_id">変更する</a>
+                <a class="address-link" href="/purchase/address/:item_id">変更する</a>
             </div>
         </div>
         <div class="child__container-right">
