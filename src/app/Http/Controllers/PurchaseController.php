@@ -16,7 +16,21 @@ class PurchaseController extends Controller
     {
         $user = Auth::user();
         $items = Item::where('id', $request->id)->get();
+        $profiles = Profile::where('user_id', $user->id)->get();
 
-        return view('purchase', compact('items'));
+        return view('purchase', compact('items', 'profiles'));
+    }
+
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+    }
+
+    public function edit()
+    {
+        $user = Auth::user();
+        $profiles = Profile::where('user_id', $user->id)->get();
+
+        return view('address');
     }
 }

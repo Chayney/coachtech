@@ -80,6 +80,7 @@
 
 .pay-group {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-top: 5%;
@@ -88,6 +89,7 @@
 
 .address-group {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -107,4 +109,8 @@
 
 .address-link {
     text-decoration: none;
+}
+
+.user-address {
+    padding: 20px;
 }

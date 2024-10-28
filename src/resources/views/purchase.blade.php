@@ -23,6 +23,12 @@
                 <span class="form__label--item">配送先</span><br>
                 <a class="address-link" href="/purchase/address/:item_id">変更する</a>
             </div>
+            <div class="user-address">
+                @foreach ($profiles as $profile)
+                    <span>〒{{ $profile['postcode'] }}</span><br><br>
+                    <span>{{ $profile['address'] }}{{ $profile['building'] }}</span><br><br>
+                @endforeach
+            </div>
         </div>
         <div class="child__container-right">
             <div class="grand-child__container">

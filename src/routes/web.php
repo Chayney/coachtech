@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
 
     // 購入ページ
     Route::post('/purchase', [PurchaseController::class, 'create']);
+
+    // 住所登録ページ
+    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'edit']);
 });
 
 
