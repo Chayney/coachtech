@@ -15,8 +15,9 @@
                 <span class="label--item">商品名</span><br>
                 <span class="form__label--item">{{ $item['name'] }}</span><br>
                 <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
-                <form action="" method="get">
+                <form action="/purchase/:item_id" method="get">
                     <div class="form__button">
+                        <input type="hidden" name="id" value="{{ $item['id'] }}">
                         <button class="form__button-submit" type="submit">購入する</button>
                     </div>
                 </form>
