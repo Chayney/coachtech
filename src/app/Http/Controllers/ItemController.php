@@ -23,16 +23,7 @@ class ItemController extends Controller
     public function detail(Request $request)
     {
         $items = Item::with(['category.element','condition'])->where('id', $request->id)->get();
+        
         return view('detail', compact('items'));
-    }
-
-    public function address()
-    {
-        return view('address');
-    }
-
-    public function profile()
-    {
-        return view('profile');
     }
 }

@@ -38,13 +38,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchase/address/:item_id', [PurchaseController::class, 'edit']);
     Route::patch('/purchase/:item_id', [PurchaseController::class, 'update']);
 });
-
-
-
-
-Route::get('/address', [ItemController::class, 'address']);
-
-Route::get('/profile', [ItemController::class, 'profile']);
-
-
-
