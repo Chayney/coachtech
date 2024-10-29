@@ -21,7 +21,9 @@
             </div>
             <div class="address-group">
                 <span class="form__label--item">配送先</span><br>
-                <a class="address-link" href="/purchase/address/:item_id">変更する</a>
+                <form action="/purchase/address/:item_id" method="get">
+                    <button class="address-link"  name="id" value="{{ $item['id'] }}">変更する</button>
+                </form>
             </div>
             <div class="user-address">
                 @foreach ($profiles as $profile)
