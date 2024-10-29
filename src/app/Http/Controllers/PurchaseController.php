@@ -21,6 +21,7 @@ class PurchaseController extends Controller
         return view('purchase', compact('items', 'profiles'));
     }
 
+    // 決済用
     public function create(Request $request)
     {
         $user = Auth::user();
