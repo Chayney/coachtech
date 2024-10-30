@@ -23,15 +23,26 @@
             </form>
         @endif
     </div>
-    <div class="tabs">
+    
+      <div class="tabs">
         <button class="tab-button" data-target="tab1">出品した商品</button>
         <button class="tab-button" data-target="tab2">購入した商品</button>
-    </div>
-    <div class="parent__container">
-        @foreach ($items as $item)
-            <div class="child__container">
-                <img class="product_image" src="{{ '/storage/' . $item['image'] }}">         
+      </div>
+      <div class="tab-content">
+        <div id="tab1" class="tab-pane">
+            <div class="parent__container-left">
+                @foreach ($items as $item)
+                    <div class="child__container-left">            
+                        <img class="product_image" src="{{ $item['image'] }}">                
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
+        </div>
+        <div id="tab2" class="tab-pane">
+          <div class="parent__container-right">
+          </div>  
+        </div>
+      </div>
+      
+    <script src="{{ asset('js/mypage.js') }}" type="text/javascript"></script>
 @endsection
