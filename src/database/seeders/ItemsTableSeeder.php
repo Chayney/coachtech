@@ -120,7 +120,7 @@ class ItemsTableSeeder extends Seeder
             'name' => '商品10',
             'description' => '即購入大丈夫です。',
             'price' => '300',
-            'image' => 'images/product11.jpg'
+            'image' => 'images/product10.jpg'
         ];
         DB::table('items')->insert($param);
     }

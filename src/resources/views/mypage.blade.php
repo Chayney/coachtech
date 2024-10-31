@@ -33,7 +33,7 @@
             <div class="parent__container-left">
                 @foreach ($items as $item)
                     <div class="child__container-left">            
-                        <img class="product_image" src="{{ $item['image'] }}">                
+                        <img class="product_image" src="{{ asset($item['image']) }}">                
                     </div>
                 @endforeach
             </div>
