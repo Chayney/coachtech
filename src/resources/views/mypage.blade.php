@@ -25,7 +25,7 @@
     </div>
     
       <div class="tabs">
-        <button class="tab-button" data-target="tab1">出品した商品</button>
+        <button class="tab-button active" data-target="tab1">出品した商品</button>
         <button class="tab-button" data-target="tab2">購入した商品</button>
       </div>
       <div class="tab-content">

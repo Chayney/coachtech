@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', () => {
             const target = button.getAttribute('data-target');
 
+            // 現在のアクティブなタブボタンを非アクティブにする
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+            // 新しいタブボタンをアクティブにする
+            button.classList.add('active');
+
             // 現在のアクティブなタブを非表示にする
             tabPanes.forEach(pane => {
                 pane.classList.remove('active');
