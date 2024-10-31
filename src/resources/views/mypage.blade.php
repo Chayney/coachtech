@@ -33,7 +33,11 @@
             <div class="parent__container-left">
                 @foreach ($items as $item)
                     <div class="child__container-left">            
-                        <img class="product_image" src="{{ asset($item['image']) }}">                
+                        @if (Str::startsWith($item['image'], 'images/'))
+                            <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                        @else
+                            <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                        @endif                
                     </div>
                 @endforeach
             </div>

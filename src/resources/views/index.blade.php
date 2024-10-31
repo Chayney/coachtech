@@ -16,7 +16,11 @@
             <div class="child__container">
                 <form action="/item/:item_id" method="get">
                     <input type="hidden" name="id" value="{{ $item['id'] }}">
-                    <button><img class="product_image" src="{{ '/storage/' . $item['image'] }}"></button>
+                        @if (Str::startsWith($item['image'], 'images/'))
+                            <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                        @else
+                            <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                        @endif
                 </form>
             </div>
         @endforeach

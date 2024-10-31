@@ -9,7 +9,11 @@
     @foreach ($items as $item)
         <div class="child__container-left">
             <div class="item-group">
-                <img class="product_image" src="{{ '/storage/' . $item['image'] }}">
+                @if (Str::startsWith($item['image'], 'images/'))
+                    <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                @else
+                    <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                @endif
                 <div class="name-group">
                     <span class="form__label--item">{{ $item['name'] }}</span><br>
                     <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
