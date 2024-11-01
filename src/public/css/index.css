@@ -1,7 +1,7 @@
 .tabs {
     margin: 7% 0;
     width: 100%;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #000;
 }
 
 .tab-content {
@@ -10,13 +10,28 @@
     width:95%;
 }
 
+.tab-pane {
+    display: none;
+}
+
 #tab1 {
-    width: 47%;
-    margin-top: 2%;
+    width: 100%;
+    margin: 0 auto;
 }
 
 #tab2 {
-    width: 53%;
+    width: 100%;
+}
+
+#tab3 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.tab-pane.active {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .tab-button {
@@ -25,8 +40,22 @@
     outline: none;
     background-color: white;
     font-weight: bold;
-    color: gray;
+    color: #808080;
     font-size: 20px;
+}
+
+.tab-button-stable { 
+    width: 20%;
+    border: none;
+    outline: none;
+    background-color: white;
+    font-weight: bold;
+    color: #808080;
+    font-size: 20px;
+}
+
+.tab-button.active {
+    color: #f00;
 }
 
 .parent__container {
@@ -39,13 +68,13 @@
 
 .child__container {
     background: white;
-    height: 100px;
-    width: 10%;
+    height: 200px;
+    width: 18%;
     border-radius: 10px;
-    margin: 3%;
-    padding: 20px;
+    margin: 3% 0;
     position: relative;
     z-index: 10;
+    border: 1px solid #000;
 }
 
 .product_image {
@@ -53,7 +82,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
     border-radius: 10px;
     z-index: 11;
