@@ -86,3 +86,14 @@
     padding: 3px 10px;
     background-color: #d3d3d3;
 }
+
+.comment {
+    width: 10%;
+    background-color: #fff;
+    border: none;
+    height: 50px;
+}
+
+.comment_image {
+    width: 100%;
+}

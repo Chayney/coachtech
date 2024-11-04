@@ -27,6 +27,12 @@
                         </div>
                     </form>
                 @else
+                    <form action="/comment" method="get">
+                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                        <button class="comment" type="submit">
+                            <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                        </button>
+                    </form>
                     <form action="/login" method="get">
                         <div class="form__button">
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
