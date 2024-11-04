@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchase/address/:item_id', [PurchaseController::class, 'edit']);
     Route::patch('/purchase/:item_id', [PurchaseController::class, 'update']);
 });
+
+Route::get('/comment', [CommentController::class, 'index']);
