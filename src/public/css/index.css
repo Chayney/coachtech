@@ -7,7 +7,7 @@
 .tab-content {
     display: flex;
     flex-wrap: wrap;
-    width:95%;
+    width: 100%;
 }
 
 .tab-pane {
@@ -16,7 +16,6 @@
 
 #tab1 {
     width: 100%;
-    margin: 0 auto;
 }
 
 #tab2 {
@@ -25,7 +24,6 @@
 
 #tab3 {
     width: 100%;
-    margin: 0 auto;
 }
 
 .tab-pane.active {
@@ -61,20 +59,19 @@
 .parent__container {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin: -5% auto;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .child__container {
     background: white;
     height: 200px;
-    width: 18%;
+    width: 15%;
     border-radius: 10px;
-    margin: 3% 0;
     position: relative;
     z-index: 10;
     border: 1px solid #000;
+    margin: 2%;
 }
 
 .product_image {
