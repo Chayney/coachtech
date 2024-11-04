@@ -17,7 +17,7 @@ class Comment extends Model
 
     public function commentProfile()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(Profile::class, 'profile_id');
     }
 
     public function commentItem()

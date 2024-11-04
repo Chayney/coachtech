@@ -28,7 +28,7 @@
                     </form>
                 @else
                     <form action="/comment" method="get">
-                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                        <input type="hidden" name="id" value="{{ $item['id'] }}">
                         <button class="comment" type="submit">
                             <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
                         </button>

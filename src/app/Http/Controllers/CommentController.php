@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Profile;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
     public function index(Request $request)
     {
-        dd($request);
-        $user = Auth::user();
-        $items = Item::where('id', $request->item_id)->get();
-
-        return view('comment', compact('items', 'profiles'));
+        
+        // dd($request);
+        $comments = Comment::where('profile_id', $request->id)->get();
+        dd($comments);
+        return view('comment', compact('items', 'comments'));
     }
 }
