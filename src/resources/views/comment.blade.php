@@ -20,8 +20,7 @@
                 <span class="form__label--item">{{ $item['name'] }}</span><br>
                 <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
             </div>
-    @endforeach
-    @foreach ($comments as $comment)
+        @foreach ($comments as $comment)
             <div class="profile">
                 <div class="user-group">
                     <img class="profile_image" src="{{ '/storage/' . $comment['commentProfile']['image'] }}">
@@ -31,16 +30,19 @@
                     <span class="comment-text">{{ $comment['comment'] }}</span>
                 </div>
             </div>
+        @endforeach
+            <form action="/comment/create" method="post">
+                @csrf
+                <div class="form-group">
+                    <span class="form__label--item">商品へのコメント</span>
+                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">            
+                    <input type="text" class="comment-post" name="comment">               
+                </div>
+                <div class="form__button">
+                    <button class="form__button-submit" type="submit">コメントを送信する</button>
+                </div>
+            </form>
+        </div>
     @endforeach
-            <div class="form-group">
-                <span class="form__label--item">商品へのコメント</span>
-                <form action="/comment/create" method="post">
-                    <input type="text" class="comment-post" name="comment">
-                </form>
-            </div>
-            <div class="form__button">
-                <button class="form__button-submit" type="submit">コメントを送信する</button>
-            </div>
-        </div>   
 </div>
 @endsection

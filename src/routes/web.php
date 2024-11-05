@@ -41,3 +41,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/comment', [CommentController::class, 'index']);
+
+Route::post('/comment/create', [CommentController::class, 'create']);

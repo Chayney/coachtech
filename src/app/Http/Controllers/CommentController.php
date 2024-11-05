@@ -12,10 +12,22 @@ class CommentController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request);
         $items = Item::where('name', $request->name)->get();
         $comments = Comment::with('commentProfile')->where('item_id', $request->item_id)->get();
 
         return view('comment', compact('items', 'comments'));
+    }
+
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $comment = Comment::create([
+            'profile_id' => $profile->user_id,
+            'item_id' => $request->item_id,
+            'comment' => $request->comment
+        ]);
+            
+        return redirect()->back();
     }
 }
