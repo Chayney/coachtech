@@ -20,6 +20,12 @@
                 <span class="form__label--item">{{ $item['name'] }}</span><br>
                 <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
                 @if (Auth::check())
+                    <form action="/comment" method="get">
+                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                        <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
+                            <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                        </button>
+                    </form>
                     <form action="/purchase/:item_id" method="get">
                         <div class="form__button">
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
@@ -28,8 +34,8 @@
                     </form>
                 @else
                     <form action="/comment" method="get">
-                        <input type="hidden" name="id" value="{{ $item['id'] }}">
-                        <button class="comment" type="submit">
+                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                        <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
                             <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
                         </button>
                     </form>
