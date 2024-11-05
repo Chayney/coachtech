@@ -25,7 +25,7 @@
             </div>
             <div class="address-group">
                 <span class="form__label--item">配送先</span><br>
-                <form action="/purchase/address/:item_id" method="get">
+                <form action="/purchase/address/{item_id}" method="get">
                     <button class="address-link"  name="id" value="{{ $item['id'] }}">変更する</button>
                 </form>
             </div>

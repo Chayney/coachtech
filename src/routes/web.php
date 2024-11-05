@@ -19,8 +19,8 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/item/:item_id', [ItemController::class, 'detail']);
-Route::get('/purchase/:item_id', [PurchaseController::class, 'index']);
+Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+Route::get('/purchase/{item_id}', [PurchaseController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
     // マイページ、プロフィールページ
@@ -36,8 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/purchase', [PurchaseController::class, 'create']);
 
     // 住所登録ページ
-    Route::get('/purchase/address/:item_id', [PurchaseController::class, 'edit']);
-    Route::patch('/purchase/:item_id', [PurchaseController::class, 'update']);
+    Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'edit']);
+    Route::patch('/purchase/{item_id}', [PurchaseController::class, 'update']);
 });
 
 Route::get('/comment', [CommentController::class, 'index']);

@@ -19,7 +19,7 @@
                 <div class="parent__container">
                     @foreach ($items as $item)
                         <div class="child__container">
-                            <form action="/item/:item_id" method="get">
+                            <form action="/item/{item_id}" method="get">
                                 <input type="hidden" name="id" value="{{ $item['id'] }}">
                                     @if (Str::startsWith($item['image'], 'images/'))
                                         <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
@@ -40,7 +40,7 @@
                 <div class="parent__container">
                     @foreach ($items as $item)
                         <div class="child__container">
-                            <form action="/item/:item_id" method="get">
+                            <form action="/item/{item_id}" method="get">
                                 <input type="hidden" name="id" value="{{ $item['id'] }}">
                                     @if (Str::startsWith($item['image'], 'images/'))
                                         <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
