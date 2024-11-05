@@ -20,12 +20,21 @@
                 <span class="form__label--item">{{ $item['name'] }}</span><br>
                 <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
                 @if (Auth::check())
-                    <form action="/comment" method="get">
-                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                        <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
-                            <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                        </button>
-                    </form>
+                    <div class="icon-group">
+                        <form action="/favorite" method="post">
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                            <button class="favorite" type="submit" name="name" value="{{ $item['name'] }}">
+                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                            </button>
+                        </form>
+                        <form action="/comment" method="get">
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                            <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
+                                <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                            </button>
+                        </form>
+                    </div>
                     <form action="/purchase/:item_id" method="get">
                         <div class="form__button">
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
@@ -33,12 +42,21 @@
                         </div>
                     </form>
                 @else
-                    <form action="/comment" method="get">
-                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                        <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
-                            <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                        </button>
-                    </form>
+                    <div class="icon-group">
+                        <form action="/favorite" method="post">
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                            <button class="favorite" type="submit" name="name" value="{{ $item['name'] }}">
+                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                            </button>
+                        </form>
+                        <form action="/comment" method="get">
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                            <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
+                                <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                            </button>
+                        </form>
+                    </div>
                     <form action="/login" method="get">
                         <div class="form__button">
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
