@@ -33,4 +33,24 @@ class Item extends Model
     {
         return $this->belongsTo(Condition::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoriteMarked()
+    {
+        $id = Auth::id();
+        $favoriteMarkers = array();
+        foreach ($this->favorites as $favoriteMark) {
+            array_push($favoriteMarkers, $favoriteMark->profile_id);
+        }
+        
+        if (in_array($id, $favoriteMarkers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

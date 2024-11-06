@@ -21,13 +21,24 @@
                 <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
                 @if (Auth::check())
                     <div class="icon-group">
-                        <form action="/favorite" method="post">
-                            @csrf
-                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                            <button class="favorite" type="submit" name="name" value="{{ $item['name'] }}">
-                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                            </button>
-                        </form>
+                        @if ($item->favoriteMarked())
+                            <form action="/favorite/destroy{item}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                                <button class="favorite" type="submit">
+                                    <img class="favorite_image" src="{{ asset('images/red_star.jpg') }}">
+                                </button>
+                            </form>
+                        @else
+                            <form action="/favorite/store" method="post">
+                                @csrf
+                                <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                                <button class="favorite" type="submit">
+                                    <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                </button>
+                            </form>
+                        @endif
                         <form action="/comment" method="get">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">

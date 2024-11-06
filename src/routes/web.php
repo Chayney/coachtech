@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     // 住所登録ページ
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'edit']);
     Route::patch('/purchase/{item_id}', [PurchaseController::class, 'update']);
+
+    // お気に入り追加と削除
+    Route::post('/favorite/store', [FavoriteController::class, 'store']);
+    Route::delete('/favorite/destroy{shop}', [FavoriteController::class, 'destroy']);
 });
 
 Route::get('/comment', [CommentController::class, 'index']);
