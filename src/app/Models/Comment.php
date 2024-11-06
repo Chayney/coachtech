@@ -12,7 +12,7 @@ class Comment extends Model
     protected $fillable = [
         'profile_id',
         'item_id',
-        'comment',
+        'comment'
     ];
 
     public function commentProfile()
