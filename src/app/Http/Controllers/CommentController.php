@@ -26,7 +26,7 @@ class CommentController extends Controller
             return redirect('/mypage');
         } else {
             $comment = Comment::create([
-                'profile_id' => $profile->user_id,
+                'profile_id' => $profile->id,
                 'item_id' => $request->item_id,
                 'comment' => $request->comment
             ]);
