@@ -40,6 +40,11 @@ class Item extends Model
         return $this->hasMany(Favorite::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function favoriteMarked()
     {
         $id = Auth::id();

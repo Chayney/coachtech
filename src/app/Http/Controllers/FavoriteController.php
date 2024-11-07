@@ -14,16 +14,22 @@ class FavoriteController extends Controller
     {
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first(['id']);
-        $item_id = $request->item_id;
-        $favoritemark = Favorite::where('profile_id', $profile->id)->where('item_id', $item_id)->first();
-        if (!$favoritemark) {
-            Favorite::create([
-                'profile_id' => $profile->id,
-                'item_id' => $item_id
-            ]);
+        if (!$profile) {
+            return redirect('/mypage');
+            
+        } else {
+            $item_id = $request->item_id;
+            $favoritemark = Favorite::where('profile_id', $profile->id)->where('item_id', $item_id)->first();
+            if (!$favoritemark) {
+                Favorite::create([
+                    'profile_id' => $profile->id,
+                    'item_id' => $item_id
+                ]);
 
-            return redirect()->back();
-        }  
+                return redirect()->back();
+            }
+        }
+        
     }
 
     public function destroy(Request $request)

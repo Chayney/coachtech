@@ -45,6 +45,7 @@
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
                                 <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                                <span>{{ $item->comments_count }}</span>
                             </button>
                         </form>
                     </div>
@@ -66,6 +67,7 @@
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
                                 <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                                <span>{{ $item->comments_count }}</span>
                             </button>
                         </form>
                     </div>
