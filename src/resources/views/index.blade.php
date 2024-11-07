@@ -33,6 +33,18 @@
             </div>
             <div id="tab2" class="tab-pane">
             <div class="parent__container-right">
+                @foreach ($favoriteItems as $favoriteItem)
+                    <div class="child__container">
+                        <form action="/item/{item_id}" method="get">
+                            <input type="hidden" name="id" value="{{ $favoriteItem['id'] }}">
+                                @if (Str::startsWith($item['image'], 'images/'))
+                                    <button><img class="product_image" src="{{ asset($favoriteItem['image']) }}"></button>
+                                @else
+                                    <button><img class="product_image" src="{{ asset( '/storage/' . $favoriteItem['image']) }}"></button>
+                                @endif
+                        </form>
+                    </div>
+                @endforeach
             </div>  
             </div>
         @else

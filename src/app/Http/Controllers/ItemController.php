@@ -16,9 +16,11 @@ class ItemController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first(['id']);
+        $favorites = $profile->profileFavorites()->pluck('item_id')->toArray();
+        $favoriteItems = Item::whereIn('id', $favorites)->get();
         $items = Item::all();
-
-        return view('index', compact('items'));
+        return view('index', compact('favoriteItems', 'items'));
     }
 
     public function detail(Request $request)

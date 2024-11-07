@@ -22,4 +22,9 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function profileFavorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }
