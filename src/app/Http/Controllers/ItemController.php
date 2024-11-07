@@ -23,7 +23,7 @@ class ItemController extends Controller
 
     public function detail(Request $request)
     {
-        $items = Item::with(['category.element','condition'])->where('id', $request->id)->get();
+        $items = Item::with(['category.element','condition'])->where('id', $request->id)->withCount('favorites')->get();
         
         return view('detail', compact('items'));
     }

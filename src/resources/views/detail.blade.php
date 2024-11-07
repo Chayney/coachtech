@@ -28,7 +28,8 @@
                                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                                 <button class="favorite" type="submit">
                                     <img class="favorite_image" src="{{ asset('images/red_star.jpg') }}">
-                                </button>
+                                    <span>{{ $item->favorites_count }}</span>
+                                </button>                      
                             </form>
                         @else
                             <form action="/favorite/store" method="post">
@@ -36,7 +37,8 @@
                                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                                 <button class="favorite" type="submit">
                                     <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                                </button>
+                                    <span>{{ $item->favorites_count }}</span>
+                                </button>                            
                             </form>
                         @endif
                         <form action="/comment" method="get">
@@ -54,13 +56,12 @@
                     </form>
                 @else
                     <div class="icon-group">
-                        <form action="/favorite" method="post">
-                            @csrf
-                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                            <button class="favorite" type="submit" name="name" value="{{ $item['name'] }}">
+                        <div class="favorite-group">
+                            <button class="favorite" onclick="location.href='/login'">
                                 <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                <span>{{ $item->favorites_count }}</span>
                             </button>
-                        </form>
+                        </div>
                         <form action="/comment" method="get">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
