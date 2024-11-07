@@ -16,7 +16,6 @@ class FavoriteController extends Controller
         $profile = Profile::where('user_id', $user->id)->first(['id']);
         if (!$profile) {
             return redirect('/mypage');
-            
         } else {
             $item_id = $request->item_id;
             $favoritemark = Favorite::where('profile_id', $profile->id)->where('item_id', $item_id)->first();
