@@ -69,13 +69,40 @@
     margin-right: 3%
 }
 
-.comment {
+.icon-group {
+    display: flex;
+    width: 30%;
+}
+
+.favorite {
+    width: 40%;
+    background-color: #fff;
+    border: none;
+    height: 50px;
+}
+
+.favorite_image {
+    width: 100%;
+}
+
+.comment-area {
     width: 100%;
     height: 50px;
     line-height: 50px;
     border: 1px solid #000;
     border-radius: 10px;
     padding-left: 5px;
+}
+
+.comment {
+    width: 70%;
+    background-color: #fff;
+    border: none;
+    height: 50px;
+}
+
+.comment_image {
+    width: 100%;
 }
 
 .form-group {

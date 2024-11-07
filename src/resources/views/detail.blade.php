@@ -42,6 +42,7 @@
                             </form>
                         @endif
                         <form action="/comment" method="get">
+                            <input type="hidden" name="id" value="{{ $item['id'] }}">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
                                 <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
@@ -64,6 +65,7 @@
                             </button>
                         </div>
                         <form action="/comment" method="get">
+                            <input type="hidden" name="id" value="{{ $item['id'] }}">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                             <button class="comment" type="submit" name="name" value="{{ $item['name'] }}">
                                 <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
@@ -71,12 +73,10 @@
                             </button>
                         </form>
                     </div>
-                    <form action="/login" method="get">
-                        <div class="form__button">
-                            <input type="hidden" name="id" value="{{ $item['id'] }}">
-                            <button class="form__button-submit" type="submit">購入する</button>
-                        </div>
-                    </form>
+                    <div class="form__button" onclick="location.href='/login'">
+                        <input type="hidden" name="id" value="{{ $item['id'] }}">
+                        <button class="form__button-submit" type="submit">購入する</button>
+                    </div>
                 @endif
             </div>
             <div class="description-group">
