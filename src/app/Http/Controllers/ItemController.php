@@ -20,6 +20,7 @@ class ItemController extends Controller
         $favorites = $profile->profileFavorites()->pluck('item_id')->toArray();
         $favoriteItems = Item::whereIn('id', $favorites)->get();
         $items = Item::all();
+        
         return view('index', compact('favoriteItems', 'items'));
     }
 
