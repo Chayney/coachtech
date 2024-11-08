@@ -24,25 +24,30 @@ class SellController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $item = Item::where('profile_id', $profile->user_id)->first();
-        $image = $request->file('image');
-        if ($request->hasFile('image')) {
-            $path = \Storage::put('/public', $image);
-            $path = explode('/', $path);
-        } else {
-            $path = null;
-        }
-        $item = Item::create([
-            'profile_id' => $profile->user_id,
-            'image' => $path[1],
-            'category_id' => $request->category_id,
-            'condition_id' => $request->condition_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price
-        ]);
+        if ($user && $user->userProfile) {
+            $profile = Profile::where('user_id', $user->id)->first();
+            $item = Item::where('profile_id', $profile->user_id)->first();
+            $image = $request->file('image');
+            if ($request->hasFile('image')) {
+                $path = \Storage::put('/public', $image);
+                $path = explode('/', $path);
+            } else {
+                $path = null;
+            }
+            $item = Item::create([
+                'profile_id' => $profile->id,
+                'image' => $path[1],
+                'category_id' => $request->category_id,
+                'condition_id' => $request->condition_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price
+            ]);
             
-        return redirect('/mypage');           
+            return redirect('/mypage');
+        } else {
+            return redirect('/mypage/profile');
+        }
+                   
     }
 }

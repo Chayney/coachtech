@@ -76,27 +76,6 @@
                 </div>
             </div>
         @endforeach
-        @if (Auth::check())
-            <form action="/comment/create" method="post">
-                @csrf
-                <div class="form-group">
-                    <span class="form__label--item">商品へのコメント</span>
-                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">            
-                    <input type="text" class="comment-post" name="comment">               
-                </div>
-                <div class="form__button">
-                    <button class="form__button-submit" type="submit">コメントを送信する</button>
-                </div>
-            </form>
-        @else
-            <div class="form-group">
-                <span class="form__label--item">商品へのコメント</span>           
-                <input type="text" class="comment-post" name="comment">               
-            </div>
-            <div class="form__button">
-                <button class="form__button-submit" onclick="location.href='/login'">コメントを送信する</button>
-            </div>
-        @endif
         </div>
     @endforeach
 </div>
