@@ -32,12 +32,16 @@
         <div id="tab1" class="tab-pane">
             <div class="parent__container-left">
                 @foreach ($items as $item)
-                    <div class="child__container-left">            
-                        @if (Str::startsWith($item['image'], 'images/'))
-                            <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
-                        @else
-                            <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
-                        @endif                
+                    <div class="child__container-left">  
+                        <form action="/comment/edit" method="get"> 
+                            <input type="hidden" name="id" value="{{ $item['id'] }}">
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">      
+                                @if (Str::startsWith($item['image'], 'images/'))
+                                    <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                                @else
+                                    <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                                @endif
+                        </form>              
                     </div>
                 @endforeach
             </div>

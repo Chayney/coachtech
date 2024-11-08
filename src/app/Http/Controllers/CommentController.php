@@ -32,7 +32,14 @@ class CommentController extends Controller
             ]);
                 
             return redirect()->back();
-        }
-        
+        }    
+    }
+
+    public function edit(Request $request)
+    {
+        $items = Item::where('name', $request->name)->where('id', $request->id)->withCount('favorites')->withCount('comments')->get();
+        $comments = Comment::with('commentProfile')->where('item_id', $request->item_id)->get();
+
+        return view('delete', compact('items', 'comments'));
     }
 }
