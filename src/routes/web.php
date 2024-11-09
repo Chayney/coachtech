@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 
     // お気に入り追加と削除
     Route::post('/favorite/store', [FavoriteController::class, 'store']);
-    Route::delete('/favorite/destroy{shop}', [FavoriteController::class, 'destroy']);
+    Route::delete('/favorite/destroy', [FavoriteController::class, 'destroy']);
 
     // コメント追加と削除
     Route::post('/comment/create', [CommentController::class, 'create']);

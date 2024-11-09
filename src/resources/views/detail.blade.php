@@ -22,7 +22,7 @@
                 @if (Auth::check())
                     <div class="icon-group">
                         @if ($item->favoriteMarked())
-                            <form action="/favorite/destroy{item}" method="post">
+                            <form action="/favorite/destroy" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
