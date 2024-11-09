@@ -38,7 +38,7 @@
                             <div class="child__container">
                                 <form action="/item/{item_id}" method="get">
                                     <input type="hidden" name="id" value="{{ $favoriteItem['id'] }}">
-                                        @if (Str::startsWith($item['image'], 'images/'))
+                                        @if (Str::startsWith($favoriteItem['image'], 'images/'))
                                             <button><img class="product_image" src="{{ asset($favoriteItem['image']) }}"></button>
                                         @else
                                             <button><img class="product_image" src="{{ asset( '/storage/' . $favoriteItem['image']) }}"></button>
