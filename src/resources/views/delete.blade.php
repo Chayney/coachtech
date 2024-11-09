@@ -73,8 +73,8 @@
                         @else
                             <img class="profile_image" src="{{ asset('/storage/' . $comment['commentProfile']['image']) }}">
                         @endif                  
-                        <span>{{ $comment['commentProfile']['name'] }}</span>
-                        <form action="/comment/destroy" method="post">
+                        <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
+                        <form action="/comment/destroy"  class="trash-group" method="post">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{ $comment['id'] }}">
