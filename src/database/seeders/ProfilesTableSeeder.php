@@ -16,8 +16,8 @@ class ProfilesTableSeeder extends Seeder
     {
         $param = [
             'user_id' => '1',
-            'image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
-            'name' => 'ナルミ',
+            'image' => 'images/product4.jpg',
+            'name' => 'test',
             'postcode' => '123-4567',
             'address' => '東京都',
             'building' => 'タマホーム'
