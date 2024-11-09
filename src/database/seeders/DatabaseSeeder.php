@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             ProfilesTableSeeder::class,
             ItemsTableSeeder::class,
-            CommentsTableSeeder::class
+            CommentsTableSeeder::class,
+            PurchasesTableSeeder::class,
         ]);
     }
 }
