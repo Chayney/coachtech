@@ -79,14 +79,14 @@
     color: #f00;
 }
 
-.parent__container-left {
+.parent__container {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: flex-start;
 }
 
-.child__container-left {
+.child__container {
     background: white;
     height: 230px;
     width: 20%;
@@ -95,13 +95,6 @@
     border: 1px solid #000;
     position: relative;
     z-index: 10;
-}
-
-.parent__container-right {
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    justify-content: flex-start;
 }
 
 .product_image {

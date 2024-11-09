@@ -19,8 +19,11 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profiles = Profile::where('user_id', $user->id)->get();
         $items = Item::where('profile_id', $user->id)->get();
+        $profile = Profile::where('user_id', $user->id)->first(['id']);
+        $purchases = $profile->profilePurchases()->pluck('item_id')->toArray();
+        $purchaseItems = Item::whereIn('id', $purchases)->get();
         
-        return view('mypage', compact('profiles', 'items'));
+        return view('mypage', compact('profiles', 'items', 'purchaseItems'));
     }
 
     public function edit(Request $request)

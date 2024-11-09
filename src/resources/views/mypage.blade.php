@@ -31,9 +31,9 @@
     </div>
     <div class="tab-content">
         <div id="tab1" class="tab-pane">
-            <div class="parent__container-left">
+            <div class="parent__container">
                 @foreach ($items as $item)
-                    <div class="child__container-left">  
+                    <div class="child__container">  
                         <form action="/comment/edit" method="get"> 
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">      
@@ -48,7 +48,19 @@
             </div>
         </div>
         <div id="tab2" class="tab-pane">
-            <div class="parent__container-right">
+            <div class="parent__container">
+                @foreach ($purchaseItems as $purchaseItem)
+                    <div class="child__container">
+                        <form action="/item/{item_id}" method="get">
+                            <input type="hidden" name="id" value="{{ $purchaseItem['id'] }}">
+                                @if (Str::startsWith($purchaseItem['image'], 'images/'))
+                                    <button><img class="product_image" src="{{ asset($purchaseItem['image']) }}"></button>
+                                @else
+                                    <button><img class="product_image" src="{{ asset( '/storage/' . $purchaseItem['image']) }}"></button>
+                                @endif
+                        </form>
+                    </div>
+                @endforeach
             </div>  
         </div>
     </div>  
