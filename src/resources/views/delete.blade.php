@@ -77,7 +77,7 @@
                         <form action="/comment/destroy" method="post">
                             @csrf
                             @method('DELETE')
-                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                            <input type="hidden" name="id" value="{{ $comment['id'] }}">
                             <button class="trash" type="submit">
                                 <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
                             </button>

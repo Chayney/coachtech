@@ -42,4 +42,11 @@ class CommentController extends Controller
 
         return view('delete', compact('items', 'comments'));
     }
+
+    public function destroy(Request $request)
+    {
+        Comment::find($request->id)->delete();
+        
+        return redirect()->back();
+    }
 }
