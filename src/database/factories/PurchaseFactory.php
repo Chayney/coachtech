@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Item;
+use Faker\Generator as Faker;
 
 class PurchaseFactory extends Factory
 {
@@ -14,13 +15,13 @@ class PurchaseFactory extends Factory
      */
     public function definition()
     {
-        return [
+        $faker = app(Faker::class); 
+        
+        return [ 
             'profile_id' => 1,
-            'item_id' => function () {
-                return Item::inRandomOrder()->first()->id;
-            },
+            'item_id' => $faker->unique()->randomElement(Item::pluck('id')->toArray()),
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => now(), 
         ];
     }
 }
