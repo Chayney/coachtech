@@ -9,7 +9,7 @@
     <div class="profile-form__heading">
       <h2>プロフィール設定</h2>
     </div>
-    @if (!$profiles->isEmpty())
+    
       @foreach ($profiles as $profile)      
         <form class="form" action="/profile/update" method="post" enctype="multipart/form-data">
             @csrf
@@ -82,7 +82,7 @@
           </div>
         </form>
       @endforeach
-    @else
+    
       <form class="form" action="/profile/update" method="post" enctype="multipart/form-data">
           @csrf
           <div class="profile">
@@ -153,6 +153,6 @@
           <button class="form__button-submit" type="submit">更新する</button>
         </div>
       </form>
-    @endif
+    
   </div>
 @endsection
