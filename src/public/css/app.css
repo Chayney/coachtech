@@ -25,13 +25,17 @@
 }
 
 .search-word {
-    height: 35px;
     width: 35%;
     border-radius: 5px;
+    color: #000;
+}
+
+.search__box {
+    width: 100%;
+    height: 35px;
+    outline: none;
     font-weight: bold;
     padding-left: 20px;
-    color: #000;
-    outline: none;
 }
 
 .header-utilities nav {
