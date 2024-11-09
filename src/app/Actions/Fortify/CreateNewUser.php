@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -25,14 +26,27 @@ class CreateNewUser implements CreatesNewUsers
                 'string',
                 'email',
                 'max:191',
-                Rule::unique(User::class),
+                'unique:users'
             ],
-            'password' => $this->passwordRules(),
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'max:191'
+            ]
         ])->validate();
 
-        return User::create([
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
+        return \DB::transaction(function () use ($input) {
+            $user = User::create([
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+            ]);
+
+            Profile::create([
+                'user_id' => $user->id,
+            ]);
+
+            return $user;
+        });
     }
 }
