@@ -45,6 +45,15 @@ class Item extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where(function ($query) use ($keyword) {
+              $query->where("name", "like", "%" . $keyword . "%");
+            });
+        }
+    }
+
     public function favoriteMarked()
     {
         $id = Auth::id();
