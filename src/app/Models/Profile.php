@@ -27,4 +27,9 @@ class Profile extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function profilePurchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }

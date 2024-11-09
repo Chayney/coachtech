@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Condition;
 use App\Models\Category;
 use App\Models\Element;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
