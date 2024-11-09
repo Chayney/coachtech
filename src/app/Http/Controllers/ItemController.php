@@ -30,6 +30,27 @@ class ItemController extends Controller
         }  
     }
 
+    public function search(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user && $user->userProfile) {
+                $profile = Profile::where('user_id', $user->id)->first(['id']);
+                $favorites = $profile->profileFavorites()->pluck('item_id')->toArray();
+                $favoriteItems = Item::whereIn('id', $favorites)->KeywordSearch($request->keyword)->get();   
+                $product = new Item;
+                $items = $product->KeywordSearch($request->keyword)->get();
+
+                return view('index', compact('items', 'favoriteItems'));
+            }
+        } else {
+            $product = new Item;
+            $items = $product->KeywordSearch($request->keyword)->get();
+
+            return view('index', compact('items'));
+        }
+    }
+
     public function detail(Request $request)
     {
         $items = Item::with(['category.element','condition'])->where('id', $request->id)->withCount('favorites')->withCount('comments')->get();

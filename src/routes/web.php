@@ -21,6 +21,7 @@ use App\Http\Controllers\CommentController;
 
 // 商品一覧ページ
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/search', [ItemController::class, 'search']);
 
 // 商品詳細ページ
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
