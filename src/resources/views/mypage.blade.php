@@ -16,13 +16,13 @@
         @if (!$profiles->isEmpty())
             @foreach ($profiles as $profile)
                 @if (empty($profile->name))
-                    <img class="profile_image">
+                    <img class="profile_image" src="{{ asset($profile['image']) }}">
                     <span class="label--item">ユーザー名</span>
                     <form class="form-label--item" action="/mypage/profile" method="get">
                         <button class="edit" type="submit">プロフィールを編集</button>
                     </form>
                 @else
-                    <img class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
+                    <img class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
                     <span class="label--item">{{ $profile['name'] }}</span>
                     <form class="form-label--item" action="/mypage/profile" method="get">
                         <input type="hidden" name="profile_id" value="{{ $profile['id'] }}">

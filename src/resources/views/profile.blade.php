@@ -14,8 +14,13 @@
           @csrf
           <div class="profile">
             <div class="event-image">
-              <img id="upload-profile-image" class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
-              <img id="uploadedImage" src="">
+              @if (empty($profile->name))
+                <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
+                <img id="uploadedImage" src="">
+              @else
+                <img id="upload-profile-image" class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
+                <img id="uploadedImage" src="">
+              @endif
             </div>
             <label class="edit">画像を選択する<input type="file" onchange="previewImage(event)" class="file" name="image"></label>
           </div>
@@ -25,7 +30,7 @@
           </div>
           <div class="form__group-content">
             <div class="form__input--text">
-              <input type="text" name="name" value="{{ $profile['name'] }}" />
+              <input type="text" name="name" value="{{ $profile['name'] }}"/>
             </div>
             <div class="form__error">
               @error('name')
@@ -40,7 +45,7 @@
           </div>
           <div class="form__group-content">
             <div class="form__input--text">
-              <input type="text" name="postcode" value="{{ $profile['postcode'] }}" />
+              <input type="text" name="postcode" value="{{ $profile['postcode'] }}"/>
             </div>
           </div>
         </div>
@@ -50,7 +55,7 @@
           </div>
           <div class="form__group-content">
             <div class="form__input--text">
-              <input type="text" name="address" value="{{ $profile['address'] }}" />
+              <input type="text" name="address" value="{{ $profile['address'] }}"/>
             </div>
           </div>
         </div>
@@ -60,7 +65,7 @@
           </div>
           <div class="form__group-content">
             <div class="form__input--text">
-              <input type="text" name="building" value="{{ $profile['building'] }}" />
+              <input type="text" name="building" value="{{ $profile['building'] }}"/>
             </div>
           </div>
         </div>
