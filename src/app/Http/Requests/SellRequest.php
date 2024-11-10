@@ -27,7 +27,7 @@ class SellRequest extends FormRequest
             'category_id' => 'required',
             'condition_id' => 'required',
             'name' => ['required', 'max:40'],           
-            'price' => 'required',
+            'price' => ['required', 'integer'],
             'image' => 'required',
         ];
     }
@@ -40,7 +40,8 @@ class SellRequest extends FormRequest
             'name.required' => '商品名を入力してください',
             'name.max:40' => '商品名は40文字以内で入力してください',
             'image.required' => '商品画像を選択してください',
-            'price.required' => '金額を入力してください'
+            'price.required' => '金額を入力してください',
+            'price.integer' => '金額は数値で入力してください'
         ];
     }
 }
