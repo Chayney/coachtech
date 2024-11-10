@@ -45,4 +45,9 @@ class PurchaseController extends Controller
 
         return view('purchase', compact('items', 'profiles'));
     }
+
+    public function revise(Request $request)
+    {
+        return view('pay');
+    }
 }
