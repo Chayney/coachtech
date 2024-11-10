@@ -68,12 +68,16 @@
             @foreach ($comments as $comment)
                 <div class="profile">
                     <div class="user-group">
-                        @if (Str::startsWith($item['image'], 'images/'))
+                        @if (empty($comment['commentProfile']['name']))
                             <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                            <span class="user_name">ユーザー名</span>
+                        @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
+                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                            <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
                         @else
-                            <img class="profile_image" src="{{ asset('/storage/' . $comment['commentProfile']['image']) }}">
-                        @endif                  
-                        <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
+                            <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
+                            <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
+                        @endif               
                         <form action="/comment/destroy"  class="trash-group" method="post">
                             @csrf
                             @method('DELETE')

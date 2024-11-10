@@ -68,12 +68,17 @@
             @foreach ($comments as $comment)
                 <div class="profile">
                     <div class="user-group">
-                        @if (Str::startsWith($item['image'], 'images/'))
+                        @if (empty($comment['commentProfile']['name']))
                             <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                            <span>ユーザー名</span>
+                        @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
+                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                            <span>{{ $comment['commentProfile']['name'] }}</span>
                         @else
                             <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
+                            <span>{{ $comment['commentProfile']['name'] }}</span>
                         @endif       
-                        <span>{{ $comment['commentProfile']['name'] }}</span>
+                        
                     </div>
                     <div class="comment-area">
                         <span class="comment-text">{{ $comment['comment'] }}</span>
