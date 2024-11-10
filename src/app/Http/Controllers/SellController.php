@@ -47,7 +47,7 @@ class SellController extends Controller
                 'price' => $request->price
             ]);
             
-            return redirect('/mypage')->with('messages', '商品を出品しました');  
+            return redirect('/mypage');
         }              
     }
 }
