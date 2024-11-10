@@ -13,8 +13,11 @@
       <form class="form" action="/profile/update" method="post" enctype="multipart/form-data">
           @csrf
           <div class="profile">
-            <img class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
-            <label class="edit">画像を選択する<input type="file" class="file" name="image"></label>
+            <div class="event-image">
+              <img id="upload-profile-image" class="profile_image" src="{{ '/storage/' . $profile['image'] }}">
+              <img id="uploadedImage" src="">
+            </div>
+            <label class="edit">画像を選択する<input type="file" onchange="previewImage(event)" class="file" name="image"></label>
           </div>
         <div class="form__group">
           <div class="form__group-title">
@@ -82,4 +85,5 @@
       </form>
     @endforeach  
   </div>
+  <script src="{{ asset('js/profile.js') }}" type="text/javascript"></script>
 @endsection
