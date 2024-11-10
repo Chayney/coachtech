@@ -24,8 +24,10 @@ class SellController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
-        if ($user && $user->userProfile) {
-            $profile = Profile::where('user_id', $user->id)->first();
+        $profile = Profile::where('user_id', $user->id)->first();
+        if (is_null($profile['name'])) {
+            return redirect('/mypage/profile');
+        } else {
             $item = Item::where('profile_id', $profile->user_id)->first();
             $image = $request->file('image');
             if ($request->hasFile('image')) {
@@ -44,10 +46,7 @@ class SellController extends Controller
                 'price' => $request->price
             ]);
             
-            return redirect('/mypage');
-        } else {
-            return redirect('/mypage/profile');
-        }
-                   
+            return redirect('/mypage');  
+        }              
     }
 }
