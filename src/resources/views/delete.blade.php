@@ -78,7 +78,7 @@
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{ $comment['id'] }}">
-                            <button class="trash" type="submit">
+                            <button class="trash" type="submit" onclick="return showAlert('本当にコメントを削除しますか？')">
                                 <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
                             </button>
                         </form>
@@ -91,4 +91,5 @@
             </div>
         @endforeach
     </div>
+    <script src="{{ asset('js/delete.js') }}" type="text/javascript"></script>
 @endsection
