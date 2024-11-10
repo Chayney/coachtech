@@ -23,11 +23,11 @@
                 @if (Auth::check())
                     <div class="icon-group">
                         @if ($item->favoriteMarked())
-                            <form action="/favorite/destroy{item}" method="post">
+                            <form action="/favorite/destroy" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                <button class="favorite" type="submit">
+                                <button class="favorite" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
                                     <img class="favorite_image" src="{{ asset('images/red_star.jpg') }}">
                                     <span>{{ $item->favorites_count }}</span>
                                 </button>                      
@@ -104,4 +104,5 @@
             </div>
         @endforeach
     </div>
+    <script src="{{ asset('js/comment.js') }}" type="text/javascript"></script>
 @endsection
