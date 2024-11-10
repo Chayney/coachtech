@@ -17,6 +17,9 @@
               @if (empty($profile->name))
                 <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
                 <img id="uploadedImage" src="">
+              @elseif (Str::startsWith($profile['image'], 'images/'))
+                <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
+                <img id="uploadedImage" src="">
               @else
                 <img id="upload-profile-image" class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
                 <img id="uploadedImage" src="">
