@@ -22,7 +22,7 @@
             <img id="uploadedImage" src="">
           </div>
           <div class="form__error">
-            @error('')
+            @error('image')
             {{ $message }}
             @enderror
           </div>
@@ -45,7 +45,7 @@
             </select>
           </div>
           <div class="form__error">
-            @error('')
+            @error('category_id')
             {{ $message }}
             @enderror
           </div>
@@ -63,7 +63,7 @@
             @endforeach
           </select>
           <div class="form__error">
-            @error('')
+            @error('condition_id')
             {{ $message }}
             @enderror
           </div>
@@ -81,7 +81,7 @@
             <input type="text" name="name" placeholder="必須 (40文字まで)">
           </div>
           <div class="form__error">
-            @error('')
+            @error('name')
             {{ $message }}
             @enderror
           </div>
@@ -94,11 +94,6 @@
         <div class="form__group-content">
           <div class="form__input">
             <input type="text" name="description">
-          </div>
-          <div class="form__error">
-            @error('')
-            {{ $message }}
-            @enderror
           </div>
         </div>
       </div>
@@ -115,7 +110,7 @@
             <label class="input__label">¥</label>
           </div>
           <div class="form__error">
-            @error('')
+            @error('price')
             {{ $message }}
             @enderror
           </div>

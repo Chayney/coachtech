@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Condition;
 use App\Models\Category;
 use App\Models\Element;
+use App\Http\Requests\SellRequest;
 
 class SellController extends Controller
 {
@@ -21,7 +22,7 @@ class SellController extends Controller
         return view('sell', compact('categories', 'conditions'));
     }
 
-    public function create(Request $request)
+    public function create(SellRequest $request)
     {
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
@@ -46,7 +47,7 @@ class SellController extends Controller
                 'price' => $request->price
             ]);
             
-            return redirect('/mypage');  
+            return redirect('/mypage')->with('messages', '商品を出品しました');  
         }              
     }
 }
