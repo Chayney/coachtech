@@ -105,10 +105,14 @@
 
 .pay-link {
     text-decoration: none;
+    border: none;
+    background-color: #fff;
 }
 
 .address-link {
     text-decoration: none;
+    border: none;
+    background-color: #fff;
 }
 
 .user-address {

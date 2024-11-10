@@ -21,7 +21,9 @@
             </div>
             <div class="pay-group">
                 <span class="form__label--item">支払い方法</span><br>
-                <a class="pay-link" href="">変更する</a>
+                <form action="/purchase/pay/{item_id}" method="get">
+                    <button class="pay-link"  name="id" value="{{ $item['id'] }}">変更する</button>
+                </form>
             </div>
             <div class="address-group">
                 <span class="form__label--item">配送先</span><br>
