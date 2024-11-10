@@ -37,22 +37,33 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
+        $request->validate([
+            'name' => 'required|max:20'
+        ], [
+            'name.required' => '名前を入力してください',
+            'name.max:20' => '名前は20文字以内で入力してください'
+        ]);
         $profile = Profile::where('user_id', $user->id)->first();
         $image = $request->file('image');
         if ($request->hasFile('image')) {
             $path = \Storage::put('/public', $image);
             $path = explode('/', $path);
+            $profile->update([
+                'image' => $path[1],
+                'name' => $request->name,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building
+            ]);
         } else {
-            $path = null;
+            $profile->update([
+                'name' => $request->name,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building
+            ]);
         }
-        $profile->update([
-            'image' => $path[1],
-            'name' => $request->name,
-            'postcode' => $request->postcode,
-            'address' => $request->address,
-            'building' => $request->building
-        ]);
-
-        return redirect('/mypage/profile');  
+        
+        return redirect('/mypage');  
     }
 }
