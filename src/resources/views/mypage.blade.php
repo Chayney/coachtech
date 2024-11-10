@@ -6,6 +6,13 @@
 
 @section('content')
     <div class="profile">
+        @if(session('alert'))
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                alert("{!! session('alert') !!}");
+            });
+            </script>
+        @endif
         @if (!$profiles->isEmpty())
             @foreach ($profiles as $profile)
                 @if (empty($profile->name))

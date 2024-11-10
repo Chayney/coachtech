@@ -64,6 +64,6 @@ class ProfileController extends Controller
             ]);
         }
         
-        return redirect('/mypage');  
+        return redirect('/mypage')->with('alert', 'プロフィール情報を更新しました');
     }
 }

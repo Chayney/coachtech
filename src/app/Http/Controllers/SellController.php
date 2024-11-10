@@ -47,7 +47,7 @@ class SellController extends Controller
                 'price' => $request->price
             ]);
             
-            return redirect('/mypage');
+            return redirect('/mypage')->with('alert', '商品を出品しました');
         }              
     }
 }
