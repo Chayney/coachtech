@@ -17,6 +17,10 @@
     display: none;
 }
 
+.header__search__logo-mobile {
+    display: none;
+}
+
 .search-word-mobile {
     display: none;
 }
@@ -221,9 +225,49 @@
     }
 
     .search-word-mobile {
-        display: initial;
-        margin: auto 0 auto 5%;
+        display: none;
+    }
+
+    /* 検索バーカスタム */
+    .header__search__logo-mobile {
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
         width: 40%;
+    }
+
+    #searchButton {
+        cursor: pointer;
+        border: none;
+        background-color: #000;
+        width: 30%;
+    }
+
+    .search__logo {
+        width: 100%;
+    }
+
+    .search-bar {
+        display: none; /* 初期状態で非表示 */
+        position: absolute;
+        top: 50px; /* ボタンの下に表示 */
+        left: 0;
+        width: 300px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-bar input {
+        width: calc(100% - 20px);
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+    /* ここまで */
+
+    .search-word-mobile {
+        display: none;
     }
 
     .nav-humberger {
@@ -330,5 +374,19 @@
         color: rgb(53,96,246);
         font-weight: bold;
         font-size: 25px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .header__logo-mobile {
+        width: 50%;
+    }
+
+    .logo-mobile {
+        width: 90%;
+    }
+
+    .header__search__logo-mobile {
+        width: 50%;
     }
 }

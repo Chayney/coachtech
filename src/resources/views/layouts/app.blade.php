@@ -39,8 +39,18 @@
       </nav>
     </div>
     <a class="header__logo-mobile" href="/">
-      <img src="{{ asset('images/logo.svg') }}">
+      <img class="logo-mobile" src="{{ asset('images/logo.svg') }}">
     </a>
+    <div class="header__search__logo-mobile">
+      <button id="searchButton">
+        <img class="search__logo" src="{{ asset('images/search.jpg') }}">
+      </button>
+      <div id="searchBar" class="search-bar">
+        <form action="/search" class="search-word-hover" method="get">
+          <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
+        </form>
+      </div>
+    </div>
     <form action="/search" class="search-word-mobile" method="get">
       <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
     </form>
@@ -91,6 +101,7 @@
   <main>
     @yield('content')
   </main>
+  <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 
 </html>
