@@ -12,6 +12,38 @@
 
 <body>
   <header class="header">
+    <div class="nav-humberger">
+      <input id="drawer_input" class="drawer_hidden" type="checkbox">
+      <label for="drawer_input" class="drawer_open"><span></span></label>
+      <nav class="nav_content">
+          <ul class="nav_list">
+              @if (Auth::check())
+                <li class="nav_item">
+                  <a class="sell__link" href="/sell">出品</a>
+                </li>
+                <li class="nav_item"><a href="{{ url('mypage') }}">マイページ</a></li>
+                <li class="nav_item">
+                  <form action="/logout" method="post">
+                    @csrf
+                    <button class="logout">ログアウト</button>
+                  </form>
+                </li>
+              @else
+                <li class="header-nav__white">
+                  <a class="header-item__link" href="/login">出品</a>
+                </li>
+                <li class="nav_item"><a href="{{ url('register') }}">会員登録</a></li>
+                <li class="nav_item"><a href="{{ url('login') }}">ログイン</a></li>
+              @endif
+          </ul>
+      </nav>
+    </div>
+    <a class="header__logo-mobile" href="/">
+      <img src="{{ asset('images/logo.svg') }}">
+    </a>
+    <form action="/search" class="search-word-mobile" method="get">
+      <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
+    </form>
     <div class="header__inner">
       <div class="header-utilities">
         <a class="header__logo" href="/">
