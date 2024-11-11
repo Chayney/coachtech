@@ -48,6 +48,9 @@ class PurchaseController extends Controller
 
     public function revise(Request $request)
     {
-        return view('pay');
+        $user = Auth::user();
+        $items = Item::where('id', $request->id)->get();
+
+        return view('pay', compact('items'));
     }
 }
