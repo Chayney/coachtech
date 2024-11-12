@@ -9,9 +9,9 @@
         @foreach ($items as $item)
             <div class="child__container-left">    
                 @if (Str::startsWith($item['image'], 'images/'))
-                    <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset($item['image']) }}">
                 @else
-                    <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}">
                 @endif
             </div>
             <div class="child__container-right">
@@ -26,8 +26,8 @@
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                    <button class="favorite" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
-                                        <img class="favorite_image" src="{{ asset('images/red_star.jpg') }}">
+                                    <button class="favorited" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
+                                        <img class="favorited_image" src="{{ asset('images/red_star.jpg') }}">
                                         <span>{{ $item->favorites_count }}</span>
                                     </button>                      
                                 </form>
