@@ -1,5 +1,5 @@
 .tabs {
-    margin: 7% 0;
+    margin: 7% 0 3% 0;
     width: 100%;
     border-bottom: 1px solid #000;
 }
@@ -83,4 +83,41 @@
     object-fit: cover;
     border-radius: 10px;
     z-index: 11;
+}
+
+@media screen and (max-width:1000px) {
+    .tabs {
+        margin: 13% auto 3% auto;
+    }
+
+    .child__container {
+        width: 45%;
+        border-radius: 10px;
+        position: relative;
+        z-index: 10;
+        border: 1px solid #000;
+        margin: 2%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .tabs {
+        margin: 22% auto 3% auto;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .tabs {
+        margin: 35% auto 3% auto;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .tab-button {
+        width: 40%;
+    }
+
+    .tab-button-stable { 
+        width: initial;
+    }
 }

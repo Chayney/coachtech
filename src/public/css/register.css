@@ -1,5 +1,5 @@
 .register__content {
-    margin: 8% auto;
+    margin: 15% auto;
 }
   
 .register-form__heading {
@@ -59,4 +59,10 @@
     text-decoration: none;
     color: lightskyblue;
     font-weight: bold;
+}
+
+@media screen and (max-width:768px) {
+    .register__content {
+        margin: 25% auto;
+    }
 }

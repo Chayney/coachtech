@@ -1,5 +1,5 @@
 .login__content {
-    margin: 8% auto;
+    margin: 15% auto;
 }
   
 .login-form__heading {
@@ -59,4 +59,10 @@
     text-decoration: none;
     color: lightskyblue;
     font-weight: bold;
+}
+
+@media screen and (max-width:768px) {
+    .login__content {
+        margin: 25% auto;
+    }
 }
