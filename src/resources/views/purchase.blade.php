@@ -10,9 +10,9 @@
         <div class="child__container-left">
             <div class="item-group">
                 @if (Str::startsWith($item['image'], 'images/'))
-                    <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset($item['image']) }}">
                 @else
-                    <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}">
                 @endif
                 <div class="name-group">
                     <span class="form__label--item">{{ $item['name'] }}</span><br>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="pay-group">
                     <span class="form__label--item">支払い金額</span><br>
-                    <span class="form__label--item">¥500</span>
+                    <span class="form__label--item">¥{{ $item['price'] }}</span>
                 </div>
                 <div class="pay-group">
                     <span class="form__label--item">支払い方法</span><br>

@@ -24,7 +24,7 @@
 }
 
 .child__container-right {
-    width: 30%;
+    width: 35%;
     height: 300px;
     color: #000;
     position: relative;
@@ -46,7 +46,6 @@
 
 .form__label--item {
     font-size: 20px;
-    padding-right: 50px;
 }
 
 .item-group {
@@ -57,7 +56,7 @@
 .product_image {
     width: 30%;
     height: 200px;
-    padding-right: 100px;
+    border: 1px solid #000;
 }
 
 .name-group {
@@ -117,4 +116,46 @@
 
 .user-address {
     padding: 20px;
+}
+
+@media screen and (max-width:1000px) {
+    .parent__container {
+        margin: 15% auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .parent__container {
+        margin: 25% auto;
+    }
+
+    .child__container-left {
+        width: 50%;
+    }
+
+    .child__container-right {
+        width: 40%;
+    }
+
+    .product_image {
+        width: 50%;
+    }
+
+    .form__label--item {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .parent__container {
+        margin: 35% auto;
+    }
+
+    .child__container-left {
+        width: 100%;
+    }
+
+    .child__container-right {
+        width: 100%;
+    }
 }
