@@ -37,7 +37,7 @@
 }
 
 .form__input--text input {
-    width: 100%;
+    width: 90%;
     height: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -47,12 +47,13 @@
 }
 
 .form__input input {
-    width: 100%;
+    width: 90%;
     height: 50px;
     border: 1px solid #ddd;
     border-radius: 5px;
     appearance: none;
     outline: none;
+    padding-left: 20px;
 }
 
 .form__input--image {
@@ -96,7 +97,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 70%;
     height: 50px;
     background-color: #fff;
     color: rgb(255,85,85);
@@ -115,6 +116,38 @@
 .input__label {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 15px;
     transform: translateY(-50%);
+}
+
+@media screen and (max-width:1000px) {
+    .sell__content {
+        margin: 15% auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .sell__content {
+        margin: 20% auto;
+    }
+
+    .edit {
+        width: 80%;
+        font-size: 20px;
+    }
+
+    .input__label {
+        left: 10px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .sell__content {
+        margin: 25% auto;
+    }
+
+    .edit {
+        width: 90%;
+        font-size: 15px;
+    }
 }
