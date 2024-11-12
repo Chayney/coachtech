@@ -1,8 +1,8 @@
-.address__content {
+.pay__content {
     margin: 8% auto;
 }
   
-.address-form__heading {
+.pay-form__heading {
     text-align: center;
 }
 
@@ -48,4 +48,26 @@
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+}
+
+@media screen and (max-width:1000px) {
+    .pay__content {
+        margin: 15% auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .pay__content {
+        margin: 20% auto;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .pay__content {
+        margin: 25% auto;
+    }
+
+    .form {
+        width: 50%;
+    }
 }

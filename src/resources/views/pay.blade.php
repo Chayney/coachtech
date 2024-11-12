@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-  <div class="address__content">
-    <div class="address-form__heading">
+  <div class="pay__content">
+    <div class="pay-form__heading">
       <h2>支払い方法の変更</h2>
     </div>
     <div class="form__error">
