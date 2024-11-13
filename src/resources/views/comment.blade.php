@@ -9,9 +9,9 @@
         @foreach ($items as $item)
             <div class="child__container-left">    
                 @if (Str::startsWith($item['image'], 'images/'))
-                    <button><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset($item['image']) }}">
                 @else
-                    <button><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                    <img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}">
                 @endif
             </div>
             <div class="child__container-right">
@@ -27,8 +27,8 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                <button class="favorite" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
-                                    <img class="favorite_image" src="{{ asset('images/red_star.jpg') }}">
+                                <button class="favorited" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
+                                    <img class="favorited_image" src="{{ asset('images/red_star.jpg') }}">
                                     <span>{{ $item->favorites_count }}</span>
                                 </button>                      
                             </form>
@@ -70,13 +70,13 @@
                     <div class="user-group">
                         @if (empty($comment['commentProfile']['name']))
                             <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span>ユーザー名</span>
+                            <span class="profile_name">ユーザー名</span>
                         @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
                             <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span>{{ $comment['commentProfile']['name'] }}</span>
+                            <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
                         @else
                             <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
-                            <span>{{ $comment['commentProfile']['name'] }}</span>
+                            <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
                         @endif       
                         
                     </div>
@@ -91,7 +91,7 @@
                     <div class="form-group">
                         <span class="form__label--item">商品へのコメント</span>
                         <input type="hidden" name="item_id" value="{{ $item['id'] }}">            
-                        <input type="text" class="comment-post" name="comment">               
+                        <textarea class="comment-post" name="comment"></textarea>          
                     </div>
                     <div class="form__button">
                         <button class="form__button-submit" type="submit">コメントを送信する</button>
@@ -100,7 +100,7 @@
             @else
                 <div class="form-group">
                     <span class="form__label--item">商品へのコメント</span>           
-                    <input type="text" class="comment-post" name="comment">               
+                    <textarea class="comment-post" name="comment"></textarea>             
                 </div>
                 <div class="form__button">
                     <button class="form__button-submit" onclick="location.href='/login'">コメントを送信する</button>
