@@ -38,7 +38,7 @@
         <div class="form__group-content">
           <div class="form__input--text">
             <select class="select__box" name="category_id">
-              <option disabled selected>必須</option>
+              <option selected>必須</option>
               @foreach ($categories as $category)
                 <option value="{{ $category['element']['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['element']['name'] }}</option>
               @endforeach
