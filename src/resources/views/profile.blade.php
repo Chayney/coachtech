@@ -27,53 +27,55 @@
             </div>
             <label class="edit">画像を選択する<input type="file" onchange="previewImage(event)" class="file" name="image"></label>
           </div>
-        <div class="form__group">
-          <div class="form__group-title">
-            <span class="form__label--item">ユーザー名</span>
-          </div>
-          <div class="form__group-content">
-            <div class="form__input--text">
-              <input type="text" name="name" value="{{ $profile['name'] }}"/>
+        <div class="form__content">
+          <div class="form__group">
+            <div class="form__group-title">
+              <span class="form__label--item">ユーザー名</span>
             </div>
-            <div class="form__error">
-              @error('name')
-              {{ $message }}
-              @enderror
-            </div>
-          </div>
-        </div>
-        <div class="form__group">
-          <div class="form__group-title">
-            <span class="form__label--item">郵便番号</span>
-          </div>
-          <div class="form__group-content">
-            <div class="form__input--text">
-              <input type="text" name="postcode" value="{{ $profile['postcode'] }}"/>
+            <div class="form__group-content">
+              <div class="form__input--text">
+                <input type="text" name="name" value="{{ $profile['name'] }}"/>
+              </div>
+              <div class="form__error">
+                @error('name')
+                {{ $message }}
+                @enderror
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form__group">
-          <div class="form__group-title">
-            <span class="form__label--item">住所</span>
-          </div>
-          <div class="form__group-content">
-            <div class="form__input--text">
-              <input type="text" name="address" value="{{ $profile['address'] }}"/>
+          <div class="form__group">
+            <div class="form__group-title">
+              <span class="form__label--item">郵便番号</span>
+            </div>
+            <div class="form__group-content">
+              <div class="form__input--text">
+                <input type="text" name="postcode" value="{{ $profile['postcode'] }}"/>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form__group">
-          <div class="form__group-title">
-            <span class="form__label--item">建物名</span>
-          </div>
-          <div class="form__group-content">
-            <div class="form__input--text">
-              <input type="text" name="building" value="{{ $profile['building'] }}"/>
+          <div class="form__group">
+            <div class="form__group-title">
+              <span class="form__label--item">住所</span>
+            </div>
+            <div class="form__group-content">
+              <div class="form__input--text">
+                <input type="text" name="address" value="{{ $profile['address'] }}"/>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form__button">
-          <button class="form__button-submit" type="submit">更新する</button>
+          <div class="form__group">
+            <div class="form__group-title">
+              <span class="form__label--item">建物名</span>
+            </div>
+            <div class="form__group-content">
+              <div class="form__input--text">
+                <input type="text" name="building" value="{{ $profile['building'] }}"/>
+              </div>
+            </div>
+          </div>
+          <div class="form__button">
+            <button class="form__button-submit" type="submit">更新する</button>
+          </div>
         </div>
       </form>
     @endforeach  

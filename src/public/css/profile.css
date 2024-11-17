@@ -1,5 +1,5 @@
 .profile__content {
-    margin: 8% auto;
+    margin: 10% auto 0 auto;
 }
   
 .profile-form__heading {
@@ -47,13 +47,13 @@
 }
 
 .form {
-    margin: 3% auto;
+    margin: 3% auto 0 auto;
     width: 35%;
     text-align: center;
 }
 
 .form__group {
-    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 .form__group-title {
@@ -88,4 +88,131 @@
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+}
+
+@media screen and (max-width:1000px) {
+    .profile__content {
+        margin: 13% auto 0 auto;
+        width: 60%;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    .profile {
+        margin-top: 18%;
+        width: 100%;
+    }
+
+    .profile-group {
+        width: 45%;
+        height: 180px;
+    }
+
+    .profile_image {
+        width: 55%;
+    }
+
+    .parent__container {
+        margin: 15% auto;
+    }
+
+    .child__container {
+        width: 45%;
+    }
+
+    .icon-group {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .profile__content {
+        width: 80%;
+        margin-top: 25%;
+    }
+
+    .profile {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .profile-group {
+        width: 80%;
+    }
+
+    .profile_image {
+        width: 100%;
+    }
+
+    .event-image {
+        margin: 0 auto;
+        height: 100%;
+        width: 40%;
+    }
+
+    .edit {
+        margin: 3% auto 0 auto;
+        width: 100%;
+    }
+
+    .form__content {
+        margin-top: 20%;
+    }
+
+    .tabs {
+        margin-top: 15%;
+        justify-content: space-around;
+    }
+
+    .tab-button {
+        width: 50%;
+    }
+
+    .parent__container {
+        margin: 15% auto;
+    }
+
+    .child__container-left {
+        width: 40%;
+    }
+
+    .child__container-right {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .profile__content {
+        margin-top: 35%;
+    }
+
+    .profile_image {
+        width: 60%;
+    }
+
+    .event-image {
+        width: 50%;
+    }
+
+    .form__content {
+        margin-top: 25%;
+    }
+
+    .tabs {
+        margin-top: 18%;
+    }
+
+    .parent__container {
+        margin-top: 15%;
+    }
+
+    .child__container-left {
+        width: 100%;
+    }
+
+    .child__container-right {
+        width: 100%;
+    }
 }
