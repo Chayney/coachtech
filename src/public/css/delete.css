@@ -59,6 +59,7 @@
     display: flex;
     width: 100%;
     align-items: center;
+    margin-top: 15%;
     margin-bottom: 3%;
 }
 
@@ -77,18 +78,18 @@
 .icon-group {
     display: flex;
     justify-content: space-between;
-    width: 40%;
+    width: 55%;
 }
 
 .favorite {
-    width: 100%;
+    width: 30%;
     background-color: #fff;
     border: none;
     height: 60px;
 }
 
 .favorited {
-    width: 100%;
+    width: 30%;
     background-color: #fff;
     border: none;
     height: 60px;
@@ -115,7 +116,7 @@
 }
 
 .comment {
-    width: 100%;
+    width: 30%;
     background-color: #fff;
     border: none;
     height: 60px;
@@ -150,6 +151,10 @@
 @media screen and (max-width:1000px) {
     .parent__container {
         margin: 15% auto;
+    }
+
+    .icon-group {
+        width: 70%;
     }
 }
 

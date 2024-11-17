@@ -22,31 +22,20 @@
                     @if (Auth::check())
                         <div class="icon-group">
                             @if ($item->favoriteMarked())
-                                <form action="/favorite/destroy{item}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                    <button class="favorited" type="submit">
-                                        <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
-                                        <span>{{ $item->favorites_count }}</span>
-                                    </button>                      
-                                </form>
+                                <button class="favorited">
+                                    <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
+                                    <span>{{ $item->favorites_count }}</span>
+                                </button>                      
                             @else
-                                <form action="/favorite/store" method="post">
-                                    @csrf
-                                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                    <button class="favorite" type="submit">
-                                        <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                                        <span>{{ $item->favorites_count }}</span>
-                                    </button>                            
-                                </form>
+                                <button class="favorite">
+                                    <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                    <span>{{ $item->favorites_count }}</span>
+                                </button>                            
                             @endif
-                            <div class="comment-group">
-                                <button class="comment">
-                                    <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                                    <span>{{ $item->comments_count }}</span>
-                                </button>
-                            </div>
+                            <button class="comment">
+                                <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                                <span>{{ $item->comments_count }}</span>
+                            </button>
                         </div>
                     @else
                         <div class="icon-group">
