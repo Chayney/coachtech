@@ -16,21 +16,27 @@
         @if (!$profiles->isEmpty())
             @foreach ($profiles as $profile)
                 @if (empty($profile->name))
-                    <img class="profile_image" src="{{ asset($profile['image']) }}">
-                    <span class="label--item">ユーザー名</span>
+                    <div class="profile-group">
+                        <img class="profile_image" src="{{ asset($profile['image']) }}">
+                        <span class="label--item">ユーザー名</span>
+                    </div>
                     <form class="form-label--item" action="/mypage/profile" method="get">
                         <button class="edit" type="submit">プロフィールを編集</button>
                     </form>
                 @elseif (Str::startsWith($profile['image'], 'images/'))
-                    <img class="profile_image" src="{{ asset($profile['image']) }}">
-                    <span class="label--item">{{ $profile['name'] }}</span>
+                    <div class="profile-group">
+                        <img class="profile_image" src="{{ asset($profile['image']) }}">
+                        <span class="label--item">{{ $profile['name'] }}</span>
+                    </div>
                     <form class="form-label--item" action="/mypage/profile" method="get">
                         <input type="hidden" name="profile_id" value="{{ $profile['id'] }}">
                         <button class="edit" type="submit">プロフィールを編集</button>
                     </form>
                 @else
-                    <img class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
-                    <span class="label--item">{{ $profile['name'] }}</span>
+                    <div class="profile-group">
+                        <img class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
+                        <span class="label--item">{{ $profile['name'] }}</span>
+                    </div>
                     <form class="form-label--item" action="/mypage/profile" method="get">
                         <input type="hidden" name="profile_id" value="{{ $profile['id'] }}">
                         <button class="edit" type="submit">プロフィールを編集</button>

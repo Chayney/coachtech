@@ -1,11 +1,23 @@
 .profile {
     display: flex;
-    height: 150px;
-    margin: 10% 0 0 15%;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    margin: 10% auto 0 auto;
+}
+
+.profile-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+    height: 180px;
 }
 
 .profile_image {
-    width: 12%;
+    width: 42%;
+    height: 100%;
     border: 1px solid #000;
     border-radius: 100%;
 }
@@ -13,11 +25,10 @@
 .label--item {
     font-weight: bold;
     font-size: 25px;
-    margin: auto 5%;
 }
 
 .form-label--item {
-    margin: auto 0 auto 30%;
+    margin: auto 0;
 }
 
 .edit {
@@ -103,7 +114,100 @@
     left: 0;
     width: 100%;
     height: 230px;
-    object-fit: cover;
     border-radius: 10px;
     z-index: 11;
+}
+
+@media screen and (max-width:1000px) {
+    .profile {
+        margin-top: 18%;
+        width: 100%;
+    }
+
+    .profile-group {
+        width: 45%;
+        height: 180px;
+    }
+
+    .profile_image {
+        width: 55%;
+    }
+
+    .parent__container {
+        margin: 15% auto;
+    }
+
+    .child__container {
+        width: 45%;
+    }
+
+    .icon-group {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .profile {
+        display: block;
+        margin: 20% auto 0 auto;
+    }
+
+    .profile-group {
+        width: 80%;
+    }
+
+    .profile_image {
+        width: 40%;
+    }
+
+    .form-label--item {
+        margin-top: 10%;
+    }
+
+    .tabs {
+        margin-top: 15%;
+        justify-content: space-around;
+    }
+
+    .tab-button {
+        width: 50%;
+    }
+
+    .parent__container {
+        margin: 15% auto;
+    }
+
+    .child__container-left {
+        width: 40%;
+    }
+
+    .child__container-right {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .profile {
+        margin: 35% auto 0 auto;
+    }
+
+    .profile_image {
+        width: 60%;
+    }
+
+    .tabs {
+        margin-top: 18%;
+    }
+
+    .parent__container {
+        margin-top: 15%;
+    }
+
+    .child__container-left {
+        width: 100%;
+    }
+
+    .child__container-right {
+        width: 100%;
+    }
 }
