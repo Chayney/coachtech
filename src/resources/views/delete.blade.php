@@ -19,79 +19,79 @@
                     <span class="label--item">商品名</span><br>
                     <span class="form__label--item">{{ $item['name'] }}</span><br>
                     <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
-                </div>
-                @if (Auth::check())
-                    <div class="icon-group">
-                        @if ($item->favoriteMarked())
-                            <form action="/favorite/destroy{item}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                <button class="favorited" type="submit">
-                                    <img class="favorited_image" src="{{ asset('images/red_star.jpg') }}">
-                                    <span>{{ $item->favorites_count }}</span>
-                                </button>                      
-                            </form>
-                        @else
-                            <form action="/favorite/store" method="post">
-                                @csrf
-                                <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-                                <button class="favorite" type="submit">
+                    @if (Auth::check())
+                        <div class="icon-group">
+                            @if ($item->favoriteMarked())
+                                <form action="/favorite/destroy{item}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                                    <button class="favorited" type="submit">
+                                        <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
+                                        <span>{{ $item->favorites_count }}</span>
+                                    </button>                      
+                                </form>
+                            @else
+                                <form action="/favorite/store" method="post">
+                                    @csrf
+                                    <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+                                    <button class="favorite" type="submit">
+                                        <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                        <span>{{ $item->favorites_count }}</span>
+                                    </button>                            
+                                </form>
+                            @endif
+                            <div class="comment-group">
+                                <button class="comment">
+                                    <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                                    <span>{{ $item->comments_count }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    @else
+                        <div class="icon-group">
+                            <div class="favorite-group">
+                                <button class="favorite" onclick="location.href='/login'">
                                     <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
                                     <span>{{ $item->favorites_count }}</span>
-                                </button>                            
-                            </form>
-                        @endif
-                        <div class="comment-group">
-                            <button class="comment">
-                                <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                                <span>{{ $item->comments_count }}</span>
-                            </button>
+                                </button>
+                            </div>
+                            <div class="comment-group">
+                                <button class="comment" >
+                                    <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                                    <span>{{ $item->comments_count }}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <div class="icon-group">
-                        <div class="favorite-group">
-                            <button class="favorite" onclick="location.href='/login'">
-                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                                <span>{{ $item->favorites_count }}</span>
-                            </button>
-                        </div>
-                        <div class="comment-group">
-                            <button class="comment" >
-                                <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                                <span>{{ $item->comments_count }}</span>
-                            </button>
-                        </div>
-                    </div>
-                @endif
-            @foreach ($comments as $comment)
-                <div class="profile">
-                    <div class="user-group">
-                        @if (empty($comment['commentProfile']['name']))
-                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span class="user_name">ユーザー名</span>
-                        @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
-                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
-                        @else
-                            <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
-                            <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
-                        @endif               
-                        <form action="/comment/destroy"  class="trash-group" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{ $comment['id'] }}">
-                            <button class="trash" type="submit" onclick="return showAlert('本当にコメントを削除しますか？')">
-                                <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
-                            </button>
-                        </form>
-                    </div>
-                    <div class="comment-area">
-                        <span class="comment-text">{{ $comment['comment'] }}</span>
-                    </div>
+                    @endif
                 </div>
-            @endforeach
+                @foreach ($comments as $comment)
+                    <div class="profile">
+                        <div class="user-group">
+                            @if (empty($comment['commentProfile']['name']))
+                                <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                                <span class="user_name">ユーザー名</span>
+                            @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
+                                <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                                <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
+                            @else
+                                <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
+                                <span class="user_name">{{ $comment['commentProfile']['name'] }}</span>
+                            @endif               
+                            <form action="/comment/destroy"  class="trash-group" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $comment['id'] }}">
+                                <button class="trash" type="submit" onclick="return showAlert('本当にコメントを削除しますか？')">
+                                    <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
+                                </button>
+                            </form>
+                        </div>
+                        <div class="comment-area">
+                            <span class="comment-text">{{ $comment['comment'] }}</span>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         @endforeach
     </div>

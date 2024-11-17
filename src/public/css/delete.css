@@ -76,29 +76,32 @@
 
 .icon-group {
     display: flex;
+    justify-content: space-between;
     width: 40%;
 }
 
 .favorite {
-    width: 48%;
+    width: 100%;
     background-color: #fff;
     border: none;
-    height: 50px;
+    height: 60px;
 }
 
 .favorited {
-    width: 55%;
+    width: 100%;
     background-color: #fff;
     border: none;
-    height: 50px;
+    height: 60px;
 }
 
 .favorite_image {
     width: 100%;
+    height: 100%;
 }
 
 .favorited_image {
     width: 100%;
+    height: 100%;
 }
 
 .comment-area {
@@ -112,14 +115,15 @@
 }
 
 .comment {
-    width: 85%;
+    width: 100%;
     background-color: #fff;
     border: none;
-    height: 50px;
+    height: 60px;
 }
 
 .comment_image {
     width: 100%;
+    height: 100%;
 }
 
 .form-group {

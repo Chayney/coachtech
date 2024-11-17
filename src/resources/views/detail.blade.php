@@ -27,7 +27,7 @@
                                     @method('DELETE')
                                     <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                                     <button class="favorited" type="submit" onclick="return showAlert('本当にお気に入りを削除しますか？')">
-                                        <img class="favorited_image" src="{{ asset('images/red_star.jpg') }}">
+                                        <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
                                         <span>{{ $item->favorites_count }}</span>
                                     </button>                      
                                 </form>
