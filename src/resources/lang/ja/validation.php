@@ -146,5 +146,7 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '商品名'
+    ],
 ];

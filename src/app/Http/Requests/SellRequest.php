@@ -40,8 +40,8 @@ class SellRequest extends FormRequest
             'name.required' => '商品名を入力してください',
             'name.max:40' => '商品名は40文字以内で入力してください',
             'image.required' => '商品画像を選択してください',
-            'price.required' => '金額を入力してください',
-            'price.integer' => '金額は数値で入力してください'
+            'price.required' => '販売価格を入力してください',
+            'price.integer' => '販売価格は数値で入力してください'
         ];
     }
 }
