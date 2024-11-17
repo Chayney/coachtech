@@ -19,12 +19,7 @@
       @method('PATCH')
       <div class="form__group">
         <div class="form__group-title">
-        <label><input type="radio" name="pay" value="クレジットカード"><span>クレジットカード</span></label>
-        </div>
-        <div class="form__group-content">
-          <div class="form__input--text">
-            <input type="text" name="postcode">
-          </div>
+          <label><input type="radio" name="pay" value="クレジットカード"><span>クレジットカード</span></label>
         </div>
       </div>
       <div class="form__group">
