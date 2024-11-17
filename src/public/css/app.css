@@ -238,13 +238,14 @@
 
     .header__inner-mobile {
         display: flex;
+        justify-content: space-between;
         position: relative;
         width: 100%;
     }
 
     .header__logo-mobile {
         display: initial;
-        margin: auto 0;
+        text-align: center;
         width: 60%;
     }
 
@@ -257,7 +258,6 @@
         display: none;
     }
 
-    /* 検索バーカスタム */
     .header__search__logo-mobile {
         display: flex;
         justify-content: flex-end;
@@ -276,9 +276,9 @@
     }
 
     .search-bar {
-        display: none; /* 初期状態で非表示 */
+        display: none;
         position: absolute;
-        top: 120%; /* ボタンの下に表示 */
+        top: 120%;
         left: 3%;
         width: 90%;
         border-radius: 5px;
@@ -291,7 +291,6 @@
     .search__box {
         border-radius: 10px;
     }
-    /* ここまで */
 
     .search-word-mobile {
         display: none;
