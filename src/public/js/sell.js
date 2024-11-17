@@ -4,7 +4,7 @@ function previewImage(event) {
     reader.onload = function() {
         var output = document.getElementById('uploadedImage');
         output.src = reader.result;
-        output.style.width = '100%';
+        output.style.width = 'initial';
         output.style.height = '100px';
         document.getElementById('uploadButton').style.display = 'none';
     };
