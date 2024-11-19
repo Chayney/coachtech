@@ -9,27 +9,21 @@
     <div class="pay-form__heading">
       <h2>支払い方法の変更</h2>
     </div>
-    <div class="form__error">
-      @error('pay')
-      {{ $message }}
-      @enderror
-    </div>
     <form class="form" action="/purchase/{item_id}" method="post">
       @csrf
-      @method('PATCH')
       <div class="form__group">
         <div class="form__group-title">
-          <label><input type="radio" name="pay" value="クレジットカード"><span>クレジットカード</span></label>
+          <label><input type="radio" name="pay" id="credit" value=1 {{ old('pay') == 1 || old('pay') == null ? : '' }}><span>クレジットカード</span></label>
         </div>
       </div>
       <div class="form__group">
         <div class="form__group-title">
-        <label><input type="radio" name="pay" value="コンビニ"><span>コンビニ</span></label>
+          <label><input type="radio" name="pay" id="store" value=2 {{ old('pay') == 2 || old('pay') == null ? : '' }}><span>コンビニ</span></label>
         </div>
       </div>
       <div class="form__group">
         <div class="form__group-title">
-        <label><input type="radio" name="pay" value="銀行振込"><span>銀行振込</span></label>
+          <label><input type="radio" name="pay" id="bank" value=3 {{ old('pay') == 3 || old('pay') == null ? : '' }}><span>銀行振込</span></label>
         </div>
       </div>
       <div class="form__button">
