@@ -24,7 +24,7 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required',
+            'elements' => ['required', 'array'],
             'condition_id' => 'required',
             'name' => ['required', 'max:40'],           
             'price' => ['required', 'integer'],
