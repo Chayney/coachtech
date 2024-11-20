@@ -25,6 +25,19 @@
                     <button class="pay-link"  name="id" value="{{ $item['id'] }}">変更する</button>
                 </form>
             </div>
+            <div class="user-address">
+                @foreach ($profiles as $profile)
+                    @if ($profile->pay == 1)
+                        <span>クレジットカード</span>
+                    @elseif ($profile->pay == 2)
+                        <span>コンビニ</span>
+                    @elseif ($profile->pay == 3)
+                        <span>銀行振込</span>
+                    @else
+                        <span></span>
+                    @endif
+                @endforeach
+            </div>
             <div class="address-group">
                 <span class="form__label--item">配送先</span><br>
                 <form action="/purchase/address/{item_id}" method="get">
@@ -50,7 +63,17 @@
                 </div>
                 <div class="pay-group">
                     <span class="form__label--item">支払い方法</span><br>
-                    <span class="form__label--item">コンビニ払い</span>
+                    @foreach ($profiles as $profile)
+                        @if ($profile->pay == 1)
+                            <span class="form__label--item">クレジットカード</span>
+                        @elseif ($profile->pay == 2)
+                            <span class="form__label--item">コンビニ</span>
+                        @elseif ($profile->pay == 3)
+                            <span class="form__label--item">銀行振込</span>
+                        @else
+                            <span></span>
+                        @endif
+                    @endforeach
                 </div>
             </div>          
             <form action="/purchase" method="post">

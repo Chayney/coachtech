@@ -23,7 +23,7 @@
           </div>
           <div class="form__error">
             @error('image')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -37,16 +37,16 @@
         </div>
         <div class="form__group-content">
           <div class="form__input--text">
-            <select class="select__box" name="category_id">
-              <option selected>必須</option>
+            <select class="select__box" name="elements[]" multiple>
+              <option value="" disabled>必須</option>
               @foreach ($categories as $category)
-                <option value="{{ $category['element']['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['element']['name'] }}</option>
+                <option value="{{ $category['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['name'] }}</option>
               @endforeach
             </select>
           </div>
           <div class="form__error">
-            @error('category_id')
-            {{ $message }}
+            @error('elements')
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -64,7 +64,7 @@
           </select>
           <div class="form__error">
             @error('condition_id')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -82,7 +82,7 @@
           </div>
           <div class="form__error">
             @error('name')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -111,7 +111,7 @@
           </div>
           <div class="form__error">
             @error('price')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>

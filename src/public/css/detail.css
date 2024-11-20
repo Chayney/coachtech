@@ -36,7 +36,6 @@
 
 .form__label--item {
     font-size: 20px;
-    padding-right: 50px;
 }
 
 .name-group {
@@ -71,21 +70,42 @@
 .category-group {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    width: 100%;
+}
+
+.category-left {
+    width: 30%;
+}
+
+.category-right {
+    width: 60%;
+    margin-left: 5%;
 }
 
 .condition-group {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     align-items: center;
     margin-top: 3%;
 }
 
+.condition-left {
+    width: 30%;
+}
+
+.condition-right {
+    width: 60%;
+    margin-left: 5%;
+}
+
 .item {
+    display: inline-block;
     border: 1px solid #000;
     border-radius: 10px;
     padding: 3px 10px;
     background-color: #d3d3d3;
+    margin: 0 5% 3% 0;
 }
 
 .icon-group {
@@ -137,6 +157,24 @@
 
     .icon-group {
         width: 60%;
+    }
+
+    .category-left {
+        width: 40%;
+    }
+    
+    .category-right {
+        width: 55%;
+        margin-left: 5%;
+    }
+
+    .condition-left {
+        width: 40%;
+    }
+    
+    .condition-right {
+        width: 55%;
+        margin-left: 5%;
     }
 }
 

@@ -86,12 +86,22 @@
                 <div class="infomation-group">
                     <span class="label--item">商品説明</span><br><br>
                     <div class="category-group">
-                        <span class="form__label--item">カテゴリー</span>
-                        <span class="item">{{ $item['category']['element']['name'] }}</span><br><br>
+                        <div class="category-left">
+                            <span class="form__label--item">カテゴリー</span>
+                        </div>
+                        <div class="category-right">
+                            @foreach ($item->elements as $element)
+                                <span class="item">{{ $element['name'] }}</span>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="condition-group">
-                        <span class="form__label--item">商品の状態</span>
-                        <span class="item">{{ $item['condition']['condition'] }}</span>
+                        <div class="condition-left">
+                            <span class="form__label--item">商品の状態</span>
+                        </div>
+                        <div class="condition-right">
+                            <span class="condition-item">{{ $item['condition']['condition'] }}</span>
+                        </div>
                     </div>
                 </div>
             </div> 
