@@ -15,7 +15,7 @@ class SellController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('element')->get();
+        $categories = Element::all();
         $conditions = Condition::all();
         $user = Auth::user();
         
@@ -40,12 +40,12 @@ class SellController extends Controller
             $item = Item::create([
                 'profile_id' => $profile->id,
                 'image' => $path[1],
-                'category_id' => $request->category_id,
                 'condition_id' => $request->condition_id,
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price
             ]);
+            $item->elements()->attach($request->input('elements'));
             
             return redirect('/mypage')->with('alert', '商品を出品しました');
         }              
