@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
     // 支払い方法登録ページ
     Route::get('/purchase/pay/{item_id}', [PurchaseController::class, 'revise']);
+    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store']);
 
     // 住所登録ページ
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'edit']);
