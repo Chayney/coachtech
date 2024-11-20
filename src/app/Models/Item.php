@@ -12,7 +12,6 @@ class Item extends Model
 
     protected $fillable = [
         'profile_id',
-        'category_id',
         'condition_id',
         'name',
         'description',
@@ -25,9 +24,9 @@ class Item extends Model
         return $this->belongsTo(Profile::class);
     }
 
-    public function category()
+    public function elements()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Element::class, 'categories');
     }
 
     public function condition()
