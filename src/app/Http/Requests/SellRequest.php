@@ -24,7 +24,7 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-            'elements' => ['required', 'array'],
+            'elements' => 'required',
             'condition_id' => 'required',
             'name' => ['required', 'max:40'],           
             'price' => ['required', 'integer'],
@@ -35,7 +35,7 @@ class SellRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required' => 'カテゴリーを選択してください',
+            'elements.required' => 'カテゴリーを選択してください',
             'condition_id.required' => '商品の状態を選択してください',
             'name.required' => '商品名を入力してください',
             'name.max:40' => '商品名は40文字以内で入力してください',
