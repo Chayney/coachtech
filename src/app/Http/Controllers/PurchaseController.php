@@ -53,4 +53,15 @@ class PurchaseController extends Controller
 
         return view('pay', compact('items'));
     }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        $payment = $request->only(['pay']);        
+        Profile::find($user->id)->update($payment);
+        $items = Item::where('id', $request->id)->get();
+        $profiles = Profile::where('user_id', $user->id)->get();
+
+        return view('purchase', compact('items', 'profiles'));
+    }
 }
