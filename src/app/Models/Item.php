@@ -23,7 +23,6 @@ class Item extends Model
     {
         return $this->belongsTo(Profile::class);
     }
-    
 
     public function elements()
     {
