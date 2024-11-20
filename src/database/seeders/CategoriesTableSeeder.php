@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Item;
+use App\Models\Element;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -14,29 +16,19 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $param = [
-            'element_id' => '1'
-        ];
-        DB::table('categories')->insert($param);
+        $items = Item::all();
+        $elements = Element::all();
 
-        $param = [
-            'element_id' => '2'
-        ];
-        DB::table('categories')->insert($param);
-
-        $param = [
-            'element_id' => '3'
-        ];
-        DB::table('categories')->insert($param);
-
-        $param = [
-            'element_id' => '4'
-        ];
-        DB::table('categories')->insert($param);
-
-        $param = [
-            'element_id' => '5'
-        ];
-        DB::table('categories')->insert($param);
+        foreach ($items as $item) {
+            $assignedElements = $elements->random(rand(1, 2))->pluck('id')->toArray();
+            foreach ($assignedElements as $elementId) {
+                DB::table('categories')->insert([
+                    'item_id' => $item->id,
+                    'element_id' => $elementId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }

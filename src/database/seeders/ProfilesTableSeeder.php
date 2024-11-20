@@ -20,7 +20,8 @@ class ProfilesTableSeeder extends Seeder
             'name' => 'test',
             'postcode' => '123-4567',
             'address' => '東京都',
-            'building' => 'タマホーム'
+            'building' => 'タマホーム',
+            'pay' => '1'
         ];
         DB::table('profiles')->insert($param);
     }
