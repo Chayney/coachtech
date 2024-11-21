@@ -69,7 +69,7 @@
 }
 
 .select__box {
-    width: 100%;
+    width: 95%;
     height: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -118,6 +118,63 @@
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
+}
+
+/* 追加 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 95%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.dropdown-button {
+    padding: 3px;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.dropdown-content label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-content label:hover {
+    background-color: #f1f1f1;
+}
+
+.selected-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.selected-options span {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.selected-options {
+    display: none;
+}
+
+.placeholder {
+    padding-left: 10px;
 }
 
 @media screen and (max-width:1000px) {

@@ -35,20 +35,23 @@
         <div class="form__group-title">
           <span class="form__label--item">カテゴリー</span>
         </div>
-        <div class="form__group-content">
-          <div class="form__input--text">
-            <select class="select__box" name="elements[]" multiple>
-              <option value="" disabled>必須</option>
-              @foreach ($categories as $category)
-                <option value="{{ $category['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['name'] }}</option>
-              @endforeach
-            </select>
+        <div class="dropdown">
+          <div class="dropdown-button">
+            <span class="placeholder">必須</span>
           </div>
-          <div class="form__error">
-            @error('elements')
-              {{ $message }}
-            @enderror
+          <div class="dropdown-content" id="dropdownContent">
+            @foreach ($categories as $category)
+              <label>
+                <input type="checkbox" name="elements[]" value="{{ $category['id'] }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category['name'] }}</option>
+              </label>
+            @endforeach
+            <div class="selected-options" id="selectedOptions"></div>
           </div>
+        </div>
+        <div class="form__error">
+          @error('elements')
+            {{ $message }}
+          @enderror
         </div>
       </div>
       <div class="form__group">

@@ -11,10 +11,12 @@ function previewImage(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
-// scripts.js
 document.addEventListener('DOMContentLoaded', function() {
     var dropdownButton = document.querySelector('.dropdown-button');
     var dropdownContent = document.getElementById('dropdownContent');
+    var selectedOptions = document.getElementById('selectedOptions');
+    var checkboxes = dropdownContent.querySelectorAll('input[type="checkbox"]');
+    var placeholder = document.querySelector('.dropdown-button .placeholder');
 
     dropdownButton.addEventListener('click', function(event) {
         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
@@ -27,10 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ドロップダウン外をクリックしたときに閉じる
     window.addEventListener('click', function(event) {
-        if (!event.target.matches('.dropdown-button')) {
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display = 'none';
-            }
+        if (!dropdownButton.contains(event.target)) {
+            dropdownContent.style.display = 'none';
         }
+    });
+
+    // チェックボックスの状態を監視
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            selectedOptions.innerHTML = '';
+            var selected = Array.from(checkboxes).filter(i => i.checked);
+            var selectedText = selected.map(item => item.parentNode.textContent.trim()).join(', ');
+            selected.forEach(item => {
+                var span = document.createElement('span');
+                span.textContent = item.parentNode.textContent.trim();
+                selectedOptions.appendChild(span);
+            });
+            placeholder.textContent = selected.length ? selectedText : '必須';
+        });
     });
 });
