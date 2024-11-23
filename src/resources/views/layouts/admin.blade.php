@@ -27,29 +27,15 @@
             </ul>
         </nav>
       </div>
-      <a class="header__logo-mobile" href="/">
+      <a class="header__logo-mobile" href="/admin">
         <img class="logo-mobile" src="{{ asset('images/logo.svg') }}">
       </a>
-      <button id="searchButton">
-        <img class="search__logo" src="{{ asset('images/search.jpg') }}">
-      </button>
-      <div id="searchBar" class="search-bar">
-        <form action="/search" class="search-word-hover" method="get">
-          <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
-        </form>
-      </div>
     </div>
-    <form action="/search" class="search-word-mobile" method="get">
-      <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
-    </form>
     <div class="header__inner">
       <div class="header-utilities">
-        <a class="header__logo" href="/">
+        <a class="header__logo" href="/admin">
           <img src="{{ asset('images/logo.svg') }}">
         </a>
-        <form action="/search" class="search-word" method="get">
-          <input class="search__box" type="text" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
-        </form>
         <nav>
           <ul class="header-nav">
             <li class="header-nav__item">
