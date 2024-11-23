@@ -1,0 +1,40 @@
+.thanks__content {
+    margin: 15% auto;
+}
+  
+.thanks-form__heading {
+    text-align: center;
+}
+
+.home__link {
+    margin-top: 3%;
+    text-align: center;
+}
+
+.button-submit {
+    text-decoration: none;
+    color: lightskyblue;
+    font-weight: bold;
+}
+
+@media screen and (max-width:1000px) {
+    .thanks__content {
+        margin: 30% auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .thanks__content {
+        margin: 35% auto;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .thanks__content {
+        margin: 40% auto;
+    }
+
+    .thanks-form__heading {
+        font-size: 13px;
+    }
+}
