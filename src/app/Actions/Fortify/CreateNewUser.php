@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -45,6 +47,9 @@ class CreateNewUser implements CreatesNewUsers
             Profile::create([
                 'user_id' => $user->id,
             ]);
+
+            $userRole = Role::firstOrCreate(['name' => 'user']);
+            $user->assignRole($userRole);
 
             return $user;
         });
