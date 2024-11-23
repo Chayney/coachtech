@@ -12,7 +12,7 @@
 
 .search-form__keyword-input {
     padding: 8px 12px;
-    width: 30%;
+    width: 40%;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
@@ -47,38 +47,38 @@
 .admin__label_id {
     width: 10%;
     border: 1px solid #000;
-    padding: 5px;
+    padding: 15px;
 }
 
 .admin__label_name {
     width: auto;
     white-space: nowrap;
     border: 1px solid #000;
-    padding: 5px;
+    padding: 15px;
 }
 
 .admin__label_email {
     width: auto;
     white-space: nowrap;
     border: 1px solid #000;
-    padding: 5px;
+    padding: 15px;
 }
 
 .admin__label_role {
     width: 10%;
     border: 1px solid #000;
-    padding: 5px;
+    padding: 15px;
 }
 
 .admin__label_detail {
     width: 10%;
     border: 1px solid #000;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
 }
 
 .admin__detail-btn {
-    padding: 8px 12px;
+    padding: 12px;
     background: rgb(255,85,85);
     color: #fff;
     border: none;
@@ -112,10 +112,12 @@
 
 .modal__inner {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
-    width: 50%;
+    width: 60%;
+    height: 75%;
     border: 1px solid #8B7969;
+    border-radius: 5px;
     background-color: #fff;
     box-shadow: 4px 4px 4px rgba(139, 121, 105, 0.25);
     transform: translate(-50%, -50%);
@@ -123,14 +125,13 @@
 
 .modal__content {
     position: relative;
-    padding: 64px 64px;
+    padding: 50px;
 }
 
 .modal-form__group {
     display: grid;
-    margin-top: 32px;
+    margin-top: 3%;
     grid-template-columns: 1fr 2fr;
-    gap: 20px;
 }
 
 .modal-form__label {
@@ -138,20 +139,238 @@
 }
 
 .modal-form__delete-btn {
-    margin: 64px auto 0;
-    background-color: #BA370D;
-    color: #FFF;
+    margin-top: 3%;
+    padding: 12px;
+    background: rgb(255,85,85);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
 }
 
 .modal__close-btn {
     position: absolute;
-    top: 32px;
-    right: 32px;
-    width: 32px;
-    height: 32px;
-    border: 1px solid #8B7969;
+    display: inline-block;
+    padding: 3px;
+    top: 3%;
+    right: 3%;
+    width: 8%;
+    line-height: 40px;
     border-radius: 50%;
-    color: #8B7969;
+    background: rgb(255,85,85);
+    color: #fff;
     text-align: center;
     text-decoration: none;
+}
+
+.parent__card {
+    display: none;
+}
+
+@media screen and (max-width:1000px) {
+    .admin__inner {
+        margin: 15% auto 0 auto;
+    }
+
+    .modal__inner {
+        height: 65%;
+    }
+
+    .modal__close-btn {
+        width: 9%;
+        line-height: 40px;
+    }
+
+    .modal-form__delete-btn {
+        padding: 5px;
+    }
+
+    .admin__label_role {
+        width: 15%;
+    }
+    
+    .admin__label_detail {
+        width: 15%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .admin {
+        margin-top: 20%;
+    }
+
+    .admin__inner {
+        display: none;
+    }
+
+    .parent__card {
+        display: initial;
+    }
+
+    .search-mobile {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .search-keyword-input-mobile {
+        padding: 8px 12px;
+        width: 50%;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    
+    .search-role-select-mobile {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    
+    .search-search-btn-mobile {
+        padding: 12px;
+        width: 100%;
+        background: rgb(255,85,85);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 16px;
+        margin-top: 3%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-header {
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    
+    .card-content {
+        margin-bottom: 8px;
+    }
+
+    .admin__detail-btn-mobile {
+        padding: 5px;
+        background: rgb(255,85,85);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .modal {
+        display: none;
+    }
+
+    .modal-mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+    
+    .modal-mobile:target {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .modal-mobile-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .modal-mobile__inner {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        width: 80%;
+        height: 70%;
+        border: 1px solid #8B7969;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 4px 4px 4px rgba(139, 121, 105, 0.25);
+        transform: translate(-50%, -50%);
+    }
+    
+    .modal-mobile__content {
+        position: relative;
+        padding: 35px;
+    }
+    
+    .modal-mobile-form__group {
+        display: grid;
+        margin-top: 3%;
+        grid-template-columns: 1fr 2fr;
+    }
+    
+    .modal-mobile-form__label {
+        font-weight: bold;
+    }
+    
+    .modal-mobile-form__delete-btn {
+        margin-top: 3%;
+        padding: 12px;
+        background: rgb(255,85,85);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .modal-mobile__close-btn {
+        position: absolute;
+        display: inline-block;
+        padding: 3px;
+        top: 3%;
+        right: 3%;
+        width: 8%;
+        line-height: 40px;
+        border-radius: 50%;
+        background: rgb(255,85,85);
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .admin {
+        margin-top: 25%;
+    }
+
+    .search-mobile {
+        display: block;
+    }
+
+    .search-keyword-input-mobile {
+        width: 95%;
+    }
+    
+    .search-role-select-mobile {
+        margin-top: 3%;
+        width: 100%;
+    }
+    
+    .search-search-btn-mobile {
+        margin-top: 3%;
+        padding: 12px;
+    }
+
+    .modal-mobile__inner {
+        width: 85%;
+        height: 70%;
+    }
 }
