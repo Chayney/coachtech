@@ -8,11 +8,10 @@
   <!-- PC版レイアウト -->
   <div class="admin">
     <div class="admin__inner">
-      <form class="search" method="get">
-        @csrf
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください" value="">
+      <form class="search" action="/user/search" method="get" onsubmit="return removeEmptyFields(this)">
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください">
         <div class="search-form__role">
-          <select class="search-form__role-select" name="roles">
+          <select class="search-form__role-select" name="role">
             <option disabled selected>Roles</option>
             @foreach ($roles as $role)
               <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
@@ -47,7 +46,7 @@
             <a href="#pc-{{ $user['id'] }}" class="modal-overlay"></a>
             <div class="modal__inner">
               <div class="modal__content">
-                <form class="modal__detail-form" action="/delete" method="post">
+                <form class="modal__detail-form" action="/user/destroy" method="post">
                   @csrf
                   <div class="modal-form__group">
                     <label class="modal-form__label">Name</label>
@@ -90,11 +89,11 @@
 
     <!-- スマホ版レイアウト -->
     <div class="parent__card">
-      <form class="search-mobile" method="get">
+      <form class="search-mobile" action="/user/search" method="get">
         @csrf
-        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください" value="">
+        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください">
         <div class="search-role-mobile">
-          <select class="search-role-select-mobile" name="roles">
+          <select class="search-role-select-mobile" name="role">
             <option disabled selected>Roles</option>
             @foreach ($roles as $role)
               <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
@@ -135,7 +134,7 @@
           <a href="#mobile-{{ $user['id'] }}" class="modal-mobile-overlay"></a>
           <div class="modal-mobile__inner">
             <div class="modal-mobile__content">
-              <form class="modal-mobile__detail-form" action="/delete" method="post">
+              <form class="modal-mobile__detail-form" action="/user/destroy" method="post">
                 @csrf
                 <div class="modal-mobile-form__group">
                   <label class="modal-mobile-form__label">Name</label>
@@ -175,4 +174,14 @@
       @endforeach
     </div>
   </div>
+  <script>
+    function removeEmptyFields(form) {
+        Array.from(form.elements).forEach(input => {
+            if (!input.value) {
+                input.name = '';
+            }
+        });
+        return true;
+    }
+  </script>
 @endsection

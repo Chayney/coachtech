@@ -79,7 +79,7 @@
             <form action="/purchase" method="post">
                 @csrf
                 <div class="form__button">
-                    <button class="form__button-submit" type="submit">購入する</button>
+                    <button class="form__button-submit" type="submit" name="id" value="{{ $item['id'] }}">購入する</button>
                 </div>
             </form>    
         </div> 
