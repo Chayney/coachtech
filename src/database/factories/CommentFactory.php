@@ -18,7 +18,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         do {
-            $profileId = Profile::inRandomOrder()->first()->id;
+            $profileId = Profile::whereNotIn('id', [1])->inRandomOrder()->first()->id;
             $itemId = Item::inRandomOrder()->first()->id;
 
             $exists = Comment::where('profile_id', $profileId)
