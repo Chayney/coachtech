@@ -9,10 +9,10 @@
   <div class="admin">
     <div class="admin__inner">
       <form class="search" action="/user/search" method="get" onsubmit="return removeEmptyFields(this)">
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください">
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
         <div class="search-form__role">
           <select class="search-form__role-select" name="role">
-            <option disabled selected>Roles</option>
+            <option disabled selected>役割</option>
             @foreach ($roles as $role)
               <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
             @endforeach
@@ -24,11 +24,11 @@
       </form>  
       <table class="admin__table">
         <tr class="admin__row">
-          <th class="admin__label_id">ID</th>
-          <th class="admin__label_name">Name</th>
-          <th class="admin__label_email">Email</th>
-          <th class="admin__label_role">Roles</th>
-          <th class="admin__label_detail">detail</th>
+          <th class="admin__label_id">番号</th>
+          <th class="admin__label_name">ユーザー名</th>
+          <th class="admin__label_email">メールアドレス</th>
+          <th class="admin__label_role">役割</th>
+          <th class="admin__label_detail">詳細</th>
         </tr>
         @foreach ($users as $user)   
           <tr class="admin__row">
@@ -49,7 +49,7 @@
                 <form class="modal__detail-form" action="/user/destroy" method="post">
                   @csrf
                   <div class="modal-form__group">
-                    <label class="modal-form__label">Name</label>
+                    <label class="modal-form__label">ユーザー名</label>
                     <p>{{ $user['userProfile']['name'] }}</p>
                   </div>
                   <div class="modal-form__group">
@@ -61,7 +61,7 @@
                     <p>{{ $user['userProfile']['address'] }}</p>
                   </div>
                   <div class="modal-form__group">
-                    <label class="modal-form__label">building</label>
+                    <label class="modal-form__label">建物名</label>
                     <p>{{ $user['userProfile']['building'] }}</p>
                   </div>
                   <div class="modal-form__group">
@@ -91,7 +91,7 @@
     <div class="parent__card">
       <form class="search-mobile" action="/user/search" method="get">
         @csrf
-        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="名前やメールアドレスを入力してください">
+        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
         <div class="search-role-mobile">
           <select class="search-role-select-mobile" name="role">
             <option disabled selected>Roles</option>
@@ -108,22 +108,22 @@
         <div class="card">
           <table class="user__table">
             <tr>
-              <th class="table__header">ID</th>
+              <th class="table__header">番号</th>
               <td class="table__item">{{ $user['id'] }}</td>
               <td class="table__item">
                 <a class="admin__detail-btn-mobile" href="#mobile-{{ $user['id'] }}">詳細</a>
               </td>
             </tr>
             <tr>
-              <th class="table__header">Name</th>
+              <th class="table__header">ユーザー名</th>
               <td class="table__item">{{ $user['userProfile']['name'] }}</td>
             </tr>
             <tr>
-              <th class="table__header">Email</th>
+              <th class="table__header">メールアドレス</th>
               <td class="table__item">{{ $user['email'] }}</td>
             </tr>
             <tr>
-              <th class="table__header">Role</th>
+              <th class="table__header">役割</th>
               @foreach ($user->roles as $role)
                 <td class="table__item">{{ $role['name'] }}</td>
               @endforeach
@@ -137,7 +137,7 @@
               <form class="modal-mobile__detail-form" action="/user/destroy" method="post">
                 @csrf
                 <div class="modal-mobile-form__group">
-                  <label class="modal-mobile-form__label">Name</label>
+                  <label class="modal-mobile-form__label">ユーザー名</label>
                   <p>{{ $user['userProfile']['name'] }}</p>
                 </div>
                 <div class="modal-mobile-form__group">
@@ -149,7 +149,7 @@
                   <p>{{ $user['userProfile']['address'] }}</p>
                 </div>
                 <div class="modal-mobile-form__group">
-                  <label class="modal-mobile-form__label">building</label>
+                  <label class="modal-mobile-form__label">建物名</label>
                   <p>{{ $user['userProfile']['building'] }}</p>
                 </div>
                 <div class="modal-mobile-form__group">

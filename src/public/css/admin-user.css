@@ -5,14 +5,14 @@
 
 .search {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
 
 .search-form__keyword-input {
     padding: 8px 12px;
-    width: 40%;
+    width: 70%;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
@@ -208,14 +208,14 @@
 
     .search-mobile {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
     
     .search-keyword-input-mobile {
         padding: 8px 12px;
-        width: 50%;
+        width: 70%;
         border: 1px solid #ddd;
         border-radius: 5px;
         background-color: #fff;
@@ -245,15 +245,6 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
-    }
-    
-    .card-header {
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    
-    .card-content {
-        margin-bottom: 8px;
     }
 
     .admin__detail-btn-mobile {
