@@ -2,6 +2,7 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Auth;
 
 return [
 
@@ -155,6 +156,16 @@ return [
             'confirmPassword' => true,
             // 'window' => 0,
         ]),
+    ],
+
+    'redirects' => [
+        'login' => function () {
+            if (Auth::user()->hasRole('admin')) {
+                return '/admin';
+            } else {
+                return '/';
+            }
+        },
     ],
 
 ];
