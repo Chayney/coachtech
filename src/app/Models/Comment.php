@@ -24,4 +24,14 @@ class Comment extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function scopeFreewordSearch($query, $freeword)
+    {
+        if (!empty($freeword)) {
+            $query->where('comment', 'like', '%' . $freeword . '%')
+                  ->orWhereHas('commentProfile', function ($query) use ($freeword) {
+                      $query->where('profiles.name', 'like', '%' . $freeword . '%');
+            });
+        }
+    }
 }
