@@ -65,9 +65,17 @@ Route::middleware(['auth'])->group(function () {
 
     // 管理者専用ページ
     Route::middleware(['role:admin'])->group(function () {
+        // 管理者マイページ
         Route::get('/admin', [AdminController::class, 'index']);
-        Route::get('/user', [AdminController::class, 'edit']);
-        Route::get('/user/search', [AdminController::class, 'search']);
-        Route::post('/user/destroy', [AdminController::class, 'destroy']);
+
+        // ユーザー一覧ページ、ユーザー削除処理
+        Route::get('/admin/user', [AdminController::class, 'edit']);
+        Route::get('/admin/user/search', [AdminController::class, 'search']);
+        Route::post('/admin/user/destroy', [AdminController::class, 'destroy']);
+
+        // コメント一覧ページ、コメント削除処理
+        Route::get('/admin/comment', [AdminController::class, 'show']);
+        Route::get('/admin/comment/search', [AdminController::class, 'look']);
+        Route::delete('admin/comment/delete', [AdminController::class, 'remove']);
     });
 });
