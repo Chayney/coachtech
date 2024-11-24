@@ -8,7 +8,7 @@
   <!-- PC版レイアウト -->
   <div class="admin">
     <div class="admin__inner">
-      <form class="search" action="/user/search" method="get" onsubmit="return removeEmptyFields(this)">
+      <form class="search" action="/admin/user/search" method="get" onsubmit="return removeEmptyFields(this)">
         <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
         <div class="search-form__role">
           <select class="search-form__role-select" name="role">
@@ -46,7 +46,7 @@
             <a href="#pc-{{ $user['id'] }}" class="modal-overlay"></a>
             <div class="modal__inner">
               <div class="modal__content">
-                <form class="modal__detail-form" action="/user/destroy" method="post">
+                <form class="modal__detail-form" action="/admin/user/destroy" method="post">
                   @csrf
                   <div class="modal-form__group">
                     <label class="modal-form__label">ユーザー名</label>
@@ -89,7 +89,7 @@
 
     <!-- スマホ版レイアウト -->
     <div class="parent__card">
-      <form class="search-mobile" action="/user/search" method="get">
+      <form class="search-mobile" action="/admin/user/search" method="get">
         @csrf
         <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
         <div class="search-role-mobile">
@@ -134,7 +134,7 @@
           <a href="#mobile-{{ $user['id'] }}" class="modal-mobile-overlay"></a>
           <div class="modal-mobile__inner">
             <div class="modal-mobile__content">
-              <form class="modal-mobile__detail-form" action="/user/destroy" method="post">
+              <form class="modal-mobile__detail-form" action="/admin/user/destroy" method="post">
                 @csrf
                 <div class="modal-mobile-form__group">
                   <label class="modal-mobile-form__label">ユーザー名</label>

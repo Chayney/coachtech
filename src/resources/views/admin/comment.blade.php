@@ -8,8 +8,8 @@
   <!-- PC版レイアウト -->
   <div class="admin">
     <div class="admin__inner">
-      <form class="search" action="/comment/search" method="get" onsubmit="return removeEmptyFields(this)">
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名もしくはコメントを入力してください">
+      <form class="search" action="/admin/comment/search" method="get" onsubmit="return removeEmptyFields(this)">
+        <input class="search-form__keyword-input" type="text" name="freeword" placeholder="ユーザー名もしくはコメントを入力してください">
         <div class="search-form__actions">
           <input class="search-form__search-btn" type="submit" value="検索">
         </div>
@@ -27,7 +27,7 @@
             <td class="admin__label_name">{{ $comment['commentProfile']['name'] }}</td>
             <td class="admin__label_comment">{{ $comment['comment'] }}</td>
             <td class="admin__label_delete">
-              <form action="/comment/destroy"  class="trash-group" method="post">
+              <form action="/admin/comment/delete"  class="trash-group" method="post">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="id" value="{{ $comment['id'] }}">
@@ -43,9 +43,9 @@
 
     <!-- スマホ版レイアウト -->
     <div class="parent__card">
-      <form class="search-mobile" action="/comment/search" method="get">
+      <form class="search-mobile" action="/admin/comment/search" method="get">
         @csrf
-        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="ユーザー名もしくはコメントを入力してください">
+        <input class="search-keyword-input-mobile" type="text" name="freeword" placeholder="ユーザー名もしくはコメントを入力してください">
         <div class="search-actions-mobile">
           <input class="search-search-btn-mobile" type="submit" value="検索">
         </div>
@@ -57,7 +57,7 @@
               <th class="table__header">番号</th>
               <td class="table__item">{{ $comment['id'] }}</td>
               <td class="table__item_delete">
-                <form action="/comment/destroy"  class="trash-group" method="post">
+                <form action="/admin/comment/delete" class="trash-group" method="post">
                   @csrf
                   @method('DELETE')
                   <input type="hidden" name="id" value="{{ $comment['id'] }}">
@@ -80,4 +80,17 @@
       @endforeach
     </div>
   </div>
+  <script>
+    function showAlert(message) {
+      return confirm(message);
+    }
+    function removeEmptyFields(form) {
+        Array.from(form.elements).forEach(input => {
+            if (!input.value) {
+                input.name = '';
+            }
+        });
+        return true;
+    }
+  </script>
 @endsection
