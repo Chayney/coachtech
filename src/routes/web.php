@@ -7,6 +7,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sell', [SellController::class, 'index']);
     Route::post('/sell/register', [SellController::class, 'create']);
 
-    // 購入ページ
+    // 決済処理
     Route::post('/purchase', [PurchaseController::class, 'create']);
 
     // 支払い方法登録ページ
@@ -61,7 +62,12 @@ Route::middleware(['auth'])->group(function () {
     // コメント追加と削除
     Route::post('/comment/create', [CommentController::class, 'create']);
     Route::delete('/comment/destroy', [CommentController::class, 'destroy']);
+
+    // 管理者専用ページ
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/admin', [AdminController::class, 'index']);
+        Route::get('/user', [AdminController::class, 'edit']);
+        Route::get('/user/search', [AdminController::class, 'search']);
+        Route::post('/user/destroy', [AdminController::class, 'destroy']);
+    });
 });
-
-
-
