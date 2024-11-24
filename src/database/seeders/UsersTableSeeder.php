@@ -28,8 +28,11 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
         $adminRole = Role::create(['name' => 'admin']);
-        $masterPermission = Permission::create(['name' => 'master']);
-        $adminRole->givePermissionTo($masterPermission);
+        $userRole = Role::create(['name' => 'user']);
+        Permission::create(['name' => 'edit']);
+        Permission::create(['name' => 'delete']);
+        $adminRole->givePermissionTo(['edit', 'delete']);
         $admin->assignRole($adminRole);
+        $user->assignRole($userRole);
     }
 }
