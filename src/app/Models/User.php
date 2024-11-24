@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +45,25 @@ class User extends Authenticatable
     public function userProfile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function scopeRoleSearch($query, $role)
+    {
+        if (!empty($role)) {
+            $query->whereHas('roles', function ($query) use ($role) {
+                $query->where('roles.id', $role);
+            });
+        }
+    }
+
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->join('profiles', 'users.id', '=', 'profiles.user_id')
+                  ->where(function ($query) use ($keyword) {
+                      $query->Where('users.email', 'like', '%' . $keyword . '%')
+                            ->orWhere('profiles.name', 'like', '%' . $keyword . '%');
+            });
+        }
     }
 }
