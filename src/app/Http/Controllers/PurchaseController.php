@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Condition;
 use App\Models\Category;
 use App\Models\Element;
+use App\Models\Purchase;
 
 class PurchaseController extends Controller
 {
@@ -21,10 +22,20 @@ class PurchaseController extends Controller
         return view('purchase', compact('items', 'profiles'));
     }
 
-    // 決済用
     public function create(Request $request)
     {
         $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        if (empty($profile->pay)) {
+            return redirect('/purchase/pay/{item_id}');
+        } else {
+            $payment = Purchase::create([
+                'profile_id' => $profile->id,
+                'item_id' => $request->id,
+            ]);
+              
+            return view('thanks');
+        }
     }
 
     public function edit(Request $request)
