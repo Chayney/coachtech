@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Comment;
 use Spatie\Permission\Models\Role;
 
 
@@ -49,6 +50,28 @@ class AdminController extends Controller
     public function destroy(Request $request)
     {
         User::find($request->id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function show()
+    {
+        $comments = Comment::with('commentProfile')->get();
+        
+        return view('admin.comment', compact('comments'));
+    }
+
+    public function look(Request $request)
+    {
+        $comments = Comment::with('commentProfile')
+                  ->FreewordSearch($request->freeword)->get();
+
+        return view('admin.comment', compact('comments'));
+    }
+
+    public function remove(Request $request)
+    {
+        Comment::find($request->id)->delete();
 
         return redirect()->back();
     }
