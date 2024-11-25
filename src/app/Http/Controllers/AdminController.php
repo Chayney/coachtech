@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Notification;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Comment;
 use Spatie\Permission\Models\Role;
-
 
 class AdminController extends Controller
 {
@@ -78,6 +79,17 @@ class AdminController extends Controller
 
     public function mail()
     {
-        return view('admin.mail');
+        return view('admin.email');
+    }
+
+    public function send(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => 'required | email',
+            'message' => 'required'
+        ]);
+        Mail::to($validate['email'])->send(new Notification($validate['message']));
+
+        return back()->with('success', '送信完了しました。');
     }
 }
