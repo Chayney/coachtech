@@ -77,5 +77,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/comment', [AdminController::class, 'show']);
         Route::get('/admin/comment/search', [AdminController::class, 'look']);
         Route::delete('admin/comment/delete', [AdminController::class, 'remove']);
+
+        // メール作成ページ
+        Route::get('/admin/email', [AdminController::class, 'mail']);
+        Route::post('/admin/send-email', [AdminController::class, 'send']);
     });
 });
