@@ -1,0 +1,158 @@
+.notification-main {
+    width: 60%;
+    margin: 13% auto 0 auto;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+.alert-success {
+    margin-bottom: 3%;
+    font-size: 25px;
+    color: rgb(63, 90, 242);
+    font-weight: bold;
+}
+
+.notification__wrap {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.notification__header {
+    background-color: rgb(63, 90, 242);
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 13px;
+}
+
+.notification__content-wrap {
+    width: 100%;
+    padding: 15px 0;
+}
+
+.notification__content {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid grey;
+}
+
+.notification__title {
+    padding-left: 15px;
+    width: 10%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.input-email {
+    width: 70%;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+.vertical-center {
+    padding-top: 5px;
+}
+
+.destination__content-select {
+    width: 130px;
+    height: 30px;
+}
+
+.notification__content-textarea {
+    border-bottom: 1px solid grey;
+    padding: 20px 0;
+    width: 100%;
+    height: 200px;
+}
+
+.notification__textarea {
+    display: block;
+    margin:  0 auto;
+    width: 90%;
+    height: 190px;
+    font-size: 18px;
+    border: 1px solid #000;
+}
+
+.form__button {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.form__button-btn:hover,
+.back__button:hover {
+    opacity: 0.8;
+}
+
+.back__button {
+    display: inline-block;
+    width: clamp(8rem, 6.5712rem + 4.46vw, 10rem);
+    padding: 5px 0;
+    font-size: clamp(1rem, 0.7136rem + 0.89vw, 1.2rem);
+    margin-right: 30px;
+    text-decoration: none;
+    background-color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form__button-btn {
+    display: inline-block;
+    width: clamp(8rem, 6.5712rem + 4.46vw, 10rem);
+    padding: 5px 0;
+    font-size: clamp(1rem, 0.7136rem + 0.89vw, 1.2rem);
+    background-color: rgb(63, 90, 242);
+    border: 1px solid rgb(63, 90, 242);
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1000px) {
+    .notification-main {
+        width: 80%;
+        margin: 15% auto 0 auto;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .notification-main {
+        width: 90%;
+        margin: 23% auto 0 auto;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .notification-main {
+        width: 90%;
+        margin: 25% auto 0 auto;
+    }
+
+    .notification__title {
+        width: 25%;
+    }
+
+    .input-email {
+        width: 60%;
+    }
+
+    .form__button {
+        flex-wrap: wrap;
+        width: 90%;
+    }
+
+    .back__button {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    
+    .form__button-btn {
+        width: 100%;
+    }
+}
