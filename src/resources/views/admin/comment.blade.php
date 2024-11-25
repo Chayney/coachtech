@@ -79,6 +79,7 @@
         </div>
       @endforeach
     </div>
+    {{ $comments->appends(request()->query())->links('pagination::custom') }}
   </div>
   <script>
     function showAlert(message) {

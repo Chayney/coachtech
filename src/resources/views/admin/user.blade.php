@@ -173,6 +173,7 @@
         </div>
       @endforeach
     </div>
+    {{ $users->appends(request()->query())->links('pagination::custom') }}
   </div>
   <script>
     function removeEmptyFields(form) {

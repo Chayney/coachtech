@@ -22,7 +22,7 @@ class AdminController extends Controller
 
     public function edit()
     {
-        $users = User::with('userProfile', 'roles')->get();
+        $users = User::with('userProfile', 'roles')->paginate(5);
         $roles = Role::all();
         
         return view('admin.user', compact('users', 'roles'));
@@ -41,7 +41,7 @@ class AdminController extends Controller
                     } elseif ($role) {
                         return $query->roleSearch($role);
                     }                     
-               })->get();
+               })->paginate(5);
         $roles = Role::all();
 
         return view('admin.user', compact('keyword', 'role', 'users', 'roles'));
@@ -56,7 +56,7 @@ class AdminController extends Controller
 
     public function show()
     {
-        $comments = Comment::with('commentProfile')->get();
+        $comments = Comment::with('commentProfile')->paginate(5);
         
         return view('admin.comment', compact('comments'));
     }
@@ -64,7 +64,7 @@ class AdminController extends Controller
     public function look(Request $request)
     {
         $comments = Comment::with('commentProfile')
-                  ->FreewordSearch($request->freeword)->get();
+                  ->FreewordSearch($request->freeword)->paginate(5);
 
         return view('admin.comment', compact('comments'));
     }
@@ -74,5 +74,10 @@ class AdminController extends Controller
         Comment::find($request->id)->delete();
 
         return redirect()->back();
+    }
+
+    public function mail()
+    {
+        return view('admin.mail');
     }
 }
