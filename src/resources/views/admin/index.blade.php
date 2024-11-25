@@ -16,7 +16,7 @@
       <a class="button-submit" href="/admin/comment">コメント一覧</a>
     </div>
     <div class="link">
-      <a class="button-submit" href="/user">お知らせメール作成・送信</a>
+      <a class="button-submit" href="/admin/email">お知らせメール作成・送信</a>
     </div>
   </div>
 @endsection
