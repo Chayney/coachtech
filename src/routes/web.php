@@ -31,9 +31,6 @@ Route::get('/purchase/{item_id}', [PurchaseController::class, 'index']);
 // コメント一覧ページ
 Route::get('/comment', [CommentController::class, 'index']);
 
-// 出品者用コメント一覧ページ(コメント削除専用)
-Route::get('/comment/edit', [CommentController::class, 'edit']);
-
 Route::middleware(['auth'])->group(function () {
     // マイページ、プロフィールページ
     Route::get('/mypage', [ProfileController::class, 'index']);
@@ -59,8 +56,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/favorite/store', [FavoriteController::class, 'store']);
     Route::delete('/favorite/destroy', [FavoriteController::class, 'destroy']);
 
-    // コメント追加と削除
+    // コメント追加
     Route::post('/comment/create', [CommentController::class, 'create']);
+
+    // 出品者用コメント一覧ページとコメント削除
+    Route::get('/comment/edit', [CommentController::class, 'edit']);
     Route::delete('/comment/destroy', [CommentController::class, 'destroy']);
 
     // 管理者専用ページ
