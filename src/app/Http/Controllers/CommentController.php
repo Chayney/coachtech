@@ -31,7 +31,7 @@ class CommentController extends Controller
                 'comment' => $request->comment
             ]);
                 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'コメントを追加しました');
         }    
     }
 

@@ -47,7 +47,7 @@ class SellController extends Controller
             ]);
             $item->elements()->attach($request->input('elements'));
             
-            return redirect('/mypage')->with('alert', '商品を出品しました');
+            return redirect('/mypage')->with('success', '商品を出品しました');
         }              
     }
 }

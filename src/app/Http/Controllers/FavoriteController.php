@@ -25,7 +25,7 @@ class FavoriteController extends Controller
                     'item_id' => $item_id
                 ]);
 
-                return redirect()->back();
+                return redirect()->back()->with('success', 'お気に入りに追加しました');
             }
         }
         
