@@ -109,5 +109,9 @@
             </div>
         @endforeach
     </div>
-    <script src="{{ asset('js/comment.js') }}" type="text/javascript"></script>
+    <script>
+        function showAlert(message) {
+            return confirm(message);
+        }
+    </script>
 @endsection

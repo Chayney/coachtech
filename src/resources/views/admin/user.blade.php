@@ -77,7 +77,7 @@
                     @endif
                   </div>
                   <input type="hidden" name="id" value="{{ $user['id'] }}">
-                  <input class="modal-form__delete-btn btn" type="submit" value="削除">
+                  <input class="modal-form__delete-btn btn" type="submit" value="削除" onclick="return showAlert('本当にユーザーを削除しますか？')">
                 </form>
               </div>
               <a href="" class="modal__close-btn">✕</a>
@@ -165,7 +165,7 @@
                   @endif
                 </div>
                 <input type="hidden" name="id" value="{{ $user['id'] }}">
-                <input class="modal-mobile-form__delete-btn btn" type="submit" value="削除">
+                <input class="modal-mobile-form__delete-btn btn" type="submit" value="削除" onclick="return showAlert('本当にユーザーを削除しますか？')">
               </form>
             </div>
             <a href="" class="modal-mobile__close-btn">✕</a>
@@ -183,6 +183,9 @@
             }
         });
         return true;
+    }
+    function showAlert(message) {
+      return confirm(message);
     }
   </script>
 @endsection
