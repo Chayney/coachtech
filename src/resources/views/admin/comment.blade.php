@@ -27,7 +27,7 @@
             <td class="admin__label_name">{{ $comment['commentProfile']['name'] }}</td>
             <td class="admin__label_comment">{{ $comment['comment'] }}</td>
             <td class="admin__label_delete">
-              <form action="/admin/comment/delete"  class="trash-group" method="post">
+              <form action="/admin/comment/destroy"  class="trash-group" method="post">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" name="id" value="{{ $comment['id'] }}">
@@ -57,7 +57,7 @@
               <th class="table__header">番号</th>
               <td class="table__item">{{ $comment['id'] }}</td>
               <td class="table__item_delete">
-                <form action="/admin/comment/delete" class="trash-group" method="post">
+                <form action="/admin/comment/destroy" class="trash-group" method="post">
                   @csrf
                   @method('DELETE')
                   <input type="hidden" name="id" value="{{ $comment['id'] }}">
