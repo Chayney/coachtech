@@ -29,7 +29,3 @@ document.addEventListener('DOMContentLoaded', function() {
         tabButtons[0].click();
     }
 });
-
-function showAlert(message) {
-    return confirm(message);
-}
