@@ -1,20 +1,8 @@
-.notification-main {
-    width: 60%;
+.notification__wrap {
+    width: 70%;
     margin: 13% auto 0 auto;
     border-radius: 10px;
     border: 1px solid #000;
-}
-
-.alert-success {
-    margin-bottom: 3%;
-    font-size: 25px;
-    color: rgb(63, 90, 242);
-    font-weight: bold;
-}
-
-.notification__wrap {
-    width: 100%;
-    border-radius: 10px;
     background-color: #fff;
 }
 
@@ -115,23 +103,23 @@
 }
 
 @media screen and (max-width:1000px) {
-    .notification-main {
+    .notification__wrap {
         width: 80%;
-        margin: 15% auto 0 auto;
+        margin: 20% auto 0 auto;
     }
 }
 
 @media screen and (max-width:768px) {
-    .notification-main {
+    .notification__wrap {
         width: 90%;
-        margin: 23% auto 0 auto;
+        margin: 25% auto 0 auto;
     }
 }
 
 @media screen and (max-width:600px) {
-    .notification-main {
+    .notification__wrap {
         width: 90%;
-        margin: 25% auto 0 auto;
+        margin: 38% auto 0 auto;
     }
 
     .notification__title {
