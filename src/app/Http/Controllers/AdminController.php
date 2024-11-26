@@ -85,11 +85,14 @@ class AdminController extends Controller
     public function send(Request $request)
     {
         $validate = $request->validate([
-            'email' => 'required | email',
             'message' => 'required'
         ]);
-        Mail::to($validate['email'])->send(new Notification($validate['message']));
-
+        $role = Role::findByName('user');
+        $users = $role ? $role->users : collect();
+        foreach ($users as $user) {
+            Mail::to($user['email'])->send(new Notification($validate['message']));
+        }
+        
         return back()->with('success', '送信完了しました。');
     }
 }
