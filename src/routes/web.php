@@ -71,12 +71,12 @@ Route::middleware(['auth'])->group(function () {
         // ユーザー一覧ページ、ユーザー削除処理
         Route::get('/admin/user', [AdminController::class, 'edit']);
         Route::get('/admin/user/search', [AdminController::class, 'search']);
-        Route::post('/admin/user/destroy', [AdminController::class, 'destroy']);
+        Route::delete('/admin/user/destroy', [AdminController::class, 'destroy']);
 
         // コメント一覧ページ、コメント削除処理
         Route::get('/admin/comment', [AdminController::class, 'show']);
         Route::get('/admin/comment/search', [AdminController::class, 'look']);
-        Route::delete('admin/comment/delete', [AdminController::class, 'remove']);
+        Route::delete('admin/comment/destroy', [AdminController::class, 'remove']);
 
         // メール作成ページ
         Route::get('/admin/email', [AdminController::class, 'mail']);
