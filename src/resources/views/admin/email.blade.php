@@ -14,7 +14,7 @@
                 @csrf
                 <div class="notification__content">
                     <div class="notification__title vertical-center">宛先</div>
-                    <input type="email" class="input-email" name="email" id="email" required>
+                    <label class="user-label">ユーザー全員</labbel>
                 </div>
                 <div class="notification__content-textarea">
                     <textarea class="notification__textarea" name="message" rows="10" required placeholder="本文"></textarea>
