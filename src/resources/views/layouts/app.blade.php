@@ -98,6 +98,11 @@
       </div>
     </div>
   </header>
+  @if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
   <main>
     @yield('content')
   </main>
