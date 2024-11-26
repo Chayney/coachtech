@@ -48,6 +48,7 @@
               <div class="modal__content">
                 <form class="modal__detail-form" action="/admin/user/destroy" method="post">
                   @csrf
+                  @method('DELETE')
                   <div class="modal-form__group">
                     <label class="modal-form__label">ユーザー名</label>
                     <p>{{ $user['userProfile']['name'] }}</p>
@@ -136,6 +137,7 @@
             <div class="modal-mobile__content">
               <form class="modal-mobile__detail-form" action="/admin/user/destroy" method="post">
                 @csrf
+                @method('DELETE')
                 <div class="modal-mobile-form__group">
                   <label class="modal-mobile-form__label">ユーザー名</label>
                   <p>{{ $user['userProfile']['name'] }}</p>
