@@ -60,6 +60,10 @@
     font-weight: bold;
 }
 
+.form__label--element {
+    color: #ff0000;
+}
+
 .form__error {
     height: 20px;
     color: #ff0000;
