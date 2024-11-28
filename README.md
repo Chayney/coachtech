@@ -59,7 +59,8 @@ Laravel学習のまとめとして作成いたしました。提示された要�
 
 ## テーブル設計
 ![image](https://github.com/user-attachments/assets/a917ecee-6b6e-4436-8f99-6c9f90d3289e)  
-![image](https://github.com/user-attachments/assets/2290d25d-6ff7-4f2b-8295-bc224d465649)
+![image](https://github.com/user-attachments/assets/2290d25d-6ff7-4f2b-8295-bc224d465649)  
+![image](https://github.com/user-attachments/assets/bf34c5ec-2274-4c25-b038-c53a045f7d6f)
 
 ## ER図
 
