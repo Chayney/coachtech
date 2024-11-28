@@ -48,18 +48,26 @@ Laravel学習のまとめとして作成いたしました。提示された要�
 ・非ログイン状態でヘッダーの「出品」ボタン、星マーク、「コメントを送信する」ボタン、商品詳細ページ内の「購入する」ボタンを選択するとログインページに遷移します。なお非会員ユーザーはログインページの「会員登録はこちら」リンクを選択して会員の登録をお願いいたします。  
 
 ## ダミーデータの説明
-1.	管理者
+1.	管理者  
 ・ユーザー名: 管理者  
 ・メールアドレス: admin@admin.com  
 ・パスワード: password  
-2.	テストユーザー
+2.	テストユーザー  
 ・ユーザー名: test  
 ・メールアドレス: test@example.com  
 ・パスワード: password
 
 ## テーブル設計
+![image](https://github.com/user-attachments/assets/bc0cf55b-8213-4793-a179-9665538c2431)  
+![image](https://github.com/user-attachments/assets/983b6a6f-6149-4ec3-92b3-c5ad91799f00)  
+![image](https://github.com/user-attachments/assets/e380b1fd-2b26-4f90-a73f-4dd579051611)
+![image](https://github.com/user-attachments/assets/38efb5b2-1b44-465a-9176-1482ca2095fb)  
+![image](https://github.com/user-attachments/assets/f267315e-eca3-4225-9532-cb735ee307e6)  
+![image](https://github.com/user-attachments/assets/3b820dde-f980-4543-8e8e-39fb4d6bb7f2)
 
 ## ER図
+![image](https://github.com/user-attachments/assets/67f6a60e-b9c6-4248-9e97-fa604c0b4043)  
+![image](https://github.com/user-attachments/assets/78c4ae72-0f90-4874-89db-fd8d76f26fdf)
 
 ## 環境構築
 
