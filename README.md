@@ -58,6 +58,7 @@ Laravel学習のまとめとして作成いたしました。提示された要�
 ・パスワード: password
 
 ## テーブル設計
+![image](https://github.com/user-attachments/assets/a917ecee-6b6e-4436-8f99-6c9f90d3289e)
 
 ## ER図
 
