@@ -62,8 +62,8 @@ Laravel学習のまとめとして作成いたしました。提示された要�
 ![image](https://github.com/user-attachments/assets/983b6a6f-6149-4ec3-92b3-c5ad91799f00)  
 ![image](https://github.com/user-attachments/assets/e380b1fd-2b26-4f90-a73f-4dd579051611)
 ![image](https://github.com/user-attachments/assets/38efb5b2-1b44-465a-9176-1482ca2095fb)  
-![image](https://github.com/user-attachments/assets/1a4c1dfb-ff3c-4fcc-85de-288cddaf8d5d)  
-![image](https://github.com/user-attachments/assets/61221999-3646-4a66-a405-f4f4c14e4577)
+![image](https://github.com/user-attachments/assets/f267315e-eca3-4225-9532-cb735ee307e6)  
+![image](https://github.com/user-attachments/assets/3b820dde-f980-4543-8e8e-39fb4d6bb7f2)
 
 ## ER図
 ![image](https://github.com/user-attachments/assets/67f6a60e-b9c6-4248-9e97-fa604c0b4043)  
