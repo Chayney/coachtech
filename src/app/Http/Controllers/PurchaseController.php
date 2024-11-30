@@ -32,10 +32,10 @@ class PurchaseController extends Controller
             return redirect('/purchase/pay/{item_id}');
         } elseif ($profile->pay == 1) {
             Stripe::setApiKey(config('services.stripe.secret'));
-            $token = $request->input('stripeToken');
             $itemId = $request->input('item_id');
+            $amount = $request->input('amount');
             PaymentIntent::create([
-                'amount' => 100,
+                'amount' => $amount,
                 'currency' => 'jpy',
                 'automatic_payment_methods' => [
                     'enabled' => true,
