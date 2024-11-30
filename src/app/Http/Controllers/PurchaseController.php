@@ -10,6 +10,8 @@ use App\Models\Condition;
 use App\Models\Category;
 use App\Models\Element;
 use App\Models\Purchase;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
 
 class PurchaseController extends Controller
 {
@@ -28,6 +30,24 @@ class PurchaseController extends Controller
         $profile = Profile::where('user_id', $user->id)->first();
         if (empty($profile->pay)) {
             return redirect('/purchase/pay/{item_id}');
+        } elseif ($profile->pay == 1) {
+            Stripe::setApiKey(config('services.stripe.secret'));
+            $token = $request->input('stripeToken');
+            $itemId = $request->input('item_id');
+            PaymentIntent::create([
+                'amount' => 100,
+                'currency' => 'jpy',
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                    'allow_redirects' => 'never'
+                ],
+            ]);
+            Purchase::create([
+                'profile_id' => $profile->id,
+                'item_id' => $itemId,
+            ]);
+
+            return view('thanks');
         } else {
             $payment = Purchase::create([
                 'profile_id' => $profile->id,
