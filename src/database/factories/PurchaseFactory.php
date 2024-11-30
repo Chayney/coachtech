@@ -18,7 +18,7 @@ class PurchaseFactory extends Factory
         $faker = app(Faker::class); 
         
         return [ 
-            'profile_id' => 1,
+            'profile_id' => 2,
             'item_id' => $faker->unique()->randomElement(Item::pluck('id')->toArray()),
             'created_at' => now(),
             'updated_at' => now(), 
