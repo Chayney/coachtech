@@ -28,9 +28,9 @@ class PurchaseController extends Controller
     {
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
-        if (empty($profile->pay)) {
-            return redirect('/purchase/pay/{item_id}');
-        } elseif ($profile->pay == 1) {
+        if (empty($profile->address) && empty($profile->pay)) {
+            return redirect()->back()->with('alert', '支払い先と配送先の登録をしてください。');
+        } elseif ($profile->pay == 1 && $profile->address) {
             Stripe::setApiKey(config('services.stripe.secret'));
             $itemId = $request->input('item_id');
             $amount = $request->input('amount');
@@ -48,13 +48,17 @@ class PurchaseController extends Controller
             ]);
 
             return view('thanks');
-        } else {
+        } elseif (($profile->pay == 2 || $profile->pay == 3) && $profile->address){
             $payment = Purchase::create([
                 'profile_id' => $profile->id,
                 'item_id' => $request->id,
             ]);
               
             return view('thanks');
+        } elseif (empty($profile->pay)) {
+            return redirect()->back()->with('alert', '支払い先の登録をしてください。');
+        } else {
+            return redirect()->back()->with('alert', '配送先の登録をしてください。');
         }
     }
 
@@ -71,10 +75,9 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $profile = $request->only(['postcode', 'address', 'building']);        
         Profile::find($user->id)->update($profile);
-        $items = Item::where('id', $request->id)->get();
-        $profiles = Profile::where('user_id', $user->id)->get();
+        $id = $request->id;
 
-        return view('purchase', compact('items', 'profiles'));
+        return redirect("/purchase/{item_id}?id={$id}")->with('success', '配送先の登録が完了しました');
     }
 
     public function revise(Request $request)
@@ -90,9 +93,8 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $payment = $request->only(['pay']);        
         Profile::find($user->id)->update($payment);
-        $items = Item::where('id', $request->id)->get();
-        $profiles = Profile::where('user_id', $user->id)->get();
+        $id = $request->id;
 
-        return view('purchase', compact('items', 'profiles'));
+        return redirect("/purchase/{item_id}?id={$id}")->with('success', '支払い先の登録が完了しました');
     }
 }
