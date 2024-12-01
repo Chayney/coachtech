@@ -87,9 +87,12 @@
     </div>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script>
-        var payFlag = {{ $profile->pay }};
-        var paymentAmount = "{{ $item->price }}";
-        if (payFlag === 1) {
+        var profiles = @json($profiles);
+        var items = @json($items);
+        var profile = profiles.length > 0 ? profiles[0] : null;
+        var item = items.length > 0 ? items[0] : null;
+        var paymentAmount = item.price;
+        if (profile && profile.pay === 1 && profile.address) {
             var stripePublicKey = "{{ config('services.stripe.key') }}";
             document.getElementById('purchase-button').addEventListener('click', function(e) {
                 e.preventDefault();
@@ -111,7 +114,7 @@
                         var itemInput = document.createElement('input');
                         itemInput.type = 'hidden';
                         itemInput.name = 'item_id';
-                        itemInput.value = "{{ $item['id'] }}";
+                        itemInput.value = item.id;
                         form.appendChild(itemInput);
                         var amountInput = document.createElement('input');
                         amountInput.type = 'hidden';

@@ -9,8 +9,9 @@
     <div class="pay-form__heading">
       <h2>支払い方法の変更</h2>
     </div>
-    <form class="form" action="/purchase/{item_id}" method="post">
+    <form class="form" action="/purchase/{item_id}/pay" method="post">
       @csrf
+      @method('PATCH')
       <div class="form__group">
         <div class="form__group-title">
           <label><input type="radio" name="pay" id="credit" value=1 {{ old('pay') == 1 || old('pay') == null ? : '' }}><span>クレジットカード</span></label>

@@ -26,6 +26,8 @@ Route::get('/search', [ItemController::class, 'search']);
 
 // 商品詳細ページ
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+
+// 購入ページ
 Route::get('/purchase/{item_id}', [PurchaseController::class, 'index']);
 
 // コメント一覧ページ
@@ -44,13 +46,13 @@ Route::middleware(['auth'])->group(function () {
     // 決済処理
     Route::post('/purchase', [PurchaseController::class, 'create']);
 
-    // 支払い方法登録ページ
+    // 支払先変更ページ
     Route::get('/purchase/pay/{item_id}', [PurchaseController::class, 'revise']);
-    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store']);
+    Route::patch('/purchase/{item_id}/pay', [PurchaseController::class, 'store']);
 
-    // 住所登録ページ
+    // 住所変更ページ
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'edit']);
-    Route::patch('/purchase/{item_id}', [PurchaseController::class, 'update']);
+    Route::patch('/purchase/{item_id}/address', [PurchaseController::class, 'update']);
 
     // お気に入り追加と削除
     Route::post('/favorite/store', [FavoriteController::class, 'store']);
