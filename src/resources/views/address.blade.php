@@ -21,7 +21,7 @@
             <input type="text" name="postcode">
           </div>
           <div class="form__error">
-            @error('email')
+            @error('postcode')
             {{ $message }}
             @enderror
           </div>
@@ -36,7 +36,7 @@
             <input type="text" name="address">
           </div>
           <div class="form__error">
-            @error('password')
+            @error('address')
             {{ $message }}
             @enderror
           </div>
@@ -51,7 +51,7 @@
             <input type="text" name="building">
           </div>
           <div class="form__error">
-            @error('')
+            @error('building')
             {{ $message }}
             @enderror
           </div>

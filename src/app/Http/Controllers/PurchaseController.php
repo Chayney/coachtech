@@ -72,6 +72,13 @@ class PurchaseController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'postcode' => 'required',
+            'address' => 'required'
+        ], [
+            'postcode.required' => '郵便番号を入力してください',
+            'address.required' => '住所を入力してください'
+        ]);
         $user = Auth::user();
         $profile = $request->only(['postcode', 'address', 'building']);        
         Profile::find($user->id)->update($profile);
