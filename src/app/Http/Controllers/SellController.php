@@ -27,7 +27,7 @@ class SellController extends Controller
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
         if (is_null($profile['name'])) {
-            return redirect('/mypage/profile');
+            return redirect('/mypage/profile')->with('alert', 'プロフィールを登録してください');
         } else {
             $item = Item::where('profile_id', $profile->user_id)->first();
             $image = $request->file('image');

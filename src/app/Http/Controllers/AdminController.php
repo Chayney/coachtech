@@ -93,6 +93,6 @@ class AdminController extends Controller
             Mail::to($user['email'])->send(new Notification($validate['message']));
         }
         
-        return back()->with('success', '送信完了しました。');
+        return back()->with('success', '送信完了しました');
     }
 }

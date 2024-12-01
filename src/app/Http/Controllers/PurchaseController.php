@@ -29,7 +29,7 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
         if (empty($profile->address) && empty($profile->pay)) {
-            return redirect()->back()->with('alert', '支払い先と配送先の登録をしてください。');
+            return redirect()->back()->with('alert', '支払い先と配送先の登録をしてください');
         } elseif ($profile->pay == 1 && $profile->address) {
             Stripe::setApiKey(config('services.stripe.secret'));
             $itemId = $request->input('item_id');
@@ -56,9 +56,9 @@ class PurchaseController extends Controller
               
             return view('thanks');
         } elseif (empty($profile->pay)) {
-            return redirect()->back()->with('alert', '支払い先の登録をしてください。');
+            return redirect()->back()->with('alert', '支払い先の登録をしてください');
         } else {
-            return redirect()->back()->with('alert', '配送先の登録をしてください。');
+            return redirect()->back()->with('alert', '配送先の登録をしてください');
         }
     }
 
