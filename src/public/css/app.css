@@ -111,6 +111,18 @@
     font-weight: bold;
 }
 
+.alert-danger {
+    position: fixed;
+    padding: 5px 5px 5px 10px;
+    font-size: 20px;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    font-weight: bold;
+}
+
 @media screen and (max-width:1000px) {
     .header__inner {
         display: none;

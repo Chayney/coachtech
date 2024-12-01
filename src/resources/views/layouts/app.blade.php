@@ -98,9 +98,13 @@
       </div>
     </div>
   </header>
-  @if(session('success'))
+  @if (session('success'))
     <div class="alert-success">
         {{ session('success') }}
+    </div>
+  @elseif (session('alert'))
+    <div class="alert-danger">
+        {{ session('alert') }}
     </div>
   @endif
   <main>
