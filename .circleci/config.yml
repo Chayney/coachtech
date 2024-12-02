@@ -1,0 +1,49 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.4.9-fpm
+    steps:
+      - checkout
+      - run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - run: npm install
+      - run: npm run prod
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: php artisan migrate --env=testing --force
+      - run: php artisan test
+
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Authenticate Docker to gcr.io
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project $GOOGLE_PROJECT_ID
+            gcloud auth configure-docker
+      - run:
+          name: Build Docker image
+          command: docker build -t gcr.io/$GOOGLE_PROJECT_ID/laravel-project:$CIRCLE_SHA1 .
+      - run:
+          name: Push Docker image
+          command: docker push gcr.io/$GOOGLE_PROJECT_ID/laravel-project:$CIRCLE_SHA1
+      - run:
+          name: Deploy to Cloud Run
+          command: |
+            gcloud run deploy laravel-project --image gcr.io/$GOOGLE_PROJECT_ID/laravel-project:$CIRCLE_SHA1 --region us-central1 --platform managed --quiet
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
