@@ -3,17 +3,21 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/php:7.4.9-fpm
+      # カスタムイメージを使用するように変更
+      - image: php:7.4.9-fpm  # もしくは自分で作成したカスタムイメージを指定
+        working_directory: /home/circleci/project
     steps:
       - checkout
       - run: 
           name: Build Custom PHP Docker Image
           command: |
-            docker build -t php:7.4.9-fpm ./docker/php
+            # カスタムイメージをビルド（php:7.4.9-fpmを元にしたカスタムイメージをビルド）
+            docker build -t my-custom-php-image:latest ./docker/php
       - run:
           name: Install dependencies
           command: |
-            docker run --rm -v $(pwd):/app php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
+            # ビルドしたカスタムイメージを使用
+            docker run --rm -v $(pwd):/app my-custom-php-image:latest composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
       - run: npm run prod
       - run: cp .env.example .env
@@ -23,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      - image: google/cloud-sdk
+      - image: google/cloud-sdk  # Cloud SDKのイメージを使用
     steps:
       - checkout
       - setup_remote_docker:
@@ -36,10 +40,12 @@ jobs:
             gcloud --quiet config set project $GOOGLE_PROJECT_ID
             gcloud auth configure-docker
       - run:
-          name: Build Docker image
-          command: docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
+          name: Build Docker image for deployment
+          command: |
+            # ビルドしたカスタムイメージを使用して、Cloud Run用のイメージをビルド
+            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
       - run:
-          name: Push Docker image
+          name: Push Docker image to Google Container Registry
           command: docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
       - run:
           name: Deploy to Cloud Run
