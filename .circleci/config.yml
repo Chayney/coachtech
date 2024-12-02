@@ -6,6 +6,9 @@ jobs:
       - image: circleci/php:7.4.9-fpm
     steps:
       - checkout
+      - run: 
+          name: Change to src
+          command: cd src
       - run: composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
       - run: npm run prod
