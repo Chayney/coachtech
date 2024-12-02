@@ -9,12 +9,11 @@ jobs:
       - run: 
           name: Build Custom PHP Docker Image
           command: |
-            cd src
             docker build -t php:7.4.9-fpm ./docker/php
       - run:
           name: Install dependencies
           command: |
-            docker run --rm -v $(pwd):/app your-image-name:latest composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker run --rm -v $(pwd):/app php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
       - run: npm run prod
       - run: cp .env.example .env
