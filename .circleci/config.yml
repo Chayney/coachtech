@@ -7,10 +7,14 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: Change to src
+          name: Build Custom PHP Docker Image
           command: |
             cd src
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker build -t php:7.4.9-fpm ./docker/php
+      - run:
+          name: Install dependencies
+          command: |
+            docker run --rm -v $(pwd):/app your-image-name:latest composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
       - run: npm run prod
       - run: cp .env.example .env
