@@ -8,8 +8,9 @@ jobs:
       - checkout
       - run: 
           name: Change to src
-          command: cd src
-      - run: composer install --no-interaction --prefer-dist --optimize-autoloader
+          command: |
+            cd src
+            composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
       - run: npm run prod
       - run: cp .env.example .env
