@@ -5,7 +5,7 @@ jobs:
     docker:
       # カスタムイメージを使用するように変更
       - image: php:7.4.9-fpm  # もしくは自分で作成したカスタムイメージを指定
-        working_directory: /home/circleci/project/src
+        working_directory: /home/circleci/project
     steps:
       - checkout
       - run: 
@@ -16,6 +16,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            cd src
             # ビルドしたカスタムイメージを使用
             docker run --rm -v $(pwd):/app my-custom-php-image:latest composer install --no-interaction --prefer-dist --optimize-autoloader
       - run: npm install
