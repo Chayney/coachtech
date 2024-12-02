@@ -5,7 +5,7 @@ jobs:
     docker:
       # カスタムイメージを使用するように変更
       - image: php:7.4.9-fpm  # もしくは自分で作成したカスタムイメージを指定
-        working_directory: /home/circleci/project
+        working_directory: /home/circleci/project/src
     steps:
       - checkout
       - run: 
