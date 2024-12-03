@@ -4,44 +4,48 @@ jobs:
   build:
     docker:
       - image: php:7.4.9-fpm
-        working_directory: /var/www
+    working_directory: /home/circleci/project
     steps:
       - checkout
       - run:
-          name: Debug directory structure (Checking for composer.json)
+          name: Install Docker Compose
           command: |
-            echo "Current directory structure:"
-            ls -al /var/www
+            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
       - run:
-          name: Build Custom PHP Docker Image
+          name: Start Docker Compose services
           command: |
-            docker build -t php:7.4.9-fpm ./docker/php
+            docker-compose up -d  # バックグラウンドでサービスを立ち上げる
       - run:
-          name: Install Composer (if not already installed in Dockerfile)
+          name: Install Composer
           command: |
-            curl -sS https://getcomposer.org/installer | php
-            mv composer.phar /usr/local/bin/composer
+            docker-compose exec app bash -c "curl -sS https://getcomposer.org/installer | php"
+            docker-compose exec app bash -c "mv composer.phar /usr/local/bin/composer"
       - run:
-          name: Install Laravel (if not already done in Dockerfile)
+          name: Install Laravel dependencies
           command: |
-            composer create-project --prefer-dist laravel/laravel src
+            docker-compose exec app bash -c "composer install"
       - run:
           name: Install NPM dependencies
-          command: npm install
+          command: |
+            docker-compose exec app bash -c "npm install"
       - run:
           name: Run NPM build
-          command: npm run prod
+          command: |
+            docker-compose exec app bash -c "npm run prod"
       - run:
           name: Copy .env.example to .env
-          command: cp .env.example .env
+          command: |
+            docker-compose exec app bash -c "cp .env.example .env"
       - run:
           name: Generate Laravel app key
-          command: php artisan key:generate
+          command: |
+            docker-compose exec app bash -c "php artisan key:generate"
       - run:
           name: Run migrations and tests
           command: |
-            php artisan migrate --env=testing --force
-            php artisan test
+            docker-compose exec app bash -c "php artisan migrate --env=testing --force"
+            docker-compose exec app bash -c "php artisan test"
 
   deploy:
     docker:
