@@ -4,19 +4,18 @@ jobs:
   build:
     docker:
       - image: php:7.4.9-fpm
-        working_directory: /home/circleci/project/src
+        working_directory: /var/www
     steps:
       - checkout
       - run:
           name: Debug directory structure (Checking for composer.json)
           command: |
             echo "Current directory structure:"
-            ls -al /home/circleci/project
-            ls -al /home/circleci/project/src
+            ls -al /var/www
       - run:
           name: Set file permissions
           command: |
-            sudo chown -R $USER:$USER /home/circleci/project/src
+            sudo chown -R $USER:$USER /var/www
       - run:
           name: Build Custom PHP Docker Image
           command: |
@@ -25,12 +24,12 @@ jobs:
           name: Debug composer.json existence
           command: |
             # コンテナ内で composer.json があるか確認
-            echo "Checking if composer.json exists in /src"
-            docker run --rm -v /home/circleci/project:/home/circleci/project php:7.4.9-fpm ls -al /home/circleci/project/src
+            echo "Checking if composer.json exists in /var/www"
+            docker run --rm -v /home/circleci/project/src:/var/www php:7.4.9-fpm ls -al /var/www
       - run:
           name: Install dependencies
           command: |
-            docker run --rm -v /home/circleci/project:/home/circleci/project -w /home/circleci/project/src php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker run --rm -v /home/circleci/project/src:/var/www -w /var/www php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
       - run:
           name: Install NPM dependencies
           command: npm install
@@ -66,8 +65,7 @@ jobs:
       - run:
           name: Build Docker image for deployment
           command: |
-            # ビルドしたカスタムイメージを使用して、Cloud Run用のイメージをビルド
-            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 . 
+            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
       - run:
           name: Push Docker image to Google Container Registry
           command: docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
