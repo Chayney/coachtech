@@ -16,17 +16,17 @@ jobs:
       - run:
           name: Build Custom PHP Docker Image
           command: |
-            docker build -t custom-php-image ./docker/php
+            docker build -t php:7.4.9-fpm ./docker/php
       - run:
           name: Debug composer.json existence
           command: |
             # コンテナ内で composer.json があるか確認
             echo "Checking if composer.json exists in /src"
-            docker run --rm -v $(pwd)/src:/src custom-php-image ls -al /src
+            docker run --rm -v /home/circleci/project:/home/circleci/project php:7.4.9-fpm ls -al /home/circleci/project/src
       - run:
           name: Install dependencies
           command: |
-            docker run --rm -v $(pwd)/src:/src custom-php-image composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker run --rm -v /home/circleci/project:/home/circleci/project -w /home/circleci/project/src php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
       - run:
           name: Install NPM dependencies
           command: npm install
@@ -63,7 +63,7 @@ jobs:
           name: Build Docker image for deployment
           command: |
             # ビルドしたカスタムイメージを使用して、Cloud Run用のイメージをビルド
-            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
+            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 . 
       - run:
           name: Push Docker image to Google Container Registry
           command: docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
