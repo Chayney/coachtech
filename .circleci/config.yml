@@ -3,32 +3,53 @@ version: 2.1
 jobs:
   build:
     docker:
-      # カスタムイメージを使用するように変更
       - image: php:7.4.9-fpm
         working_directory: /home/circleci/project
     steps:
       - checkout
-      - run: 
+      - run:
+          name: Debug directory structure (Checking for composer.json)
+          command: |
+            echo "Current directory structure:"
+            ls -al /home/circleci/project
+            ls -al /home/circleci/project/src
+      - run:
           name: Build Custom PHP Docker Image
           command: |
-            # カスタムイメージをビルド（php:7.4.9-fpmを元にしたカスタムイメージをビルド）
-            docker build -t my-custom-php-image:latest ./docker/php
+            docker build -t php:7.4.9-fpm ./docker/php
+      - run:
+          name: Debug composer.json existence
+          command: |
+            # コンテナ内で composer.json があるか確認
+            echo "Checking if composer.json exists in /src"
+            docker run --rm -v /home/circleci/project/src:/src php:7.4.9-fpm ls -al /src
       - run:
           name: Install dependencies
           command: |
             cd src
             # ビルドしたカスタムイメージを使用
-            docker run --rm -v $(pwd):/app my-custom-php-image:latest composer install --no-interaction --prefer-dist --optimize-autoloader
-      - run: npm install
-      - run: npm run prod
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      - run: php artisan migrate --env=testing --force
-      - run: php artisan test
+            docker run --rm -v /home/circleci/project/src:/src php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
+      - run:
+          name: Install NPM dependencies
+          command: npm install
+      - run:
+          name: Run NPM build
+          command: npm run prod
+      - run:
+          name: Copy .env.example to .env
+          command: cp .env.example .env
+      - run:
+          name: Generate Laravel app key
+          command: php artisan key:generate
+      - run:
+          name: Run migrations and tests
+          command: |
+            php artisan migrate --env=testing --force
+            php artisan test
 
   deploy:
     docker:
-      - image: google/cloud-sdk  # Cloud SDKのイメージを使用
+      - image: google/cloud-sdk
     steps:
       - checkout
       - setup_remote_docker:
