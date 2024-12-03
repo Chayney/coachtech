@@ -1,55 +1,49 @@
 version: 2.1
 
+executors:
+  docker-executor:
+    docker:
+      - image: circleci/php:7.4.9-fpm
+    working_directory: ~/project
+
 jobs:
   build:
-    docker:
-      - image: php:7.4.9-fpm
-    working_directory: /home/circleci/project
+    executor: docker-executor
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.7
       - run:
           name: Install Docker Compose
           command: |
-            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
+            sudo apt-get update
+            sudo apt-get install -y docker-compose
       - run:
-          name: Start Docker Compose services
-          command: |
-            docker-compose up -d  # バックグラウンドでサービスを立ち上げる
+          name: Start Docker Compose
+          command: docker-compose up -d
       - run:
-          name: Install Composer
-          command: |
-            docker-compose exec app bash -c "curl -sS https://getcomposer.org/installer | php"
-            docker-compose exec app bash -c "mv composer.phar /usr/local/bin/composer"
-      - run:
-          name: Install Laravel dependencies
-          command: |
-            docker-compose exec app bash -c "composer install"
+          name: Install PHP dependencies
+          command: docker-compose exec php composer install --no-interaction --prefer-dist --optimize-autoloader
       - run:
           name: Install NPM dependencies
-          command: |
-            docker-compose exec app bash -c "npm install"
+          command: docker-compose exec php npm install
       - run:
           name: Run NPM build
-          command: |
-            docker-compose exec app bash -c "npm run prod"
+          command: docker-compose exec php npm run prod
       - run:
           name: Copy .env.example to .env
-          command: |
-            docker-compose exec app bash -c "cp .env.example .env"
+          command: docker-compose exec php cp .env.example .env
       - run:
           name: Generate Laravel app key
-          command: |
-            docker-compose exec app bash -c "php artisan key:generate"
+          command: docker-compose exec php php artisan key:generate
       - run:
           name: Run migrations and tests
           command: |
-            docker-compose exec app bash -c "php artisan migrate --env=testing --force"
-            docker-compose exec app bash -c "php artisan test"
+            docker-compose exec php php artisan migrate --env=testing --force
+            docker-compose exec php php artisan test
 
   deploy:
-    docker:
-      - image: google/cloud-sdk
+    executor: docker-executor
     steps:
       - checkout
       - setup_remote_docker:
@@ -63,8 +57,7 @@ jobs:
             gcloud auth configure-docker
       - run:
           name: Build Docker image for deployment
-          command: |
-            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
+          command: docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
       - run:
           name: Push Docker image to Google Container Registry
           command: docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
