@@ -14,6 +14,10 @@ jobs:
             ls -al /home/circleci/project
             ls -al /home/circleci/project/src
       - run:
+          name: Set file permissions
+          command: |
+            sudo chown -R $USER:$USER /home/circleci/project/src
+      - run:
           name: Build Custom PHP Docker Image
           command: |
             docker build -t php:7.4.9-fpm ./docker/php
