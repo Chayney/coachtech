@@ -27,8 +27,8 @@ jobs:
           name: Install dependencies
           command: |
             cd src
-            # ビルドしたカスタムイメージを使用
-            docker run --rm -v /home/circleci/project/src:/src php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
+            # ビルドしたカスタムイメージを使用して、作業ディレクトリを明示的に指定してcomposer installを実行
+            docker run --rm -v /home/circleci/project/src:/src -w /src php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
       - run:
           name: Install NPM dependencies
           command: npm install
