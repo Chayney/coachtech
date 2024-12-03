@@ -13,23 +13,9 @@ jobs:
             echo "Current directory structure:"
             ls -al /var/www
       - run:
-          name: Set file permissions
-          command: |
-            sudo chown -R $USER:$USER /var/www
-      - run:
           name: Build Custom PHP Docker Image
           command: |
             docker build -t php:7.4.9-fpm ./docker/php
-      - run:
-          name: Debug composer.json existence
-          command: |
-            # コンテナ内で composer.json があるか確認
-            echo "Checking if composer.json exists in /var/www"
-            docker run --rm -v /home/circleci/project/src:/var/www php:7.4.9-fpm ls -al /var/www
-      - run:
-          name: Install dependencies
-          command: |
-            docker run --rm -v /home/circleci/project/src:/var/www -w /var/www php:7.4.9-fpm composer install --no-interaction --prefer-dist --optimize-autoloader
       - run:
           name: Install NPM dependencies
           command: npm install
