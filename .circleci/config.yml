@@ -17,6 +17,15 @@ jobs:
           command: |
             docker build -t php:7.4.9-fpm ./docker/php
       - run:
+          name: Install Composer (if not already installed in Dockerfile)
+          command: |
+            curl -sS https://getcomposer.org/installer | php
+            mv composer.phar /usr/local/bin/composer
+      - run:
+          name: Install Laravel (if not already done in Dockerfile)
+          command: |
+            composer create-project --prefer-dist laravel/laravel src
+      - run:
           name: Install NPM dependencies
           command: npm install
       - run:
