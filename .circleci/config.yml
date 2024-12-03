@@ -1,49 +1,24 @@
 version: 2.1
 
-executors:
-  docker-executor:
-    docker:
-      - image: circleci/php:7.4.9-fpm
-    working_directory: ~/project
-
 jobs:
   build:
-    executor: docker-executor
+    docker:
+      - image: circleci/php:7.4.9-fpm
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.7
       - run:
-          name: Install Docker Compose
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y docker-compose
-      - run:
-          name: Start Docker Compose
-          command: docker-compose up -d
-      - run:
-          name: Install PHP dependencies
-          command: docker-compose exec php composer install --no-interaction --prefer-dist --optimize-autoloader
-      - run:
-          name: Install NPM dependencies
-          command: docker-compose exec php npm install
-      - run:
-          name: Run NPM build
-          command: docker-compose exec php npm run prod
-      - run:
-          name: Copy .env.example to .env
-          command: docker-compose exec php cp .env.example .env
-      - run:
-          name: Generate Laravel app key
-          command: docker-compose exec php php artisan key:generate
-      - run:
-          name: Run migrations and tests
-          command: |
-            docker-compose exec php php artisan migrate --env=testing --force
-            docker-compose exec php php artisan test
+          name: Change to project directory
+          command: cd project-directory && composer install --no-interaction --working-dir=path/to
+      - run: npm install
+      - run: npm run prod
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: php artisan migrate --env=testing --force
+      - run: php artisan test
 
   deploy:
-    executor: docker-executor
+    docker:
+      - image: google/cloud-sdk
     steps:
       - checkout
       - setup_remote_docker:
@@ -56,10 +31,10 @@ jobs:
             gcloud --quiet config set project $GOOGLE_PROJECT_ID
             gcloud auth configure-docker
       - run:
-          name: Build Docker image for deployment
+          name: Build Docker image
           command: docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
       - run:
-          name: Push Docker image to Google Container Registry
+          name: Push Docker image
           command: docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
       - run:
           name: Deploy to Cloud Run
