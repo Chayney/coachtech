@@ -25,15 +25,15 @@ jobs:
       - run:
           name: Build the application using Dockerfile.production
           command: |
-            docker build -f docker/php/Dockerfile.production -t my-app /home/circleci/project
+            docker build -f docker/php/Dockerfile.production -t my-app ~/project
       - run:
           name: Debug composer.json existence
           command: |
-            docker run --rm -v /home/circleci/project:/var/www/html my-app ls -al /var/www/html/project/src
+            docker run --rm -v ~/project:/var/www/html my-app ls -al /var/www/html/project/src
       - run:
           name: Install Composer dependencies
           command: |
-            docker run --rm -v /home/circleci/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src
+            docker run --rm -v ~/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src
       - run:
           name: Run PHPUnit tests
           command: |
