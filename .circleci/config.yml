@@ -19,9 +19,9 @@ jobs:
       - run:
           name: Debug directory structure
           command: |
-            echo "Initial directory structure:"
-            ls -al ~
-            ls -al ~/project
+            echo "Current directory structure:"
+            ls -al
+            ls -al src
       - run:
           name: Build the application using Dockerfile.production
           command: |
