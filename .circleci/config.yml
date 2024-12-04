@@ -7,6 +7,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Debug directory structure
+          command: |
+            echo "Current directory structure:"
+            ls -al /home/circleci/project
+            ls -al /home/circleci/project/src
+      - run:
           name: Build the application using Dockerfile.production
           command: |
             docker build -f docker/php/Dockerfile.production -t my-app /home/circleci/project
