@@ -1,0 +1,25 @@
+FROM php:7.4.9-fpm
+
+RUN apt-get update && apt-get install -y \
+    git \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    zip \
+    libzip-dev \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install gd zip pdo pdo_mysql
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+WORKDIR /var/www/html
+
+RUN docker-php-ext-install bcmath
+
+COPY . .
+
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+ENV APP_ENV=production
+
+CMD ["php-fpm"]
