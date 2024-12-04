@@ -33,11 +33,11 @@ jobs:
       - run:
           name: Install Composer dependencies
           command: |
-            docker run --rm -v ~/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src
+            docker run --rm -v ~/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src || { echo "Composer install failed"; exit 1; }
       - run:
           name: Run PHPUnit tests
           command: |
-            docker run --rm -v $(pwd):/var/www/html my-app php artisan test
+            docker run --rm -v ~/project:/var/www/html my-app php artisan test
 
   deploy:
     docker:
