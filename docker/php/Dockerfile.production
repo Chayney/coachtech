@@ -17,10 +17,10 @@ WORKDIR /var/www/html/project/src
 RUN docker-php-ext-install bcmath
 
 RUN echo "Checking the project directory"
-RUN ls -al /home/circleci/project
+RUN ls -al /var/www/html
 
 RUN echo "Checking the src directory"
-RUN ls -al /home/circleci/project/src
+RUN ls -al /var/www/html/project/src
 
 COPY src /var/www/html/project/src
 
