@@ -27,14 +27,6 @@ jobs:
           command: |
             docker build -f docker/php/Dockerfile.production -t my-app .
       - run:
-          name: Debug composer.json existence
-          command: |
-            docker run --rm -v ~/project:/var/www/html my-app ls -al /var/www/html
-      - run:
-          name: Install Composer dependencies
-          command: |
-            docker run --rm -v ~/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src
-      - run:
           name: Run PHPUnit tests
           command: |
             docker run --rm -v ~/project:/var/www/html my-app php artisan test
