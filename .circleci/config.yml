@@ -9,9 +9,9 @@ jobs:
       - run:
           name: Debug directory structure
           command: |
-            echo "Current directory structure:"
+            echo "Initial directory structure:"
+            ls -al /home/circleci
             ls -al /home/circleci/project
-            ls -al /home/circleci/project/src
       - run:
           name: Build the application using Dockerfile.production
           command: |
