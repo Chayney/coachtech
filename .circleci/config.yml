@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install Composer dependencies
           command: |
-            docker run --rm -v $(pwd):/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction
+            docker run --rm -v /home/circleci/project:/var/www/html my-app composer install --no-dev --optimize-autoloader --no-interaction --working-dir=/var/www/html/project/src
       - run:
           name: Run PHPUnit tests
           command: |
