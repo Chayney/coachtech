@@ -6,8 +6,7 @@ jobs:
       - image: php:7.4.9-fpm
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.7
+      - setup_remote_docker
       - run:
           name: Install Docker CLI
           command: |
@@ -41,8 +40,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.7
+      - setup_remote_docker
       - run:
           name: Authenticate Docker to Google Cloud Registry
           command: |
