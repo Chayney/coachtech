@@ -10,8 +10,7 @@ jobs:
       - run:
           name: Install Docker CLI
           command: |
-            sudo apt-get update
-            sudo apt-get install -y docker-ce
+            apt-get update && apt-get install -y docker-ce
       - run:
           name: Debug directory structure
           command: |
