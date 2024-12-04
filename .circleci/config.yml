@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Build the application using Dockerfile.production
           command: |
-            docker build -f docker/php/Dockerfile.production -t my-app ~/project
+            docker build -f docker/php/Dockerfile.production -t my-app .
       - run:
           name: Debug composer.json existence
           command: |
