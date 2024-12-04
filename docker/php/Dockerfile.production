@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/project/src
 
 RUN docker-php-ext-install bcmath
 
