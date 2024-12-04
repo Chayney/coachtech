@@ -10,8 +10,8 @@ jobs:
           name: Debug directory structure
           command: |
             echo "Initial directory structure:"
-            ls -al /home/circleci
-            ls -al /home/circleci/project
+            ls -al ~
+            ls -al ~/project
       - run:
           name: Build the application using Dockerfile.production
           command: |
