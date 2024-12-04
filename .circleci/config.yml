@@ -7,12 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Change to project root directory
-          command: cd /home/circleci/project
-      - run:
           name: Build the application using Dockerfile.production
           command: |
-            docker build -f docker/php/Dockerfile.production -t my-app .
+            docker build -f docker/php/Dockerfile.production -t my-app /home/circleci/project
       - run:
           name: Install Composer dependencies
           command: |
