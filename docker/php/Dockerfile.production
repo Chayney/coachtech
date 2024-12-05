@@ -24,7 +24,7 @@ COPY . /var/www/html/project
 
 RUN docker-php-ext-install bcmath
 
-COPY nginx/production.conf /etc/nginx/sites-available/default
+COPY docker/nginx/production.conf /etc/nginx/conf.d/production.conf
 
 COPY supervisord.conf /etc/supervisord.conf
 
