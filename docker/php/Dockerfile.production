@@ -14,21 +14,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/html/project/src
 
-RUN echo "Checking the project directory"
-RUN ls -al /var/www/html
-
-RUN echo "Checking the src directory"
-RUN ls -al /var/www/html/project/src
-
 COPY src /var/www/html/project/src
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-WORKDIR /var/www/html/project/docker
-
-RUN ls -al /var/www/html/project/docker
-
-COPY ../nginx/production.conf /etc/nginx/default.conf
 
 WORKDIR /var/www/html/project
 
@@ -36,8 +24,12 @@ COPY . /var/www/html/project
 
 RUN docker-php-ext-install bcmath
 
+COPY nginx/production.conf /etc/nginx/sites-available/default
+
 COPY supervisord.conf /etc/supervisord.conf
 
-EXPOSE 8080
+ENV APP_ENV=production
+ENV NGINX_HOST=0.0.0.0
+ENV NGINX_PORT=8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
