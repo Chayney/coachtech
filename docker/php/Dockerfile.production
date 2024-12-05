@@ -24,12 +24,16 @@ COPY src /var/www/html/project/src
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+COPY nginx/production.conf /etc/nginx/conf.d/default.conf
+
 WORKDIR /var/www/html/project
 
 COPY . /var/www/html/project
 
 RUN docker-php-ext-install bcmath
 
-ENV APP_ENV=production
+COPY supervisord.conf /etc/supervisord.conf
 
-CMD ["php-fpm"]
+EXPOSE 8080
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
