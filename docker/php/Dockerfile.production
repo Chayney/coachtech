@@ -30,7 +30,7 @@ COPY supervisord.conf /etc/supervisord.conf
 
 ENV APP_ENV=production
 ENV NGINX_HOST=0.0.0.0
-ENV NGINX_PORT ${PORT:-8080}
+ENV PORT 8080
 
 EXPOSE 8080
 
