@@ -24,7 +24,7 @@ COPY src /var/www/html/project/src
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-WORKDIR /var/www/html/project/docker/nginx
+WORKDIR /var/www/html/project/docker
 
 COPY nginx/production.conf /etc/nginx/default.conf
 
