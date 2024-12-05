@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Run PHPUnit tests
           command: |
-            docker run --rm -v ~/project:/var/www/html my-app php artisan test --working-dir=/var/www/html
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/artisan test
 
   deploy:
     docker:
