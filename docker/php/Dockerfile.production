@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     libzip-dev \
+    nginx \
     && docker-php-ext-configure zip \
     && docker-php-ext-install gd zip pdo pdo_mysql
 
