@@ -59,6 +59,7 @@ jobs:
               --image gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 \
               --region us-central1 \
               --platform managed \
+              --timeout 300s \
               --quiet
       - run:
           name: Set APP_URL in .env.production
