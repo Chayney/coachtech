@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     libzip-dev \
+    supervisor \
     nginx \
     && docker-php-ext-configure zip \
     && docker-php-ext-install gd zip pdo pdo_mysql
@@ -33,4 +34,4 @@ ENV PORT 8080
 
 EXPOSE 8080
 
-CMD service nginx start && php-fpm -F
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
