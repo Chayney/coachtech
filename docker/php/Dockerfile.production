@@ -28,7 +28,7 @@ RUN docker-php-ext-install bcmath
 
 COPY docker/nginx/production.conf /etc/nginx/conf.d/production.conf
 
-COPY docker/supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 
 ENV APP_ENV=production
 ENV NGINX_HOST=0.0.0.0
