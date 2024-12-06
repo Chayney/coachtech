@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Build Docker image for deployment
           command: |
-            docker build -f docker/php/Dockerfile.production -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 .
+            docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 -f docker/php/Dockerfile.production .
       - run:
           name: Push Docker image to Google Cloud Container Registry
           command: |
@@ -59,7 +59,7 @@ jobs:
               --image gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 \
               --region us-central1 \
               --platform managed \
-              --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com
+              --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com \
               --timeout 300s \
               --quiet
       - run:
