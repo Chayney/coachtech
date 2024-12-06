@@ -59,7 +59,8 @@ jobs:
               --image gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 \
               --region us-central1 \
               --platform managed \
-              --timeout 1000s \
+              --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com
+              --timeout 300s \
               --quiet
       - run:
           name: Set APP_URL in .env.production
