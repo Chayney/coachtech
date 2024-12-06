@@ -30,10 +30,6 @@ jobs:
           name: Run PHPUnit tests
           command: |
             docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html --working-dir=/var/www/html
-      - run:
-          name: Run Docker container
-          command: |
-            docker run -p 8080:8080 my-app
 
   deploy:
     docker:
