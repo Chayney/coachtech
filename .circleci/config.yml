@@ -53,7 +53,7 @@ jobs:
           command: |
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --role="roles/artifactregistry.writer" \
-              --member="laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
       - run:
           name: Push Docker image to Google Cloud Container Registry
           command: |
