@@ -43,7 +43,7 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project $GOOGLE_PROJECT_ID
-            gcloud auth configure-docker asia-docker.pkg.dev
+            gcloud auth configure-docker asia-northeast1-docker.pkg.dev
       - run:
           name: Build Docker image for deployment
           command: |
