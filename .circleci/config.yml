@@ -61,7 +61,7 @@ jobs:
               --platform managed \
               --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com \
               --timeout 300s \
-              --quiet
+              --quiet \
               --allow-unauthenticated
       - run:
           name: Set APP_URL in .env.production
