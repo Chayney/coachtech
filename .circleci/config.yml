@@ -27,11 +27,6 @@ jobs:
           command: |
             docker build -f docker/php/Dockerfile.production -t my-app .
       - run:
-          name: Push the application image to Google Cloud Container Registry
-          command: |
-            gcloud auth configure-docker
-            docker push gcr.io/$GOOGLE_PROJECT_ID/my-app
-      - run:
           name: Run PHPUnit tests
           command: |
             docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html --working-dir=/var/www/html
@@ -75,10 +70,6 @@ jobs:
             
             # APP_URLを.env.productionに設定
             echo "APP_URL=$SERVICE_URL" >> .env.production
-      - run:
-          name: Generate Laravel APP_KEY
-          command: |
-            | docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html gcr.io/$GOOGLE_PROJECT_ID/my-app php /var/www/html/artisan key:generate --env=production
       - run:
           name: Set mail environment variables in .env.production
           command: |
