@@ -38,6 +38,20 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Add Owner role to service account
+          command: |
+            echo "Adding Owner role to laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/owner"
+      - run:
+          name: Verify Owner role assignment
+          command: |
+            echo "Verifying if the service account has Owner role"
+            gcloud projects get-iam-policy $GOOGLE_PROJECT_ID \
+              --format="json(bindings)" \
+              | jq '.bindings[] | select(.members[] | contains("serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com")) | .role'
+      - run:
           name: Authenticate Docker to Google Cloud Registry
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
@@ -70,11 +84,6 @@ jobs:
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/iam.serviceAccountUser"
-            
-            # Grant Owner role (be cautious with Owner role)
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/owner"
 
             # Grant Editor role
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
