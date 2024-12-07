@@ -38,13 +38,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Login Owner role
+          name: Grant Owner role to service account
           command: |
-            gcloud auth login
-      - run:
-          name: Add Owner role to service account
-          command: |
-            echo "Adding Owner role to laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
+            # ここで OWNERアカウントで認証し、指定したサービスアカウントに OWNER 権限を付与
+            gcloud auth login --no-launch-browser
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/owner"
