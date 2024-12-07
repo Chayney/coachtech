@@ -42,7 +42,7 @@ jobs:
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            gcloud --quiet config set project $GOOGLE_PROJECT_ID
+            gcloud config set project $GOOGLE_PROJECT_ID
             gcloud auth configure-docker asia-northeast1-docker.pkg.dev
             echo '{"credHelpers": {"gcr.io": "gcloud"}}' > ${HOME}/.docker/config.json
       - run:
