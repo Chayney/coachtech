@@ -73,24 +73,6 @@ jobs:
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/editor"
       - run:
-          name: Check if Artifact Registry repository exists
-          command: |
-            echo "Checking if the repository exists..."
-            gcloud artifacts repositories list --project=$GOOGLE_PROJECT_ID --location=asia-northeast1
-            if [ $? -eq 0 ]; then
-              echo "Repository exists."
-            else
-              echo "Repository does not exist."
-            fi
-      - run:
-          name: Create Artifact Registry Repository
-          command: |
-            gcloud artifacts repositories create coachtech \
-              --repository-format=docker \
-              --location=asia-northeast1 \
-              --project=$GOOGLE_PROJECT_ID \
-              --description="Docker repository for coachtech"
-      - run:
           name: Build Docker image for deployment
           command: |
             docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 -f docker/php/Dockerfile.production .
@@ -138,7 +120,7 @@ jobs:
       - run:
           name: Grant Artifact Registry roles
           command: |
-            gcloud artifacts repositories add-iam-policy-binding $GOOGLE_PROJECT_ID/coachtech \
+            gcloud artifacts repositories add-iam-policy-binding coachtech \
               --location=asia-northeast1 \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/artifactregistry.repositoryAdministrator"
