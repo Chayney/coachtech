@@ -120,10 +120,10 @@ jobs:
       - run:
           name: Grant Artifact Registry roles
           command: |
-            gcloud artifacts repositories add-iam-policy-binding coachtech \
+            gcloud artifacts repositories add-iam-policy-binding $GOOGLE_PROJECT_ID/coachtech \
               --location=asia-northeast1 \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.repositoryAdministrator"
+              --role="roles/artifactregistry.writer"
       - run:
           name: Grant allUsers role to Cloud Run service
           command: |
