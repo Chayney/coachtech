@@ -96,12 +96,6 @@ jobs:
               --role="roles/run.invoker" \
               --region=us-central1 \
               --platform managed
-      - run:
-          name: Grant Cloud Run ResourcePolicyBinding role to service account
-          command: |
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/iam.resourcePolicyBinding" \
           
 workflows:
   version: 2
