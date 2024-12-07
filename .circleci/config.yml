@@ -44,6 +44,7 @@ jobs:
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project $GOOGLE_PROJECT_ID
             gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+            echo '{"credHelpers": {"gcr.io": "gcloud"}}' > ${HOME}/.docker/config.json
       - run:
           name: Build Docker image for deployment
           command: |
@@ -57,7 +58,7 @@ jobs:
           command: |
             gcloud run deploy coachtech \
               --image gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 \
-              --region us-central1 \
+              --region asia-northeast1 \
               --platform managed \
               --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com \
               --timeout 300s \
