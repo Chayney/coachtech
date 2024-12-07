@@ -73,6 +73,14 @@ jobs:
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/editor"
       - run:
+          name: Create Artifact Registry Repository
+          command: |
+            gcloud artifacts repositories describe $GOOGLE_PROJECT_ID/coachtech \
+              --location=asia-northeast1 || gcloud artifacts repositories create coachtech \
+              --repository-format=docker \
+              --location=asia-northeast1 \
+              --description="Docker repository for coachtech"
+      - run:
           name: Build Docker image for deployment
           command: |
             docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 -f docker/php/Dockerfile.production .
