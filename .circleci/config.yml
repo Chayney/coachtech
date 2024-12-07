@@ -97,7 +97,14 @@ jobs:
               --role="roles/run.invoker" \
               --region=us-central1 \
               --platform managed
-          
+      - run:
+          name: Grant serviceAccount role to Cloud Run service
+          command: |
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/run.admin" \
+              --role="roles/iam.serviceAccountUser"
+              
 workflows:
   version: 2
   build_and_deploy:
