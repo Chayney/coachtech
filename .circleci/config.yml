@@ -71,11 +71,42 @@ jobs:
             # APP_URLを.env.productionに設定
             echo "APP_URL=$SERVICE_URL" >> .env.production
       - run:
+          name: Generate Laravel APP_KEY
+          command: |
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php artisan key:generate --env=production
+      - run:
+          name: Set mail environment variables in .env.production
+          command: |
+            echo "MAIL_MAILER=smtp" >> .env.production
+            echo "MAIL_HOST=smtp.gmail.com" >> .env.production
+            echo "MAIL_PORT=587" >> .env.production
+            echo "MAIL_USERNAME=$MAIL_USERNAME" >> .env.production
+            echo "MAIL_PASSWORD=$MAIL_PASSWORD" >> .env.production
+            echo "MAIL_ENCRYPTION=tls" >> .env.production
+            echo "MAIL_FROM_ADDRESS=from@example.com" >> .env.production
+            echo 'MAIL_FROM_NAME="${APP_NAME}"' >> .env.production
+      - run:
           name: Deploy updated .env.production to Cloud Run
           command: |
             gcloud run services update coachtech \
               --update-env-vars APP_URL=$SERVICE_URL \
               --region us-central1 \
+              --platform managed
+      - run:
+          name: Grant allUsers role to Cloud Run service
+          command: |
+            gcloud run services add-iam-policy-binding coachtech \
+              --member="allUsers" \
+              --role="roles/run.invoker" \
+              --region=us-central1 \
+              --platform managed
+      - run:
+          name: Grant Cloud Run Invoker role to service account
+          command: |
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/run.invoker" \
+              --region=us-central1 \
               --platform managed
           
 workflows:
