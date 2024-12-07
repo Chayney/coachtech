@@ -38,6 +38,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Login Owner role
+          command: |
+            gcloud auth login
+      - run:
           name: Add Owner role to service account
           command: |
             echo "Adding Owner role to laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
