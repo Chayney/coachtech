@@ -46,6 +46,36 @@ jobs:
             gcloud auth configure-docker asia-northeast1-docker.pkg.dev
             echo '{"credHelpers": {"gcr.io": "gcloud"}}' > ${HOME}/.docker/config.json
       - run:
+          name: Assign IAM Roles to Service Account
+          command: |
+            # Grant Artifact Registry roles
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/artifactregistry.writer"
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/artifactregistry.repositoryAdministrator"
+            
+            # Grant Cloud Run roles
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/run.admin"
+            
+            # Grant Service Account User role
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/iam.serviceAccountUser"
+            
+            # Grant Owner role (be cautious with Owner role)
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/owner"
+
+            # Grant Editor role
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/editor"
+      - run:
           name: Build Docker image for deployment
           command: |
             docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 -f docker/php/Dockerfile.production .
@@ -98,13 +128,6 @@ jobs:
               --role="roles/run.invoker" \
               --region=us-central1 \
               --platform managed
-      - run:
-          name: Grant serviceAccount role to Cloud Run service
-          command: |
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/run.admin" \
-              --role="roles/iam.serviceAccountUser"
               
 workflows:
   version: 2
