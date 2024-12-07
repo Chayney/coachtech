@@ -38,12 +38,6 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Grant Owner role to service account
-          command: |
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/owner"
-      - run:
           name: Authenticate Docker to Google Cloud Registry
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
@@ -111,7 +105,7 @@ jobs:
           name: Set APP_URL in .env.production
           command: |
             # Cloud RunのサービスURLを取得
-            SERVICE_URL=$(gcloud run services describe coachtech --region us-central1 --platform managed --format 'value(status.url)')
+            SERVICE_URL=$(gcloud run services describe coachtech --region asia-northeast1 --platform managed --format 'value(status.url)')
             
             # APP_URLを.env.productionに設定
             echo "APP_URL=$SERVICE_URL" >> .env.production
@@ -131,7 +125,7 @@ jobs:
           command: |
             gcloud run services update coachtech \
               --update-env-vars APP_URL=$SERVICE_URL \
-              --region us-central1 \
+              --region asia-northeast1 \
               --platform managed
       - run:
           name: Grant allUsers role to Cloud Run service
@@ -139,7 +133,7 @@ jobs:
             gcloud run services add-iam-policy-binding coachtech \
               --member="allUsers" \
               --role="roles/run.invoker" \
-              --region=us-central1 \
+              --region=asia-northeast1 \
               --platform managed
               
 workflows:
