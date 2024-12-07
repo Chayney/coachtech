@@ -73,7 +73,7 @@ jobs:
       - run:
           name: Generate Laravel APP_KEY
           command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html php artisan key:generate --env=production
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/artisan key:generate --env=production
       - run:
           name: Set mail environment variables in .env.production
           command: |
