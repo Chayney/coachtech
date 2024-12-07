@@ -57,14 +57,6 @@ jobs:
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/owner"
-
-            # Grant Artifact Registry roles
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.writer"
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.repositoryAdministrator"
             
             # Grant Cloud Run roles
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
@@ -125,6 +117,13 @@ jobs:
               --update-env-vars APP_URL=$SERVICE_URL \
               --region asia-northeast1 \
               --platform managed
+      - run:
+          name: Grant Artifact Registry roles
+          command: |
+            gcloud artifacts repositories add-iam-policy-binding $GOOGLE_PROJECT_ID/coachtech \
+              --location="asia-northeast1" \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/artifactregistry.repositoryAdministrator"
       - run:
           name: Grant allUsers role to Cloud Run service
           command: |
