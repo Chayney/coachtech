@@ -49,6 +49,12 @@ jobs:
           command: |
             docker build -t gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1 -f docker/php/Dockerfile.production .
       - run:
+          name: Grant artifactregistry role to Cloud Run service
+          command: |
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --role="roles/artifactregistry.writer" \
+              --member="laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com"
+      - run:
           name: Push Docker image to Google Cloud Container Registry
           command: |
             docker push gcr.io/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
