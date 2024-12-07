@@ -51,13 +51,6 @@ jobs:
             echo "gcloud auth list (debug)"
             gcloud auth list
       - run:
-          name: Verify Owner role assignment
-          command: |
-            echo "Verifying if the service account has Owner role"
-            gcloud projects get-iam-policy $GOOGLE_PROJECT_ID \
-              --format="json(bindings)" \
-              | jq '.bindings[] | select(.members[] | contains("serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com")) | .role'
-      - run:
           name: Assign IAM Roles to Service Account
           command: |
             # Grant Artifact Registry roles
