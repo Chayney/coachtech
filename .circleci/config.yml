@@ -53,6 +53,11 @@ jobs:
       - run:
           name: Assign IAM Roles to Service Account
           command: |
+            # Grant Project Owner roles
+            gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --role="roles/owner"
+
             # Grant Artifact Registry roles
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
