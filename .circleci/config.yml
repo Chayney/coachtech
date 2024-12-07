@@ -27,6 +27,12 @@ jobs:
           command: |
             docker build -f docker/php/Dockerfile.production -t my-app .
       - run:
+          name: Push the application image to Docker Hub
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker tag my-app $DOCKERHUB_USERNAME/my-app
+            docker push $DOCKERHUB_USERNAME/my-app
+      - run:
           name: Run PHPUnit tests
           command: |
             docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html --working-dir=/var/www/html
@@ -73,7 +79,7 @@ jobs:
       - run:
           name: Generate Laravel APP_KEY
           command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html $DOCKERHUB_USERNAME/my-app:latest php /var/www/html/artisan key:generate --env=production
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html $DOCKERHUB_USERNAME/my-app php /var/www/html/artisan key:generate --env=production
       - run:
           name: Set mail environment variables in .env.production
           command: |
