@@ -25,11 +25,11 @@ jobs:
       - run:
           name: Build the application using Dockerfile.production
           command: |
-            docker build -f docker/php/Dockerfile.production -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest .
+            docker build -f docker/php/Dockerfile.production -t my-app .
       - run:
           name: Run PHPUnit tests
           command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest php /var/www/html --working-dir=/var/www/html
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html --working-dir=/var/www/html
 
   deploy:
     docker:
@@ -73,9 +73,13 @@ jobs:
               --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
               --role="roles/editor"
       - run:
+          name: Build Docker image for deployment
+          command: |
+            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech:latest -f docker/php/Dockerfile.production .
+      - run:
           name: Debug Docker images
           command: |
-            echo "Listing Docker images:"	docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech:latest -f docker/php/Dockerfile.production .
+            echo "Listing Docker images:"
             docker images
       - run:
           name: Push Docker image to Google Cloud Container Registry
