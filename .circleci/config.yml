@@ -62,24 +62,19 @@ jobs:
       - run:
           name: Assign IAM Roles to Service Account
           command: |
-            # Grant Project Owner roles
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
-              --role="roles/owner"
-            
             # Grant Cloud Run roles
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/run.admin"
             
             # Grant Service Account User role
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/iam.serviceAccountUser"
 
             # Grant Editor role
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/editor"
       - run:
           name: Build Docker image for deployment
@@ -129,8 +124,9 @@ jobs:
           command: |
             gcloud artifacts repositories add-iam-policy-binding coachtech \
               --location=asia-northeast1 \
-              --member="serviceAccount:laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com" \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/artifactregistry.writer"
+              --role="roles/artifactregistry.read"
       - run:
           name: Grant allUsers role to Cloud Run service
           command: |
