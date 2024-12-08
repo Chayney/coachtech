@@ -44,6 +44,11 @@ jobs:
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud config set project $GOOGLE_PROJECT_ID
 
+            # Assign Artifact Registry Admin Role to Service Account
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
+              --role="roles/artifactregistry.admin"
+
             # Create Artifact Registry Repository
             if ! gcloud artifacts repositories describe coachtech --location=asia-northeast1 > /dev/null 2>&1; then
               gcloud artifacts repositories create coachtech \
