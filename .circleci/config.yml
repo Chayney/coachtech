@@ -97,7 +97,7 @@ jobs:
       - run:
           name: Deploy to Google Cloud Run
           command: |
-            gcloud run deploy coachtech --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest --platform managed --region asia-northeast1 --project=$GOOGLE_PROJECT_ID
+            gcloud run deploy coachtech --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest --platform managed --region asia-northeast1 --project=$GOOGLE_PROJECT_ID --allow-unauthenticated
       - run:
           name: Set APP_URL in .env.production
           command: |
