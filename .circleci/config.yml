@@ -75,16 +75,16 @@ jobs:
       - run:
           name: Build Docker image for deployment
           command: |
-            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech:latest -f docker/php/Dockerfile.production .
+            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachech:latest -f docker/php/Dockerfile.production .
       - run:
           name: Debug Docker images
           command: |
             echo "Listing Docker images:"
             docker images
       - run:
-          name: Push Docker image to Google Cloud Container Registry
+          name: Push Docker image to Artifact Registry
           command: |
-            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech:latest
+            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest
       - run:
           name: Deploy to Google Cloud Run
           command: |
