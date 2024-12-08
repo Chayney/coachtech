@@ -43,8 +43,17 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud config set project $GOOGLE_PROJECT_ID
-            gcloud auth configure-docker
-            echo '{"credHelpers": {"asia-northeast1-docker.pkg.dev": "gcloud"}}' > ${HOME}/.docker/config.json
+
+            # Create Artifact Registry Repository
+            if ! gcloud artifacts repositories describe my-repo --location=asia-northeast1 > /dev/null 2>&1; then
+              gcloud artifacts repositories create coachtech \
+                --repository-format=docker \
+                --location=asia-northeast1 \
+                --description="Docker repository"
+            else
+              echo "Artifact Registry 'my-repo' already exists."
+            fi
+            gcloud auth configure-docker asia-northeast1-docker.pkg.dev
       - run:
           name: Show gcloud auth list (debug)
           command: |
@@ -75,7 +84,7 @@ jobs:
       - run:
           name: Build Docker image for deployment
           command: |
-            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachech:latest -f docker/php/Dockerfile.production .
+            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest -f docker/php/Dockerfile.production .
       - run:
           name: Debug Docker images
           command: |
