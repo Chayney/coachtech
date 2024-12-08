@@ -45,7 +45,7 @@ jobs:
             gcloud config set project $GOOGLE_PROJECT_ID
 
             # Create Artifact Registry Repository
-            if ! gcloud artifacts repositories describe my-repo --location=asia-northeast1 > /dev/null 2>&1; then
+            if ! gcloud artifacts repositories describe coachtech --location=asia-northeast1 > /dev/null 2>&1; then
               gcloud artifacts repositories create coachtech \
                 --repository-format=docker \
                 --location=asia-northeast1 \
@@ -97,14 +97,7 @@ jobs:
       - run:
           name: Deploy to Google Cloud Run
           command: |
-            gcloud run deploy coachtech \
-              --image gcr.io/$GOOGLE_PROJECT_ID/coachtech:latest \
-              --region asia-northeast1 \
-              --platform managed \
-              --service-account laravel-project@notional-portal-439111-s2.iam.gserviceaccount.com \
-              --timeout 300s \
-              --quiet \
-              --allow-unauthenticated
+            gcloud run deploy coachtech --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest --platform managed --project=$GOOGLE_PROJECT_ID
       - run:
           name: Set APP_URL in .env.production
           command: |
