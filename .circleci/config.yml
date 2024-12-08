@@ -131,7 +131,6 @@ jobs:
               --location=asia-northeast1 \
               --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/artifactregistry.writer"
-              --role="roles/artifactregistry.read"
       - run:
           name: Grant allUsers role to Cloud Run service
           command: |
