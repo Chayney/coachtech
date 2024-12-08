@@ -79,7 +79,7 @@ jobs:
       - run:
           name: Push Docker image to Google Cloud Container Registry
           command: |
-            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech:$CIRCLE_SHA1
+            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:$CIRCLE_SHA1
       - run:
           name: Deploy to Google Cloud Run
           command: |
