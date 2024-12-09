@@ -23,13 +23,17 @@ jobs:
             ls -al
             ls -al src
       - run:
-          name: Build the application using Dockerfile.production
+          name: Build Docker images
           command: |
-            docker build -f docker/php/Dockerfile.production -t my-app .
+            docker-compose -f docker-compose.production.yml build
       - run:
           name: Run PHPUnit tests
           command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html --working-dir=/var/www/html
+            docker-compose -f docker-compose.production.yml run php vendor/bin/phpunit --configuration phpunit.xml
+      - run:
+          name: Push Docker images to Artifact Registry
+          command: |
+            docker-compose -f docker-compose.production.yml push
 
   deploy:
     docker:
@@ -81,19 +85,6 @@ jobs:
             gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
               --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/editor"
-      - run:
-          name: Build Docker image for deployment
-          command: |
-            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest -f docker/php/Dockerfile.production .
-      - run:
-          name: Debug Docker images
-          command: |
-            echo "Listing Docker images:"
-            docker images
-      - run:
-          name: Push Docker image to Artifact Registry
-          command: |
-            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest
       - run:
           name: Deploy to Google Cloud Run
           command: |
