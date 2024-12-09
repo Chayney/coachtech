@@ -30,6 +30,10 @@ jobs:
           command: |
             docker-compose -f docker-compose.production.yml build
       - run:
+          name: Install Composer dependencies
+          command: |
+            composer install --no-dev --optimize-autoloader --no-interaction
+      - run:
           name: Verify Composer installation
           command: |
             composer --version  # Composerがインストールされているか確認
