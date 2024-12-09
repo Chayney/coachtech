@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Run PHPUnit tests
           command: |
+            docker-compose -f docker-compose.production.yml run php composer install
             docker-compose -f docker-compose.production.yml run php vendor/bin/phpunit --configuration phpunit.xml
       - run:
           name: Push Docker images to Artifact Registry
