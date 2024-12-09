@@ -29,6 +29,14 @@ jobs:
           name: Build Docker images
           command: |
             docker-compose -f docker-compose.production.yml build
+      - run:
+          name: Verify Composer installation
+          command: |
+            composer --version  # Composerがインストールされているか確認
+      - run:
+          name: Check if vendor directory exists
+          command: |
+            ls -l vendor  # vendorディレクトリが作成されているか確認
       - run: 
           name: Run PHPUnit tests 
           command: | 
