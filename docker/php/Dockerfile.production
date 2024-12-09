@@ -24,6 +24,8 @@ WORKDIR /var/www/html/project
 
 COPY . /var/www/html/project
 
+RUN ls -al /var/www/html/project/vendor/bin
+
 RUN ./vendor/bin/phpunit --configuration phpunit.xml
 
 RUN docker-php-ext-install bcmath
