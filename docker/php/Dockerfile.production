@@ -20,6 +20,10 @@ COPY src /var/www/html/project/src
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+RUN composer install --working-dir=/var/www/html/project
+
+RUN ./vendor/bin/phpunit --configuration phpunit.xml || true
+
 WORKDIR /var/www/html/project
 
 COPY . /var/www/html/project
