@@ -20,8 +20,6 @@ COPY src /var/www/html/project/src
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN chmod +x /var/www/html/project/vendor/bin/phpunit && /var/www/html/project/vendor/bin/phpunit --configuration /var/www/html/project/phpunit.xml
-
 WORKDIR /var/www/html/project
 
 COPY . /var/www/html/project

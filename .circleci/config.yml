@@ -26,6 +26,10 @@ jobs:
             ls -al
             ls -al src
       - run:
+          name: Run PHPUnit tests
+          command: |
+            docker-compose -f docker-compose.production.yml run --rm php vendor/bin/phpunit --configuration /var/www/html/project/phpunit.xml
+      - run:
           name: Build Docker images
           command: |
             docker-compose -f docker-compose.production.yml build
