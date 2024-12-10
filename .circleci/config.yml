@@ -28,11 +28,11 @@ jobs:
             if ! command -v composer &> /dev/null; then
               curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
             fi
-            composer install --no-dev --prefer-dist
+            cd /root/project/src
       - run:
           name: Run PHPUnit tests
           command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/project/src/vendor/bin/phpunit --configuration /var/www/html/phpunit.xml
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/project/src/vendor/bin/phpunit --configuration /root/project/src/phpunit.xml
       - run:
           name: Build the application using Dockerfile.production
           command: |
