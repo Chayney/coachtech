@@ -23,6 +23,17 @@ jobs:
             ls -al
             ls -al src
       - run:
+          name: Install Composer dependencies
+          command: |
+            if ! command -v composer &> /dev/null; then
+              curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            fi
+            composer install --no-dev --prefer-dist
+      - run:
+          name: Run PHPUnit tests
+          command: |
+            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/src/vendor/bin/phpunit --configuration /var/www/html/src/phpunit.xml
+      - run:
           name: Build the application using Dockerfile.production
           command: |
             docker build -f docker/php/Dockerfile.production -t my-app .

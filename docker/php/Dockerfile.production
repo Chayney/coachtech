@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     libzip-dev \
+    nginx \
     && docker-php-ext-configure zip \
     && docker-php-ext-install gd zip pdo pdo_mysql
 
@@ -24,4 +25,6 @@ COPY . /var/www/html/project
 
 RUN docker-php-ext-install bcmath
 
-CMD ["php-fpm", "-F", "-d", "listen=0.0.0.0:8080"]
+COPY docker/nginx/production.conf /etc/nginx/conf.d/default.conf
+
+CMD service nginx start && php-fpm -F
