@@ -41,7 +41,7 @@ class ProfileController extends Controller
             'name' => 'required|max:20'
         ], [
             'name.required' => '名前を入力してください',
-            'name.max:20' => '名前は20文字以内で入力してください'
+            'name.max' => '名前は20文字以内で入力してください'
         ]);
         $profile = Profile::where('user_id', $user->id)->first();
         $image = $request->file('image');
