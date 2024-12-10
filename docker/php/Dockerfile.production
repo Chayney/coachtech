@@ -1,37 +1,29 @@
-# PHPベースのイメージを使用（php-fpm）
 FROM php:7.4.9-fpm
 
-# 必要な依存関係をインストール
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
     git \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    zip \
+    libzip-dev \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install gd zip pdo pdo_mysql
 
-# Composerのインストール
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Laravel用の作業ディレクトリを作成
-WORKDIR /var/www
+WORKDIR /var/www/html/project/src
 
-# Laravelアプリケーションのソースコードをコピー
-COPY ./src /var/www
+COPY src /var/www/html/project/src
 
-# Composerで依存関係をインストール
-RUN composer install --no-dev --prefer-dist --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Laravelのストレージ・キャッシュディレクトリに適切な権限を設定
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+WORKDIR /var/www/html/project
 
-# Nginxの設定を適用する（コンテナ内にNginxを含める場合）
-# Nginxがすでに別のコンテナとして管理される場合は省略可能
+COPY . /var/www/html/project
 
-# PHP-FPMが使用するポートを公開
+RUN docker-php-ext-install bcmath
+
 EXPOSE 8080
 
-# アプリケーションを実行するためのコマンド
 CMD ["php-fpm"]
