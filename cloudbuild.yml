@@ -1,0 +1,42 @@
+steps:
+  # ステップ1: ソースコードを取得する
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/your-organization/coachtech.git']
+  
+  # ステップ2: Composerで依存関係をインストール
+  - name: 'gcr.io/cloud-builders/composer'
+    args: ['install', '--no-dev', '--prefer-dist']
+
+  # ステップ3: Dockerイメージのビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech',  # Artifact Registryのリポジトリに合わせて変更
+      '.'
+    ]
+
+  # ステップ4: DockerイメージをArtifact Registryにプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push', 'asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech'  # Artifact Registryのリポジトリに合わせて変更
+    ]
+
+  # ステップ5: Cloud Runにデプロイ
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - 'gcloud'
+      - 'run'
+      - 'deploy'
+      - 'coachtech'  # サービス名
+      - '--image'
+      - 'asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech'  # Artifact Registryからイメージを指定
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'asia-northeast1'  # 適切なリージョンに変更
+      - '--allow-unauthenticated'
+
+images:
+  - 'asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech'  # 作成したイメージのリスト
+
+timeout: '900s'  # ビルド時間のタイムアウト（15分）

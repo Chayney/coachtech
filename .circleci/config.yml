@@ -1,112 +1,79 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  docker-executor:
     docker:
-      - image: php:7.4.9-fpm
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Install Docker CLI
-          command: |
-            apt-get update
-            apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-            curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-            apt-get update
-            apt-get install -y docker-ce docker-ce-cli containerd.io
-            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
-            docker-compose --version
-      - run:
-          name: Debug directory structure
-          command: |
-            echo "Current directory structure:"
-            ls -al
-            ls -al src
-      - run:
-          name: Build Docker images
-          command: |
-            docker-compose -f docker-compose.production.yml build
-      - run:
-          name: Verify Composer installation
-          command: |
-            composer --version  # Composerがインストールされているか確認
-      - run:
-          name: Check if vendor directory exists
-          command: |
-            ls -l vendor  # vendorディレクトリが作成されているか確認
-      - run: 
-          name: Run PHPUnit tests 
-          command: | 
-            docker-compose -f docker-compose.production.yml run --rm php php artisan test
-      - run:
-          name: Push Docker images to Artifact Registry
-          command: |
-            docker-compose -f docker-compose.production.yml push
+      - image: 'google/cloud-sdk:slim'  # Cloud SDKを使用する
+      - image: 'php:7.4.9-fpm'  # PHPをインストールしたDockerイメージ
+    working_directory: ~/repo
 
-  deploy:
-    docker:
-      - image: google/cloud-sdk
+jobs:
+  # Build job: ビルド・プッシュ
+  build:
+    executor: docker-executor
     steps:
-      - checkout
-      - setup_remote_docker
+      - checkout  # リポジトリをクローンする
+
+      # PHPUnitのインストール
       - run:
-          name: Authenticate Docker to Google Cloud Registry
+          name: Install dependencies and PHPUnit
           command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+            curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer  # Composerインストール
+            composer install --no-dev --prefer-dist --no-scripts  # 本番用依存関係のインストール
+            curl -sS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit  # PHPUnitのインストール
+            chmod +x /usr/local/bin/phpunit  # 実行権限を付与
+
+      # PHPUnitを使ったテストの実行
+      - run:
+          name: Run PHPUnit tests
+          command: |
+            phpunit --configuration src/phpunit.xml  # srcディレクトリ内のphpunit.xmlを指定してテストを実行
+
+      - run:
+          name: Set up Docker credentials for Google Cloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud config set project $GOOGLE_PROJECT_ID
+            gcloud auth configure-docker asia-northeast1-docker.pkg.dev  # Artifact RegistryへのDocker認証
 
-            # Assign Artifact Registry Admin Role to Service Account
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.admin"
-
-            # Create Artifact Registry Repository
-            if ! gcloud artifacts repositories describe coachtech --location=asia-northeast1 > /dev/null 2>&1; then
-              gcloud artifacts repositories create coachtech \
-                --repository-format=docker \
-                --location=asia-northeast1 \
-                --description="Docker repository"
-            else
-              echo "Artifact Registry 'my-repo' already exists."
-            fi
-            gcloud auth configure-docker asia-northeast1-docker.pkg.dev
       - run:
-          name: Show gcloud auth list (debug)
+          name: Build the Docker image
           command: |
-            echo "gcloud auth list (debug)"
-            gcloud auth list
-      - run:
-          name: Assign IAM Roles to Service Account
-          command: |
-            # Grant Cloud Run roles
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/run.admin"
-            
-            # Grant Service Account User role
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/iam.serviceAccountUser"
+            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest .
 
-            # Grant Editor role
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/editor"
+      - run:
+          name: Push the Docker image to Artifact Registry
+          command: |
+            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest
+
+  # Deploy job: Cloud Runへのデプロイ
+  deploy:
+    executor: docker-executor
+    steps:
+      - checkout  # リポジトリをクローンする
+      - run:
+          name: Set up Docker credentials for Google Cloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud config set project $GOOGLE_PROJECT_ID
       - run:
           name: Deploy to Google Cloud Run
           command: |
-            gcloud run deploy coachtech --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest --platform managed --region asia-northeast1 --project=$GOOGLE_PROJECT_ID --allow-unauthenticated
+            gcloud run deploy coachtech \
+              --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest \
+              --platform managed \
+              --region asia-northeast1 \
+              --allow-unauthenticated \
+              --project=$GOOGLE_PROJECT_ID
       - run:
           name: Set APP_URL in .env.production
           command: |
             # Cloud RunのサービスURLを取得
             SERVICE_URL=$(gcloud run services describe coachtech --region asia-northeast1 --platform managed --format 'value(status.url)')
             
-            # APP_URLを.env.productionに設定
+            # .env.productionにAPP_URLを設定
             echo "APP_URL=$SERVICE_URL" >> .env.production
       - run:
           name: Set mail environment variables in .env.production
@@ -126,6 +93,11 @@ jobs:
               --update-env-vars APP_URL=$SERVICE_URL \
               --region asia-northeast1 \
               --platform managed
+
+  # Grant Artifact Registry roles
+  grant-artifact-registry-permission:
+    executor: docker-executor
+    steps:
       - run:
           name: Grant Artifact Registry roles
           command: |
@@ -133,20 +105,37 @@ jobs:
               --location=asia-northeast1 \
               --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
               --role="roles/artifactregistry.writer"
+
+  # Grant Cloud Run roles
+  grant-cloud-run-permission:
+    executor: docker-executor
+    steps:
       - run:
-          name: Grant allUsers role to Cloud Run service
+          name: Grant Cloud Run roles
           command: |
-            gcloud run services add-iam-policy-binding coachtech \
-              --member="allUsers" \
-              --role="roles/run.invoker" \
-              --region=asia-northeast1 \
-              --platform managed
-              
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
+              --role="roles/run.admin"
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
+              --role="roles/iam.serviceAccountUser"
+            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
+              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
+              --role="roles/editor"
+
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
+      - grant-artifact-registry-permission:
+          requires:
+            - build
+      - grant-cloud-run-permission:
+          requires:
+            - build
       - deploy:
           requires:
             - build
+            - grant-artifact-registry-permission
+            - grant-cloud-run-permission
