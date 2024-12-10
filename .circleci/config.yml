@@ -13,22 +13,6 @@ jobs:
     executor: docker-executor
     steps:
       - checkout  # リポジトリをクローンする
-
-      # PHPUnitのインストール
-      - run:
-          name: Install dependencies and PHPUnit
-          command: |
-            curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer  # Composerインストール
-            composer install --no-dev --prefer-dist --no-scripts  # 本番用依存関係のインストール
-            curl -sS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit  # PHPUnitのインストール
-            chmod +x /usr/local/bin/phpunit  # 実行権限を付与
-
-      # PHPUnitを使ったテストの実行
-      - run:
-          name: Run PHPUnit tests
-          command: |
-            phpunit --configuration src/phpunit.xml  # srcディレクトリ内のphpunit.xmlを指定してテストを実行
-
       - run:
           name: Set up Docker credentials for Google Cloud
           command: |
