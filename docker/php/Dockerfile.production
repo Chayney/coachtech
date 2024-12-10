@@ -24,6 +24,4 @@ COPY . /var/www/html/project
 
 RUN docker-php-ext-install bcmath
 
-EXPOSE 8080
-
-CMD ["php-fpm"]
+CMD ["php-fpm", "-F", "-d", "listen=0.0.0.0:8080"]
