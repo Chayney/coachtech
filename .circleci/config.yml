@@ -47,7 +47,7 @@ jobs:
           name: Docker Compose up
           command: |
             pwd
-            docker-compose -f docker-compose.yml up -d --build
+            docker-compose -f docker-compose.production.yml up -d --build
 
       # 依存関係のインストール
       - run:
