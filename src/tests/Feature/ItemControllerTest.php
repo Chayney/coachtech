@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Profile;
 use App\Models\Condition;
+use Mockery;
 
 class ItemControllerTest extends TestCase
 {
@@ -20,7 +21,7 @@ class ItemControllerTest extends TestCase
      */
     public function test_index()
     {
-        $user = User::factory()->create();
+        $user = User::where('email', 'test@test.com')->first();
         $this->actingAs($user);
         $profile = Profile::create([
             'user_id' => $user->id,
