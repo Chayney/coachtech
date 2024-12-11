@@ -6,151 +6,98 @@ jobs:
       - image: php:7.4.9-fpm
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Install Docker CLI
-          command: |
-            apt-get update
-            apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-            curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-            apt-get update
-            apt-get install -y docker-ce docker-ce-cli containerd.io
-      - run:
-          name: Debug directory structure
-          command: |
-            echo "Current directory structure:"
-            ls -al
-            ls -al src
-      - run:
-          name: Install Composer dependencies
-          command: |
-            if ! command -v composer &> /dev/null; then
-              curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-            fi
-      - run:
-          name: Build the application using Dockerfile.production
-          command: |
-            docker build -f docker/php/Dockerfile.production -t my-app .
-      - run:
-          name: Run PHPUnit tests
-          command: |
-            docker run --rm -v $CIRCLE_WORKING_DIRECTORY:/var/www/html my-app php /var/www/html/project/src/vendor/bin/phpunit --configuration /root/project/src/phpunit.xml
 
-  deploy:
-    docker:
-      - image: google/cloud-sdk
-    steps:
-      - checkout
-      - setup_remote_docker
+      # Docker Compose のインストール
       - run:
-          name: Authenticate Docker to Google Cloud Registry
+          name: Install Docker Compose
           command: |
-            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
-            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            gcloud config set project $GOOGLE_PROJECT_ID
+            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+            ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
-            # Assign Artifact Registry Admin Role to Service Account
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.admin"
-
-            # Create Artifact Registry Repository
-            if ! gcloud artifacts repositories describe coachtech --location=asia-northeast1 > /dev/null 2>&1; then
-              gcloud artifacts repositories create coachtech \
-                --repository-format=docker \
-                --location=asia-northeast1 \
-                --description="Docker repository"
+      # シンボリックリンクの確認
+      - run:
+          name: Verify Symbolic Link
+          command: |
+            if [ -L /usr/bin/docker-compose ]; then
+              echo "Symbolic link exists."
+              ls -l /usr/bin/docker-compose
             else
-              echo "Artifact Registry 'my-repo' already exists."
+              echo "Symbolic link does not exist."
             fi
-            gcloud auth configure-docker asia-northeast1-docker.pkg.dev
-      - run:
-          name: Show gcloud auth list (debug)
-          command: |
-            echo "gcloud auth list (debug)"
-            gcloud auth list
-      - run:
-          name: Assign IAM Roles to Service Account
-          command: |
-            # Grant Cloud Run roles
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/run.admin"
-            
-            # Grant Service Account User role
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/iam.serviceAccountUser"
 
-            # Grant Editor role
-            gcloud projects add-iam-policy-binding $GOOGLE_PROJECT_ID \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/editor"
+      # Docker Compose のパス確認
       - run:
-          name: Build Docker image for deployment
+          name: Check Docker Compose Path
           command: |
-            docker build -t asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest -f docker/php/Dockerfile.production .
+            if command -v docker-compose >/dev/null 2>&1; then
+              echo "Docker Compose is available in PATH"
+              which docker-compose
+            else
+              echo "Docker Compose is not available in PATH"
+            fi
+
+      # Docker Compose がインストールされているか確認
       - run:
-          name: Debug Docker images
-          command: |
-            echo "Listing Docker images:"
-            docker images
+          name: Check Docker Compose version
+          command: docker-compose --version
+
+      # Docker Compose プロジェクトの構築と起動
       - run:
-          name: Push Docker image to Artifact Registry
+          name: Docker Compose up
           command: |
-            docker push asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest
+            pwd
+            docker-compose -f docker-compose.yml up -d --build
+
+      # 依存関係のインストール
       - run:
-          name: Deploy to Google Cloud Run
-          command: |
-            gcloud run deploy coachtech --image asia-northeast1-docker.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest --platform managed --region asia-northeast1 --project=$GOOGLE_PROJECT_ID --allow-unauthenticated
+          name: Install dependencies
+          command: docker-compose exec php composer install
+
+      # 環境変数ファイルのコピー
       - run:
-          name: Set APP_URL in .env.production
+          name: Copy .env.production
           command: |
-            # Cloud RunのサービスURLを取得
-            SERVICE_URL=$(gcloud run services describe coachtech --region asia-northeast1 --platform managed --format 'value(status.url)')
-            
-            # APP_URLを.env.productionに設定
-            echo "APP_URL=$SERVICE_URL" >> .env.production
+            cp .env.example .env.production
+
+      # .env.productionファイルの設定更新
       - run:
-          name: Set mail environment variables in .env.production
+          name: Update .env.production for testing
           command: |
-            echo "MAIL_MAILER=smtp" >> .env.production
-            echo "MAIL_HOST=smtp.gmail.com" >> .env.production
-            echo "MAIL_PORT=587" >> .env.production
-            echo "MAIL_USERNAME=$MAIL_USERNAME" >> .env.production
-            echo "MAIL_PASSWORD=$MAIL_PASSWORD" >> .env.production
-            echo "MAIL_ENCRYPTION=tls" >> .env.production
-            echo "MAIL_FROM_ADDRESS=from@example.com" >> .env.production
-            echo 'MAIL_FROM_NAME="${APP_NAME}"' >> .env.production
+            sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env.production && \
+            sed -i 's/DB_DATABASE=laravel/DB_DATABASE=laravel_db/' .env.production && \
+            sed -i 's/DB_USERNAME=root/DB_USERNAME=laravel_user/' .env.production && \
+            sed -i 's/DB_PASSWORD=/DB_PASSWORD=laravel_pass/' .env.production
+            sed -i 's/MAIL_MAILER=smtp/MAIL_MAILER=smtp/' .env.production && \
+            sed -i 's/MAIL_HOST=sandbox.smtp.mailtrap.io/MAIL_HOST=smtp.gmail.com/' .env.production && \
+            sed -i 's/MAIL_PORT=2525/MAIL_PORT=587/' .env.production && \
+            sed -i 's/MAIL_USERNAME=0e0dea4110ceb7/MAIL_USERNAME="${$MAIL_USERNAME}"/' .env.production
+            sed -i 's/MAIL_PASSWORD=8487ccaa207adf/MAIL_PASSWORD="${MAIL_PASSWORD}"/' .env.production && \
+            sed -i 's/MAIL_ENCRYPTION=tls/MAIL_ENCRYPTION=tls/' .env.production && \
+            sed -i 's/MAIL_FROM_ADDRESS=hello@example.com/MAIL_FROM_ADDRESS=from@example.com/' .env.production && \
+            sed -i 's/MAIL_FROM_NAME="${APP_NAME}"/MAIL_FROM_NAME="${APP_NAME}"/' .env.production
+
+      # アプリケーションキーの生成
       - run:
-          name: Deploy updated .env.production to Cloud Run
-          command: |
-            gcloud run services update coachtech \
-              --update-env-vars APP_URL=$SERVICE_URL \
-              --region asia-northeast1 \
-              --platform managed
+          name: Generate application key
+          command: docker-compose exec php php artisan key:generate
+
+      # データベースのセットアップ
       - run:
-          name: Grant Artifact Registry roles
-          command: |
-            gcloud artifacts repositories add-iam-policy-binding coachtech \
-              --location=asia-northeast1 \
-              --member="serviceAccount:coachtech-project@laravel-project-444111.iam.gserviceaccount.com" \
-              --role="roles/artifactregistry.writer"
+          name: Wait for MySQL
+          command: docker-compose exec php sh -c 'while ! mysqladmin ping -hmysql --silent; do sleep 1; done'
+
       - run:
-          name: Grant allUsers role to Cloud Run service
-          command: |
-            gcloud run services add-iam-policy-binding coachtech \
-              --member="allUsers" \
-              --role="roles/run.invoker" \
-              --region=asia-northeast1 \
-              --platform managed
-              
+          name: Run migrations
+          command: docker-compose exec php php artisan migrate --force
+
+      # PHPUnitテストの実行
+      - run:
+          name: Run tests
+          command: docker-compose exec php ./vendor/bin/phpunit
+
 workflows:
   version: 2
-  build_and_deploy:
+  build_and_test:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
