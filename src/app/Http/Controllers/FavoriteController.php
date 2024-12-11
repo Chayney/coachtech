@@ -27,8 +27,7 @@ class FavoriteController extends Controller
 
                 return redirect()->back()->with('success', 'お気に入りに追加しました');
             }
-        }
-        
+        }        
     }
 
     public function destroy(Request $request)
