@@ -6,8 +6,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /root/project/docker/nginx/production.conf:/etc/nginx/conf.d/default.conf
-      - /root/project:/var/www
+      - /root/project/docker/nginx/production.conf:/etc/nginx/conf.d/production.conf
+      - ./src:/var/www/
     depends_on:
       - php
 
