@@ -84,6 +84,8 @@ jobs:
           name: Generate application key
           command: |
             docker-compose ps
+            docker-compose logs php
+            docker-compose logs nginx
             docker-compose exec php bash
             ls -al
 
