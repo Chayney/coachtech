@@ -1,16 +1,5 @@
 FROM php:7.4.9-fpm
 
-# 必要な依存関係をインストール
-RUN apt-get update && apt-get install -y \
-    git \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    zip \
-    libzip-dev \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-install gd zip pdo pdo_mysql bcmath
-
 # 作業ディレクトリの設定
 WORKDIR /var/www/html
 
