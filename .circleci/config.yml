@@ -83,8 +83,9 @@ jobs:
       - run:
           name: Generate application key
           command: |
-            docker-compose exec php bash -c "cd /var/www && pwd"
-            php artisan key:generate 
+            docker-compose exec php bash
+            cd /var/www
+            ls -al
 
       # マイグレーション実行
       - run:
