@@ -7,6 +7,14 @@ jobs:
     steps:
       - checkout
 
+      # Dockerデーモンの状態を確認
+      - run:
+          name: Check Docker Daemon Status
+          command: |
+            echo "Checking Docker Daemon status..."
+            systemctl status docker || true  # Dockerの状態を確認し、失敗しても続行
+            docker info || true  # Dockerが正常に情報を取得できるか確認
+
       # 依存関係のインストール
       - run:
           name: Install dependencies
