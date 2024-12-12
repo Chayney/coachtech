@@ -2,7 +2,6 @@ version: 2.1
 
 jobs:
   build:
-  type: <expected_type>
     docker:
       - image: php:7.4.9-fpm  # PHPのFPMイメージを使用
     steps:
