@@ -79,11 +79,6 @@ jobs:
             ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
 
-      # 依存関係のインストール
-      - run:
-          name: Install Composer dependencies
-          command: docker-compose exec php composer install --no-interaction --prefer-dist
-
       # アプリケーションキーの生成
       - run:
           name: Generate application key
