@@ -76,6 +76,7 @@ jobs:
             cd /root/project
             pwd
             ls -al
+            ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
 
       # 依存関係のインストール
