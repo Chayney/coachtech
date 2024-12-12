@@ -49,6 +49,7 @@ jobs:
           name: Docker Compose up
           command: |
             cd ../
+            pwd
             ls -al
             docker-compose -f docker-compose.production.yml up -d --build
 
