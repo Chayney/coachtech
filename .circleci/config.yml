@@ -47,7 +47,9 @@ jobs:
       # Docker Compose up (コンテナをバックグラウンドで起動)
       - run:
           name: Docker Compose up
-          command: docker-compose -f docker-compose.production.yml up -d --build
+          command: |
+            cd ../
+            docker-compose -f docker-compose.production.yml up -d --build
 
       # 依存関係のインストール
       - run:
