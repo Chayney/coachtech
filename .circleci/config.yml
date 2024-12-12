@@ -41,6 +41,7 @@ jobs:
       - run:
           name: Copy environment variables
           command: |
+            ls -al
             cd src
             cp .env.example .env.production
 
@@ -48,7 +49,7 @@ jobs:
       - run:
           name: Docker Compose up
           command: |
-            cd /root
+            cd /root/project
             pwd
             ls -al
             docker-compose -f docker-compose.production.yml up -d --build
