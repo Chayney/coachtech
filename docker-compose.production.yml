@@ -7,7 +7,7 @@ services:
       - "80:80"
     volumes:
       - /root/project/docker/nginx/production.conf:/etc/nginx/conf.d/production.conf
-      - ./src:/var/www/
+      - /root/project:/var/www
     depends_on:
       - php
 
