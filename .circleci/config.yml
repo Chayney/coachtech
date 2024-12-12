@@ -3,107 +3,68 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: php:7.4.9-fpm
+      - image: php:7.4.9-fpm  # PHPのFPMイメージを使用
     steps:
       - checkout
+
+      # 依存関係のインストール
       - run:
-          name: Install Docker CLI
+          name: Install dependencies
           command: |
             apt-get update
-            apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-            curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-            apt-get update
-            apt-get install -y docker-ce docker-ce-cli containerd.io
+            apt-get install -y \
+              libpng-dev \
+              libjpeg62-turbo-dev \
+              libfreetype6-dev \
+              zip \
+              libzip-dev \
+              git \
+              unzip \
+              curl \
+              && docker-php-ext-configure zip \
+              && docker-php-ext-install gd zip pdo pdo_mysql bcmath
 
-      # Docker Compose のインストール
+      # Composerのインストール
+      - run:
+          name: Install Composer
+          command: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+      # Docker Composeのインストール
       - run:
           name: Install Docker Compose
           command: |
             curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
-            ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
-      # シンボリックリンクの確認
+      # プロジェクトの設定ファイルをコピー
       - run:
-          name: Verify Symbolic Link
-          command: |
-            if [ -L /usr/bin/docker-compose ]; then
-              echo "Symbolic link exists."
-              ls -l /usr/bin/docker-compose
-            else
-              echo "Symbolic link does not exist."
-            fi
+          name: Copy environment variables
+          command: cp .env.example .env
 
-      # Docker Compose のパス確認
-      - run:
-          name: Check Docker Compose Path
-          command: |
-            if command -v docker-compose >/dev/null 2>&1; then
-              echo "Docker Compose is available in PATH"
-              which docker-compose
-            else
-              echo "Docker Compose is not available in PATH"
-            fi
-
-      # Docker Compose がインストールされているか確認
-      - run:
-          name: Check Docker Compose version
-          command: docker-compose --version
-
-      # Docker Compose プロジェクトの構築と起動
+      # Docker Compose up (コンテナをバックグラウンドで起動)
       - run:
           name: Docker Compose up
-          command: |
-            pwd
-            docker-compose -f docker-compose.production.yml up -d --build
+          command: docker-compose -f docker-compose.production.yml up -d --build
 
       # 依存関係のインストール
       - run:
-          name: Install dependencies
-          command: docker-compose exec php composer install
-
-      # 環境変数ファイルのコピー
-      - run:
-          name: Copy .env.production
-          command: |
-            cp .env.example .env.production
-
-      # .env.productionファイルの設定更新
-      - run:
-          name: Update .env.production for testing
-          command: |
-            sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env.production && \
-            sed -i 's/DB_DATABASE=laravel/DB_DATABASE=laravel_db/' .env.production && \
-            sed -i 's/DB_USERNAME=root/DB_USERNAME=laravel_user/' .env.production && \
-            sed -i 's/DB_PASSWORD=/DB_PASSWORD=laravel_pass/' .env.production
-            sed -i 's/MAIL_MAILER=smtp/MAIL_MAILER=smtp/' .env.production && \
-            sed -i 's/MAIL_HOST=sandbox.smtp.mailtrap.io/MAIL_HOST=smtp.gmail.com/' .env.production && \
-            sed -i 's/MAIL_PORT=2525/MAIL_PORT=587/' .env.production && \
-            sed -i 's/MAIL_USERNAME=0e0dea4110ceb7/MAIL_USERNAME="${$MAIL_USERNAME}"/' .env.production
-            sed -i 's/MAIL_PASSWORD=8487ccaa207adf/MAIL_PASSWORD="${MAIL_PASSWORD}"/' .env.production && \
-            sed -i 's/MAIL_ENCRYPTION=tls/MAIL_ENCRYPTION=tls/' .env.production && \
-            sed -i 's/MAIL_FROM_ADDRESS=hello@example.com/MAIL_FROM_ADDRESS=from@example.com/' .env.production && \
-            sed -i 's/MAIL_FROM_NAME="${APP_NAME}"/MAIL_FROM_NAME="${APP_NAME}"/' .env.production
+          name: Install Composer dependencies
+          command: docker-compose exec php composer install --no-interaction --prefer-dist
 
       # アプリケーションキーの生成
       - run:
           name: Generate application key
           command: docker-compose exec php php artisan key:generate
 
-      # データベースのセットアップ
-      - run:
-          name: Wait for MySQL
-          command: docker-compose exec php sh -c 'while ! mysqladmin ping -hmysql --silent; do sleep 1; done'
-
+      # マイグレーション実行
       - run:
           name: Run migrations
           command: docker-compose exec php php artisan migrate --force
 
       # PHPUnitテストの実行
       - run:
-          name: Run tests
-          command: docker-compose exec php ./vendor/bin/phpunit
+          name: Run PHPUnit tests
+          command: docker-compose exec php ./vendor/bin/phpunit --configuration phpunit.xml
 
 workflows:
   version: 2
