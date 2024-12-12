@@ -35,16 +35,13 @@ jobs:
           command: |
             curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
-      - run:
-          name: Debug directory structure
-          command: |
-            echo "Current directory structure:"
-            ls -al
 
       # プロジェクトの設定ファイルをコピー
       - run:
           name: Copy environment variables
-          command: cp .env.example .env.production
+          command: |
+            cd src
+            cp .env.example .env.production
 
       # Docker Compose up (コンテナをバックグラウンドで起動)
       - run:
