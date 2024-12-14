@@ -14,8 +14,8 @@ jobs:
       - checkout
 
       - run:
-        name: Carrent Directory
-        command: |
+          name: Carrent Directory
+          command: |
             pwd
             ls -al
       # Composerのインストール
