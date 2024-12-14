@@ -78,8 +78,8 @@ jobs:
             ls -al
             ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
+            sleep 15
             docker-compose ps
-            cd /var/www
 
       # アプリケーションキーの生成
       - run:
