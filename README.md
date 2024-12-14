@@ -65,12 +65,12 @@ Laravel学習のまとめとして作成いたしました。提示された要�
 ・パスワード: password
 
 ## テーブル設計
-![image](https://github.com/user-attachments/assets/bc0cf55b-8213-4793-a179-9665538c2431)  
-![image](https://github.com/user-attachments/assets/983b6a6f-6149-4ec3-92b3-c5ad91799f00)  
-![image](https://github.com/user-attachments/assets/e380b1fd-2b26-4f90-a73f-4dd579051611)
-![image](https://github.com/user-attachments/assets/38efb5b2-1b44-465a-9176-1482ca2095fb)  
-![image](https://github.com/user-attachments/assets/f267315e-eca3-4225-9532-cb735ee307e6)  
-![image](https://github.com/user-attachments/assets/3b820dde-f980-4543-8e8e-39fb4d6bb7f2)
+![image](https://github.com/user-attachments/assets/51f023be-262e-491d-bddb-65d5e7585ca8)  
+![image](https://github.com/user-attachments/assets/862eb85e-ea2b-4aa4-9e32-574ad1a926df)  
+![image](https://github.com/user-attachments/assets/d87154c7-dc98-4758-984a-42b57907c821)  
+![image](https://github.com/user-attachments/assets/290187d1-3258-4aa5-97cd-a4fa9de88b03)  
+![image](https://github.com/user-attachments/assets/70ade95f-5ab8-4ae0-83a9-b8b65f3e0122)  
+![image](https://github.com/user-attachments/assets/87c36da2-9272-4fd9-8a61-4f67924655c8)
 
 ## ER図
 ![image](https://github.com/user-attachments/assets/67f6a60e-b9c6-4248-9e97-fa604c0b4043)  
