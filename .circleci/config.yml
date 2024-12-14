@@ -73,7 +73,7 @@ jobs:
       - run:
           name: Docker Compose up
           command: |
-            cd /root/project
+            cd /root/coachtech
             pwd
             ls -al
             ls -al /root/coachtech/docker/nginx/production.conf
