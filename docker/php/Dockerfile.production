@@ -1,9 +1,9 @@
 FROM php:7.4.9-fpm
 
 # 作業ディレクトリの設定
-WORKDIR /var/www/html
+WORKDIR /var/www
 
 # ソースコードのコピー
-COPY src /var/www/html
+COPY src /var/www
 
 CMD ["php-fpm"]
