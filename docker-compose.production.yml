@@ -7,14 +7,14 @@ services:
       - "80:80"
     volumes:
       - /root/project/docker/nginx/default.conf:/root/project/docker/nginx/production.conf
-      - ./src:/var/www/
+      - ./src:/var/www
     depends_on:
       - php
 
   php:
     image: php:7.4.9-fpm
     volumes:
-      - ./src:/var/www/
+      - ./src:/var/www
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
