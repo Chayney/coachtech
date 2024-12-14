@@ -13,6 +13,11 @@ jobs:
       # ソースコードを取得
       - checkout
 
+      - run:
+        name: Carrent Directory
+        command: |
+            pwd
+            ls -al
       # Composerのインストール
       - run:
           name: Install Composer
