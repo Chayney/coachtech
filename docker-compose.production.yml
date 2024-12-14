@@ -2,19 +2,22 @@ version: '3.8'
 
 services:
   nginx:
-    image: nginx:1.21.1
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
-      - /root/project/docker/nginx/default.conf:/root/project/docker/nginx/production.conf
-      - ./:/var/www/
+      - ./src:/var/www
     depends_on:
       - php
 
   php:
-    image: php:7.4.9-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile.php
     volumes:
-      - ./:/var/www/
+      - ./src:/var/www
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
@@ -31,17 +34,4 @@ services:
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-    restart: always
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=mysql
-      - PMA_USER=laravel_user
-      - PMA_PASSWORD=laravel_pass
-    depends_on:
-      - mysql
-    ports:
-      - 8080:80
     restart: always
