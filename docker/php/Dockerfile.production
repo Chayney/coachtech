@@ -4,4 +4,6 @@ COPY php.ini /usr/local/etc/php/
 
 WORKDIR /var/www
 
+COPY src /var/www
+
 CMD ["php-fpm"]
