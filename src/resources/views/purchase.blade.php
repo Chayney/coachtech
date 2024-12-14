@@ -25,7 +25,7 @@
                         <button class="pay-link"  name="id" value="{{ $item['id'] }}">変更する</button>
                     </form>
                 </div>
-                <div class="user-address">
+                <div class="user-pay">
                     @foreach ($profiles as $profile)
                         @if ($profile->pay == 1)
                             <span>クレジットカード</span>

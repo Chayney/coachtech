@@ -8,7 +8,7 @@
 
 .form {
     margin: 3% auto;
-    width: 35%;
+    width: 45%;
     text-align: center;
 }
 
@@ -25,6 +25,7 @@
     height: 20px;
     color: #ff0000;
     text-align: left;
+    font-size: 13px;
 }
 
 .form__input--text input {
@@ -61,8 +62,18 @@
     font-weight: bold;
 }
 
+@media screen and (max-width:1000px) {
+    .form {
+        width: 80%;
+    }
+}
+
 @media screen and (max-width:768px) {
     .login__content {
         margin: 25% auto;
+    }
+
+    .form {
+        width: 80%;
     }
 }

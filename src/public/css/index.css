@@ -1,5 +1,5 @@
 .tabs {
-    margin: 7% 0 3% 0;
+    margin: 10% 0 3% 0;
     width: 100%;
     border-bottom: 1px solid #000;
 }
@@ -107,7 +107,7 @@
 
 @media screen and (max-width:600px) {
     .tabs {
-        margin: 35% auto 3% auto;
+        margin: 38% auto 3% auto;
         display: flex;
         justify-content: space-around;
     }
