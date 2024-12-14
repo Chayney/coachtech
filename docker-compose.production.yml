@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /root/project/docker/nginx/default.conf:/root/project/docker/nginx/production.conf
+      - /root/coachtech/docker/nginx/default.conf:/root/coachtech/docker/nginx/production.conf
       - ./src:/var/www/
     depends_on:
       - php
