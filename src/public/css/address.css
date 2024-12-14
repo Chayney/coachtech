@@ -54,11 +54,19 @@
     .address__content {
         margin: 15% auto;
     }
+
+    .form {
+        width: 60%;
+    }
 }
 
 @media screen and (max-width:768px) {
     .address__content {
         margin: 20% auto;
+    }
+
+    .form {
+        width: 70%;
     }
 }
 

@@ -1,7 +1,7 @@
 @extends('layouts.edit')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/address.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/address.css') }}">
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
           </div>
           <div class="form__error">
             @error('postcode')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="form__error">
             @error('address')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
@@ -52,7 +52,7 @@
           </div>
           <div class="form__error">
             @error('building')
-            {{ $message }}
+              {{ $message }}
             @enderror
           </div>
         </div>
