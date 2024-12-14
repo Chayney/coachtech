@@ -73,10 +73,10 @@ jobs:
       - run:
           name: Docker Compose up
           command: |
-            cd /root/coachtech
+            cd /laravel/coachtech
             pwd
             ls -al
-            ls -al /root/coachtech/docker/nginx/production.conf
+            ls -al /laravel/coachtech/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
             sleep 10
 
