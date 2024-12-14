@@ -11,22 +11,22 @@
     </div>
     @foreach ($profiles as $profile)      
       <form class="form" action="/profile/update" method="post" enctype="multipart/form-data">
-          @csrf
-          <div class="profile">
-            <div class="event-image">
-              @if (empty($profile->name))
-                <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
-                <img id="uploadedImage" src="">
-              @elseif (Str::startsWith($profile['image'], 'images/'))
-                <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
-                <img id="uploadedImage" src="">
-              @else
-                <img id="upload-profile-image" class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
-                <img id="uploadedImage" src="">
-              @endif
-            </div>
-            <label class="edit">画像を選択する<input type="file" onchange="previewImage(event)" class="file" name="image"></label>
+        @csrf
+        <div class="profile">
+          <div class="event-image">
+            @if (empty($profile->name))
+              <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
+              <img id="uploadedImage" src="">
+            @elseif (Str::startsWith($profile['image'], 'images/'))
+              <img id="upload-profile-image" class="profile_image" src="{{ asset($profile['image']) }}">
+              <img id="uploadedImage" src="">
+            @else
+              <img id="upload-profile-image" class="profile_image" src="{{ asset( '/storage/' . $profile['image']) }}">
+              <img id="uploadedImage" src="">
+            @endif
           </div>
+          <label class="edit">画像を選択する<input type="file" onchange="previewImage(event)" class="file" name="image"></label>
+        </div>
         <div class="form__content">
           <div class="form__group">
             <div class="form__group-title">
@@ -38,7 +38,7 @@
               </div>
               <div class="form__error">
                 @error('name')
-                {{ $message }}
+                  {{ $message }}
                 @enderror
               </div>
             </div>

@@ -47,7 +47,7 @@
 
 .form {
     margin: 3% auto 0 auto;
-    width: 35%;
+    width: 45%;
     text-align: center;
 }
 
@@ -64,6 +64,7 @@
     height: 20px;
     color: #ff0000;
     text-align: left;
+    font-size: 15px;
 }
 
 .form__input--text input {
@@ -107,10 +108,6 @@
     .profile-group {
         width: 45%;
         height: 180px;
-    }
-
-    .profile_image {
-        width: 55%;
     }
 
     .parent__container {
@@ -185,10 +182,6 @@
 @media screen and (max-width:600px) {
     .profile__content {
         margin-top: 35%;
-    }
-
-    .profile_image {
-        width: 60%;
     }
 
     .event-image {
