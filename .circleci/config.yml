@@ -78,12 +78,13 @@ jobs:
             ls -al
             ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
+            sleep 10
 
       # アプリケーションキーの生成
       - run:
           name: Generate application key
           command: |
-            docker-compose exec project_php_1 bash
+            docker-compose exec php bash
             ls -al
             php artisan key:generate
 
