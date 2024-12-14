@@ -12,11 +12,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd zip pdo pdo_mysql bcmath
 
 # Composerのインストール
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# 作業ディレクトリの設定
+WORKDIR /var/www/html/project
 
 # ソースコードのコピー
-WORKDIR /var/www/html/project
 COPY src /var/www/html/project
+
+# 必要なディレクトリを作成して適切な権限を設定
+USER root
+RUN mkdir -p /usr/src/php
+USER www-data
 
 # 依存関係のインストール
 RUN composer install --no-dev --optimize-autoloader --no-interaction
