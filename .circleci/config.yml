@@ -84,7 +84,7 @@ jobs:
       - run:
           name: Generate application key
           command: |
-            docker exec -it project_php_1 bash
+            docker-compose -p project exec php bash
             ls -al
             php artisan key:generate
 
