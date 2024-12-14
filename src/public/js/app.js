@@ -6,3 +6,18 @@ document.getElementById('searchButton').addEventListener('click', function() {
         searchBar.style.display = 'none';
     }
 });
+
+window.addEventListener('resize', function() {
+    var searchBar = document.getElementById('searchBar');
+    if (window.innerWidth >= 769) {
+        searchBar.style.display = 'none';
+    }
+});
+
+
+window.addEventListener('load', function() {
+    var searchBar = document.getElementById('searchBar');
+    if (window.innerWidth >= 769) {
+        searchBar.style.display = 'none';
+    }
+});
