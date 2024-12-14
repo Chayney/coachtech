@@ -46,20 +46,24 @@
     .pay__content {
         margin: 15% auto;
     }
+
+    .form {
+        width: 60%;
+    }
 }
 
 @media screen and (max-width:768px) {
     .pay__content {
         margin: 20% auto;
     }
+
+    .form {
+        width: 70%;
+    }
 }
 
 @media screen and (max-width:600px) {
     .pay__content {
         margin: 25% auto;
-    }
-
-    .form {
-        width: 50%;
     }
 }
