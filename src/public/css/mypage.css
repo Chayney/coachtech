@@ -153,6 +153,7 @@
     }
 
     .profile-group {
+        margin-top: 25%;
         width: 80%;
     }
 
@@ -191,8 +192,13 @@
         margin: 35% auto 0 auto;
     }
 
+    .profile-group {
+        margin-top: 28%;
+    }
+
     .profile_image {
-        width: 60%;
+        width: 50%;
+        height: 90%;
     }
 
     .tabs {

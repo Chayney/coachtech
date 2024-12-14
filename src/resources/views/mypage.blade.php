@@ -50,11 +50,11 @@
                         <form action="/comment/edit" method="get"> 
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
                             <input type="hidden" name="item_id" value="{{ $item['id'] }}">      
-                                @if (Str::startsWith($item['image'], 'images/'))
-                                    <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset($item['image']) }}"></button>
-                                @else
-                                    <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
-                                @endif
+                            @if (Str::startsWith($item['image'], 'images/'))
+                                <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset($item['image']) }}"></button>
+                            @else
+                                <button type="submit" name="name" value="{{ $item['name'] }}"><img class="product_image" src="{{ asset( '/storage/' . $item['image']) }}"></button>
+                            @endif
                         </form>              
                     </div>
                 @endforeach
@@ -66,11 +66,11 @@
                     <div class="child__container">
                         <form action="/item/{item_id}" method="get">
                             <input type="hidden" name="id" value="{{ $purchaseItem['id'] }}">
-                                @if (Str::startsWith($purchaseItem['image'], 'images/'))
-                                    <button><img class="product_image" src="{{ asset($purchaseItem['image']) }}"></button>
-                                @else
-                                    <button><img class="product_image" src="{{ asset( '/storage/' . $purchaseItem['image']) }}"></button>
-                                @endif
+                            @if (Str::startsWith($purchaseItem['image'], 'images/'))
+                                <button><img class="product_image" src="{{ asset($purchaseItem['image']) }}"></button>
+                            @else
+                                <button><img class="product_image" src="{{ asset( '/storage/' . $purchaseItem['image']) }}"></button>
+                            @endif
                         </form>
                     </div>
                 @endforeach
