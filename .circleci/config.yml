@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: php:7.4.9-fpm  # PHPのFPMイメージを使用
+      - image: circleci/php:7.4.9-fpm  # PHPのFPMイメージを使用
     steps:
       - checkout
 
@@ -86,7 +86,7 @@ jobs:
           name: Generate application key
           command: |
             ls -al
-            docker-compose exec php bash
+            docker-compose exec php bash -c "cd /var/www && php artisan key:generate"
 
       # マイグレーション実行
       - run:
