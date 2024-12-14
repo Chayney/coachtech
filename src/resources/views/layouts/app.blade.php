@@ -17,26 +17,32 @@
         <input id="drawer_input" class="drawer_hidden" type="checkbox">
         <label for="drawer_input" class="drawer_open"><span></span></label>
         <nav class="nav_content">
-            <ul class="nav_list">
-                @if (Auth::check())
-                  <li class="nav_item">
-                    <a class="sell__link" href="/sell">出品</a>
-                  </li>
-                  <li class="nav_item"><a href="{{ url('mypage') }}">マイページ</a></li>
-                  <li class="nav_item">
-                    <form action="/logout" method="post">
-                      @csrf
-                      <button class="logout">ログアウト</button>
-                    </form>
-                  </li>
-                @else
-                  <li class="header-nav__white">
-                    <a class="header-item__link" href="/login">出品</a>
-                  </li>
-                  <li class="nav_item"><a href="{{ url('register') }}">会員登録</a></li>
-                  <li class="nav_item"><a href="{{ url('login') }}">ログイン</a></li>
-                @endif
-            </ul>
+          <ul class="nav_list">
+            @if (Auth::check())
+              <li class="nav_item">
+                <a class="sell__link" href="/sell">出品</a>
+              </li>
+              <li class="nav_item">
+                <a href="{{ url('mypage') }}">マイページ</a>
+              </li>
+              <li class="nav_item">
+                <form action="/logout" method="post">
+                  @csrf
+                  <button class="logout">ログアウト</button>
+                </form>
+              </li>
+            @else
+              <li class="header-nav__white">
+                <a class="header-item__link" href="/login">出品</a>
+              </li>
+              <li class="nav_item">
+                <a href="{{ url('register') }}">会員登録</a>
+              </li>
+              <li class="nav_item">
+                <a href="{{ url('login') }}">ログイン</a>
+              </li>
+            @endif
+          </ul>
         </nav>
       </div>
       <a class="header__logo-mobile" href="/">
@@ -75,10 +81,8 @@
               <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
           @else
-          </li>
             <li class="header-nav__item">
               <a class="header-nav__link" href="/login">ログイン</a>
-            </li>
             </li>
             <li class="header-nav__item">
               <a class="header-nav__link" href="/register">会員登録</a>
@@ -100,11 +104,11 @@
   </header>
   @if (session('success'))
     <div class="alert-success">
-        {{ session('success') }}
+      {{ session('success') }}
     </div>
   @elseif (session('alert'))
     <div class="alert-danger">
-        {{ session('alert') }}
+      {{ session('alert') }}
     </div>
   @endif
   <main>
