@@ -1,104 +1,25 @@
-version: 2.1
-
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/php:7.4-fpm
+      - image: circleci/php:7.4.9-fpm
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
     steps:
       - checkout
-
-      # Docker Daemonをセットアップ
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      # Dockerをインストール
-      - run:
-          name: Install Docker
-          command: |
-            echo "Installing Docker..."
-            sudo apt-get update
-            sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-            curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-            sudo apt-get update
-            sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-      # Dockerの状態を確認
-      - run:
-          name: Check Docker Daemon Status
-          command: |
-            echo "Checking Docker Daemon status..."
-            docker info || echo "Docker is not running"
-            docker ps || echo "No running containers found"
-
-      # 依存関係のインストール
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update
-            sudo apt-get install -y \
-              libpng-dev \
-              libjpeg62-turbo-dev \
-              libfreetype6-dev \
-              zip \
-              libzip-dev \
-              git \
-              unzip \
-              curl \
-              && docker-php-ext-configure zip \
-              && docker-php-ext-install gd zip pdo pdo_mysql bcmath
-
-      # Composerのインストール
+            curl -sS https://getcomposer.org/installer | php
+            php composer.phar install
       - run:
-          name: Install Composer
-          command: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-      # Docker Composeのインストール
-      - run:
-          name: Install Docker Compose
+          name: Set up environment
           command: |
-            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
-            docker-compose --version
-
-      # プロジェクトの設定ファイルをコピー
-      - run:
-          name: Copy environment variables
-          command: |
-            ls -al
-            cd src
             cp .env.example .env.production
-
-      # Docker Compose up (コンテナをバックグラウンドで起動)
-      - run:
-          name: Docker Compose up
-          command: |
-            cd /root/project
-            pwd
-            ls -al
-            ls -al /root/project/docker/nginx/production.conf
-            docker-compose -f docker-compose.production.yml up -d --build
-            sleep 15
-            docker-compose ps
-
-      # アプリケーションキーの生成
-      - run:
-          name: Generate application key
-          command: |
-            docker-compose exec php bash -c "cd /var/www/html/project && php artisan key:generate"
-
-      # マイグレーション実行
-      - run:
-          name: Run migrations
-          command: docker-compose exec php php artisan migrate --force
-
-      # PHPUnitテストの実行
+            php artisan key:generate
+            php artisan migrate
       - run:
           name: Run PHPUnit tests
-          command: docker-compose exec php ./vendor/bin/phpunit --configuration phpunit.xml
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
+          command: |
+            ./vendor/bin/phpunit
