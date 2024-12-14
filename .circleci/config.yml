@@ -73,12 +73,12 @@ jobs:
       - run:
           name: Docker Compose up
           command: |
-            cd /laravel/coachtech
+            cd /root/project
             pwd
             ls -al
-            ls -al /laravel/coachtech/docker/nginx/production.conf
+            ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
-            sleep 10
+            docker-compose ps
 
       # アプリケーションキーの生成
       - run:
