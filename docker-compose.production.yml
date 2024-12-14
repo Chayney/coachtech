@@ -12,7 +12,7 @@ services:
       - php
 
   php:
-    image: ./docker/php
+    image: php:7.4.9-fpm
     volumes:
       - ./:/var/www/
     environment:
