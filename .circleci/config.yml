@@ -1,35 +1,59 @@
 version: 2.1
 
+executors:
+  docker-executor:
+    docker:
+      - image: circleci/php:7.4.9-fpm  # 使用するPHPのDockerイメージ
+    working_directory: ~/workspace
+
 jobs:
   build:
-    docker:
-      - image: circleci/php:7.4.9-fpm
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_db
+    executor: docker-executor
     steps:
+      # ソースコードを取得
       - checkout
+
+      # Composerのインストール
       - run:
-          name: Change directory permissions
+          name: Install Composer
           command: |
-            sudo chown -R circleci:circleci /root/project
-      - run:
-          name: Install dependencies
-          command: |
-            cd /root/project/src
             curl -sS https://getcomposer.org/installer | php
-            php composer.phar install
+            sudo mv composer.phar /usr/local/bin/composer
+            composer install --no-interaction
+
+      # Google Cloud SDKのインストールと設定（必要な場合）
       - run:
-          name: Set up environment
+          name: Install Google Cloud SDK
           command: |
-            cp .env.example .env.production
-            php artisan key:generate
-            php artisan migrate
+            curl https://sdk.cloud.google.com | bash
+            source $HOME/.bashrc
+            gcloud --quiet components install docker-credential-gcr
+
+      # Google Cloudに認証
+      - run:
+          name: Authenticate with Google Cloud
+          command: |
+            echo $GCLOUD_SERVICE_ACCOUNT | base64 --decode > $HOME/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
+            gcloud auth configure-docker asia-northeast1.pkg.dev
+
+      # PHPUnitテストの実行
       - run:
           name: Run PHPUnit tests
           command: |
-            ./vendor/bin/phpunit
+            ./vendor/bin/phpunit --configuration phpunit.xml  # PHPUnitの設定ファイルがphpunit.xmlにある場合
+
+      # Dockerイメージのビルドとタグ付け
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t asia-northeast1.pkg.dev/GOOGLE_PROJECT_ID/coachtech/coachtech:latest .
+
+      # DockerイメージをArtifact Registryにプッシュ
+      - run:
+          name: Push Docker image to Google Artifact Registry
+          command: |
+            docker push asia-northeast1.pkg.dev/$GOOGLE_PROJECT_ID/coachtech/coachtech:latest
 
 workflows:
   version: 2
