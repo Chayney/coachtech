@@ -65,47 +65,46 @@
                         </div>
                     </div>
                 @endif
-            @foreach ($comments as $comment)
-                <div class="profile">
-                    <div class="user-group">
-                        @if (empty($comment['commentProfile']['name']))
-                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span class="profile_name">ユーザー名</span>
-                        @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
-                            <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
-                            <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
-                        @else
-                            <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
-                            <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
-                        @endif       
-                        
+                @foreach ($comments as $comment)
+                    <div class="profile">
+                        <div class="user-group">
+                            @if (empty($comment['commentProfile']['name']))
+                                <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                                <span class="profile_name">ユーザー名</span>
+                            @elseif (Str::startsWith($comment['commentProfile']['image'], 'images/'))
+                                <img class="profile_image" src="{{ asset($comment['commentProfile']['image']) }}">
+                                <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
+                            @else
+                                <img class="profile_image" src="{{ asset( '/storage/' . $comment['commentProfile']['image']) }}">
+                                <span class="profile_name">{{ $comment['commentProfile']['name'] }}</span>
+                            @endif                                   
+                        </div>
+                        <div class="comment-area">
+                            <span class="comment-text">{{ $comment['comment'] }}</span>
+                        </div>
                     </div>
-                    <div class="comment-area">
-                        <span class="comment-text">{{ $comment['comment'] }}</span>
-                    </div>
-                </div>
-            @endforeach
-            @if (Auth::check())
-                <form action="/comment/create" method="post">
-                    @csrf
+                @endforeach
+                @if (Auth::check())
+                    <form action="/comment/create" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <span class="form__label--item">商品へのコメント</span>
+                            <input type="hidden" name="item_id" value="{{ $item['id'] }}">            
+                            <textarea class="comment-post" name="comment"></textarea>          
+                        </div>
+                        <div class="form__button">
+                            <button class="form__button-submit" type="submit">コメントを送信する</button>
+                        </div>
+                    </form>
+                @else
                     <div class="form-group">
-                        <span class="form__label--item">商品へのコメント</span>
-                        <input type="hidden" name="item_id" value="{{ $item['id'] }}">            
-                        <textarea class="comment-post" name="comment"></textarea>          
+                        <span class="form__label--item">商品へのコメント</span>           
+                        <textarea class="comment-post" name="comment"></textarea>             
                     </div>
                     <div class="form__button">
-                        <button class="form__button-submit" type="submit">コメントを送信する</button>
+                        <button class="form__button-submit" onclick="location.href='/login'">コメントを送信する</button>
                     </div>
-                </form>
-            @else
-                <div class="form-group">
-                    <span class="form__label--item">商品へのコメント</span>           
-                    <textarea class="comment-post" name="comment"></textarea>             
-                </div>
-                <div class="form__button">
-                    <button class="form__button-submit" onclick="location.href='/login'">コメントを送信する</button>
-                </div>
-            @endif
+                @endif
             </div>
         @endforeach
     </div>
