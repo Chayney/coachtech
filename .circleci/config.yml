@@ -79,13 +79,14 @@ jobs:
             ls -al /root/project/docker/nginx/production.conf
             docker-compose -f docker-compose.production.yml up -d --build
             docker-compose ps
+            cd /var/www
 
       # アプリケーションキーの生成
       - run:
           name: Generate application key
           command: |
             ls -al
-            docker-compose exec php bash -c "cd /var/www && php artisan key:generate"
+            docker-compose exec php bash
 
       # マイグレーション実行
       - run:
