@@ -52,6 +52,8 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(200);
         $user->delete();
         $profile->delete();
+        $condition->delete();
+        $favoriteItem->delete();
     }
 
     public function test_all_items_guest_user()
@@ -103,6 +105,9 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(200);
         $user->delete();
         $profile->delete();
+        $condition->delete();
+        $item1->delete();
+        $item2->delete();
     }
 
     public function test_search_with_guest_user()
@@ -144,6 +149,7 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(200);
         $user->delete();
         $profile->delete();
+        $condition->delete();
         $item1->delete();
         $item2->delete();
     }
@@ -186,6 +192,8 @@ class ItemControllerTest extends TestCase
         $response->assertStatus(200);
         $user->delete();
         $profile->delete();
+        $condition->delete();
+        $element->delete();
         $item->delete();
     }
 }
