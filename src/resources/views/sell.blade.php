@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="group-title">
-          <span class="label--item">商品の詳細</span>
+        <span class="label--item">商品の詳細</span>
       </div>
       <div class="form__group">
         <div class="form__group-title">
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="group-title">
-          <span class="label--item">商品名と説明</span>
+        <span class="label--item">商品名と説明</span>
       </div>
       <div class="form__group">
         <div class="form__group-title">
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div class="group-title">
-          <span class="label--item">販売価格</span>
+        <span class="label--item">販売価格</span>
       </div>
       <div class="form__group">
         <div class="form__group-title">

@@ -8,7 +8,7 @@
 
 .form {
     margin: 0 auto;
-    width: 35%;
+    width: 40%;
     text-align: center;
 }
 
@@ -30,6 +30,7 @@
     height: 40px;
     color: #ff0000;
     text-align: left;
+    font-size: 13px;
 }
 
 .form__input--text {
@@ -116,11 +117,10 @@
 .input__label {
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 20px;
     transform: translateY(-50%);
 }
 
-/* 追加 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -174,7 +174,8 @@
 }
 
 .placeholder {
-    padding-left: 10px;
+    padding-left: 15px;
+    font-size: 13px;
 }
 
 @media screen and (max-width:1000px) {
