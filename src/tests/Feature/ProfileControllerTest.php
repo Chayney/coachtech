@@ -56,7 +56,9 @@ class ProfileControllerTest extends TestCase
         $response->assertSee($item->id);
         $user->delete();
         $profile->delete();
+        $condition->delete();
         $item->delete();
+        $purchases->delete();
     }
 
     public function test_edit_profile_in_user()
