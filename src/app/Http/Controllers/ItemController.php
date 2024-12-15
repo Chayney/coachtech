@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Profile;
-use App\Models\Condition;
-use App\Models\Category;
-use App\Models\Element;
-use Illuminate\Support\Str;
 
 class ItemController extends Controller
 {

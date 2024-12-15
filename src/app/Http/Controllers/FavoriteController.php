@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite;
 use App\Models\Profile;
-use App\Models\Item;
 
 class FavoriteController extends Controller
 {
