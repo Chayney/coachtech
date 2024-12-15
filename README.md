@@ -82,8 +82,7 @@ $docker-compose up -d --build
 $docker-compose exec php bash
 
 ### PHPコンテナ内
-$composer install  
-$composer require laravel/cashier
+$composer install
 
 ### src上
 $cp .env.example .env
