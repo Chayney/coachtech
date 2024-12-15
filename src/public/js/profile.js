@@ -1,4 +1,3 @@
-// 画像のプレビューを表示する関数
 function previewImage(event) {
     var reader = new FileReader();
     reader.onload = function() {
