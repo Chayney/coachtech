@@ -47,6 +47,6 @@ class CommentController extends Controller
     {
         Comment::find($request->id)->delete();
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'コメントを削除しました');
     }
 }

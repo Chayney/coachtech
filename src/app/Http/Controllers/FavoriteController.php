@@ -36,6 +36,6 @@ class FavoriteController extends Controller
         $item_id = $request->item_id;
         Favorite::where('profile_id', $profile->id)->where('item_id', $item_id)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'お気に入りを削除しました');
     }
 }
