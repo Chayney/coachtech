@@ -52,6 +52,7 @@ class FavoriteControllerTest extends TestCase
         $response->assertSessionHas('success', 'お気に入りに追加しました');
         $user->delete();
         $profile->delete();
+        $condition->delete();
         $item->delete();
     }
 
@@ -89,6 +90,7 @@ class FavoriteControllerTest extends TestCase
         $response->assertRedirect();
         $user->delete();
         $profile->delete();
+        $condition->delete();
         $item->delete();
     }
 }
