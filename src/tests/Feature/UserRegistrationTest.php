@@ -25,5 +25,6 @@ class UserRegistrationTest extends TestCase
             'email' => 'test@test.com',
         ]);
         $response->assertRedirect('/');
+        User::where('email', 'test@test.com')->delete();
     }
 }
