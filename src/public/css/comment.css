@@ -64,7 +64,7 @@
 
 .profile_image {
     width: 20%;
-    height: 75px;
+    height: 80px;
     border: 1px solid #000;
     border-radius: 100%;
 }
@@ -72,7 +72,7 @@
 .profile_name {
     width: 50%;
     font-size: 20px;
-    margin-left: 5%;
+    margin-left: 10%;
 }
 
 .icon-group {
@@ -164,7 +164,7 @@
     }
 
     .profile_image {
-        width: 25%;
+        width: 28%;
     }
 }
 

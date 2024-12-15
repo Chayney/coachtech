@@ -9,7 +9,7 @@
   <div class="admin">
     <div class="admin__inner">
       <form class="search" action="/admin/user/search" method="get" onsubmit="return removeEmptyFields(this)">
-        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
+        <input class="search-form__keyword-input" type="text" name="keyword" placeholder="ユーザー名やメールアドレスを入力してください">
         <div class="search-form__role">
           <select class="search-form__role-select" name="role">
             <option disabled selected>役割</option>
@@ -92,10 +92,10 @@
     <div class="parent__card">
       <form class="search-mobile" action="/admin/user/search" method="get">
         @csrf
-        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="ユーザー名もしくはメールアドレスを入力してください">
+        <input class="search-keyword-input-mobile" type="text" name="keyword" placeholder="ユーザー名やメールアドレスを入力してください">
         <div class="search-role-mobile">
           <select class="search-role-select-mobile" name="role">
-            <option disabled selected>Roles</option>
+            <option disabled selected>役割</option>
             @foreach ($roles as $role)
               <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
             @endforeach
@@ -179,12 +179,12 @@
   </div>
   <script>
     function removeEmptyFields(form) {
-        Array.from(form.elements).forEach(input => {
-            if (!input.value) {
-                input.name = '';
-            }
-        });
-        return true;
+      Array.from(form.elements).forEach(input => {
+          if (!input.value) {
+              input.name = '';
+          }
+      });
+      return true;
     }
     function showAlert(message) {
       return confirm(message);
