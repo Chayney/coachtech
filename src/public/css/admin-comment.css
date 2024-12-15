@@ -183,6 +183,7 @@
     
     .table__header {
         width: 25%;
+        text-align: left;
     }
 
     .table__item {
@@ -209,7 +210,7 @@
     }
 
     .search-keyword-input-mobile {
-        width: 95%;
+        width: 90%;
     }
     
     .search-search-btn-mobile {

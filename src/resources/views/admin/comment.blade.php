@@ -9,7 +9,7 @@
   <div class="admin">
     <div class="admin__inner">
       <form class="search" action="/admin/comment/search" method="get" onsubmit="return removeEmptyFields(this)">
-        <input class="search-form__keyword-input" type="text" name="freeword" placeholder="ユーザー名もしくはコメントを入力してください">
+        <input class="search-form__keyword-input" type="text" name="freeword" placeholder="ユーザー名やコメントを入力してください">
         <div class="search-form__actions">
           <input class="search-form__search-btn" type="submit" value="検索">
         </div>
@@ -32,7 +32,7 @@
                 @method('DELETE')
                 <input type="hidden" name="id" value="{{ $comment['id'] }}">
                 <button class="trash" type="submit" onclick="return showAlert('本当にコメントを削除しますか？')">
-                    <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
+                  <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
                 </button>
               </form>
             </td>
@@ -45,7 +45,7 @@
     <div class="parent__card">
       <form class="search-mobile" action="/admin/comment/search" method="get">
         @csrf
-        <input class="search-keyword-input-mobile" type="text" name="freeword" placeholder="ユーザー名もしくはコメントを入力してください">
+        <input class="search-keyword-input-mobile" type="text" name="freeword" placeholder="ユーザー名やコメントを入力してください">
         <div class="search-actions-mobile">
           <input class="search-search-btn-mobile" type="submit" value="検索">
         </div>
@@ -62,7 +62,7 @@
                   @method('DELETE')
                   <input type="hidden" name="id" value="{{ $comment['id'] }}">
                   <button class="trash" type="submit" onclick="return showAlert('本当にコメントを削除しますか？')">
-                      <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
+                    <img class="trash_image" src="{{ asset('images/trash.jpg') }}">
                   </button>
                 </form>
               </td>
@@ -86,12 +86,12 @@
       return confirm(message);
     }
     function removeEmptyFields(form) {
-        Array.from(form.elements).forEach(input => {
-            if (!input.value) {
-                input.name = '';
-            }
-        });
-        return true;
+      Array.from(form.elements).forEach(input => {
+        if (!input.value) {
+          input.name = '';
+        }
+      });
+      return true;
     }
   </script>
 @endsection

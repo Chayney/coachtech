@@ -180,9 +180,9 @@
   <script>
     function removeEmptyFields(form) {
       Array.from(form.elements).forEach(input => {
-          if (!input.value) {
-              input.name = '';
-          }
+        if (!input.value) {
+          input.name = '';
+        }
       });
       return true;
     }
