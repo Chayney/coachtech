@@ -19,41 +19,41 @@
                     <span class="label--item">商品名</span><br>
                     <span class="form__label--item">{{ $item['name'] }}</span><br>
                     <span class="form__label--item">¥{{ $item['price'] }}(値段)</span>
-                    @if (Auth::check())
-                        <div class="icon-group">
-                            @if ($item->favoriteMarked())
-                                <button class="favorited">
-                                    <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
-                                    <span>{{ $item->favorites_count }}</span>
-                                </button>                      
-                            @else
-                                <button class="favorite">
-                                    <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                                    <span>{{ $item->favorites_count }}</span>
-                                </button>                            
-                            @endif
-                            <button class="comment">
+                </div>
+                @if (Auth::check())
+                    <div class="icon-group">
+                        @if ($item->favoriteMarked())
+                            <button class="favorited">
+                                <img class="favorited_image" src="{{ asset('images/yellow_star.jpg') }}">
+                                <span>{{ $item->favorites_count }}</span>
+                            </button>                      
+                        @else
+                            <button class="favorite">
+                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                <span>{{ $item->favorites_count }}</span>
+                            </button>                            
+                        @endif
+                        <button class="comment">
+                            <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
+                            <span>{{ $item->comments_count }}</span>
+                        </button>
+                    </div>
+                @else
+                    <div class="icon-group">
+                        <div class="favorite-group">
+                            <button class="favorite" onclick="location.href='/login'">
+                                <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
+                                <span>{{ $item->favorites_count }}</span>
+                            </button>
+                        </div>
+                        <div class="comment-group">
+                            <button class="comment" >
                                 <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
                                 <span>{{ $item->comments_count }}</span>
                             </button>
                         </div>
-                    @else
-                        <div class="icon-group">
-                            <div class="favorite-group">
-                                <button class="favorite" onclick="location.href='/login'">
-                                    <img class="favorite_image" src="{{ asset('images/star.jpg') }}">
-                                    <span>{{ $item->favorites_count }}</span>
-                                </button>
-                            </div>
-                            <div class="comment-group">
-                                <button class="comment" >
-                                    <img class="comment_image" src="{{ asset('images/comment.jpg') }}">
-                                    <span>{{ $item->comments_count }}</span>
-                                </button>
-                            </div>
-                        </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
                 @foreach ($comments as $comment)
                     <div class="profile">
                         <div class="user-group">
