@@ -26,5 +26,6 @@ class UserLoginTest extends TestCase
         $response = $this->post(route('login'), $loginData);
         $response->assertRedirect('/');
         $this->assertAuthenticatedAs($user);
+        $user->delete();
     }
 }
